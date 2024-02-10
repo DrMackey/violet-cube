@@ -1,0 +1,15 @@
+.catalog__page {
+  /* position: absolute; */
+  /* overflow: scroll; */
+  /* width: 100dvw; */
+  /* height: 100dvh; */
+  transform: translateX(0dvw);
+  transition: all .3s ease-in-out;
+}
+
+.catalog__page_active {
+  transform: translateX(-33dvw);
+  /* overflow: hidden; */
+  /* height: 100vh; */
+  /* display: none; */
+}

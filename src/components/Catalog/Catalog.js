@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
 import "./Catalog.css";
 
@@ -9,35 +9,57 @@ export default function Catalog({
   isLoadCards,
   isTogglePage,
   setIsTogglePage,
+  setIsToggleHeader,
 }) {
-  const [isCard, setIsCard] = useState({});
-  const navigate = useNavigate();
-
+  const ref = useRef(null);
   useEffect(() => {
-    navigate(`/${isCard.name}`);
-  }, [isCard]);
+    return () => {
+      setIsTogglePage(false);
+      document.body.classList.remove("disabled-scroll");
+    };
+  }, []);
+
+  const handleScroll = (event) => {
+    console.log("User scrolled:", event.target.scrollTop);
+  };
 
   function navigateTo(card) {
-    setIsTogglePage(!isTogglePage);
-    setIsCard(card);
+    setIsTogglePage(true);
+    setIsToggleHeader("header_scroll header_scroll2");
+    document.body.classList.add("disabled-scroll");
   }
 
   return (
     <>
-      <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
-      {isLoadCards
-        ? onIsCards.map((card) => {
-            return (
-              <button onClick={navigateTo}>
-                <div>{card.russian}</div>
-                <img
-                  src={`https://shikimori.one${card.image.original}`}
-                  alt="Изображение постера."
-                />
-              </button>
-            );
-          })
-        : ""}
+      <section
+        className={`catalog__page ${
+          isTogglePage ? "catalog__page_active" : ""
+        }`}
+      >
+        <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
+        {isLoadCards
+          ? onIsCards.map((card) => {
+              const reg = /\*|:|%|#|&| |-|\$/g;
+
+              return (
+                <Link onClick={navigateTo} to={`${card.name.replace(reg, "")}`}>
+                  <h2>{card.russian}</h2>
+                  <img
+                    src={`https://shikimori.one${card.image.x96}`}
+                    alt="Изображение постера."
+                  />
+                </Link>
+              );
+            })
+          : ""}
+      </section>{" "}
+      <section
+        onScroll={handleScroll}
+        ref={ref}
+        className={`page ${isTogglePage ? "page_active" : ""}`}
+      >
+        <Outlet />
+      </section>
     </>
   );
 }

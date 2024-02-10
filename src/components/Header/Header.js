@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 export default function Header({
@@ -8,9 +9,12 @@ export default function Header({
   isTogglePage,
   setIsTogglePage,
 }) {
+  const navigate = useNavigate();
   // ${isToggleHeader ? "header_scroll" : ""}
   function togglePage() {
-    setIsTogglePage(!isTogglePage);
+    navigate(-1);
+    setIsTogglePage(false);
+    document.body.classList.remove("disabled-scroll");
   }
 
   return (

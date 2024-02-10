@@ -2,7 +2,11 @@
 @import url(./vendor/normalize.css);
 
 body {
-  overflow: hidden;
+  /* overflow: hidden; */
+  /* overflow-x: scroll; */
+  /* width: 100dvw;
+  max-width: 100dvw;
+  height: 100dvh; */
   background-color: black;
   margin: 0;
   color: white;
@@ -13,6 +17,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.disabled-scroll {
+  overflow: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -21,5 +29,5 @@ code {
 #root {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  min-height: 100dvh;
 }

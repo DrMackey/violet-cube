@@ -1,5 +1,11 @@
 .main {
   /* padding: 0 20px; */
+  position: relative;
+  /* width: 100dvw; */
+  /* height: 100dvh; */
+  
+  /* overflow: scroll;
+  overflow-x: hidden; */
   flex-grow: 1;
 }
 
