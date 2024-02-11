@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
 import Page from "../Page/Page.js";
@@ -12,10 +12,19 @@ import api from "../../utils/AnimeApi.js";
 import "./App.css";
 
 function App() {
+  const location = useLocation();
+  const [sportKeyLocation, setSportKeyLocation] = useState(location.pathname);
   const [isCards, setIsCards] = useState({});
+  const [isCard, setIsCard] = useState({});
+
   const [isToggleHeader, setIsToggleHeader] = useState("");
   const [isTogglePage, setIsTogglePage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
+
+  useEffect(() => {
+    setSportKeyLocation(location.pathname);
+    // console.log(location.pathname);
+  }, [location.pathname]);
 
   useEffect(() => {
     getCards();
@@ -25,7 +34,6 @@ function App() {
 
     window.addEventListener("scroll", () => {
       const currentScroll = window.pageYOffset;
-      console.log(currentScroll);
 
       if (currentScroll > 14) {
         handleHeader("header_scroll");
@@ -50,6 +58,17 @@ function App() {
         setIsCards(res);
         setIsLoadCards(true);
         console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function getTitleData(titleUrl) {
+    api
+      .getTitleData(titleUrl)
+      .then((res) => {
+        setIsCard(res);
       })
       .catch((err) => {
         console.log(err);
@@ -90,6 +109,8 @@ function App() {
                   isTogglePage={isTogglePage}
                   isToggleHeader={isToggleHeader}
                   setIsTogglePage={setIsTogglePage}
+                  getTitleData={getTitleData}
+                  isCard={isCard}
                 />
               }
             />

@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../Header/Header.js";
 import "./Page.css";
 
@@ -6,81 +7,94 @@ export default function Page({
   isTogglePage,
   isToggleHeader,
   setIsTogglePage,
+  getTitleData,
+  isCard,
 }) {
-  // useEffect(() => {
-  //   document.body.classList.add("disabled-scroll");
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedFruit, setSelectedFruit] = useState("Смотрю");
+  const location = useLocation();
 
-  //   return () => {
-  //     document.body.classList.remove("disabled-scroll");
-  //   };
-  // }, []);
+  useEffect(() => {
+    setIsTogglePage(true);
+    document.body.classList.add("disabled-scroll");
+    getTitleData(location.pathname.slice(8));
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(isCard).length !== 0) {
+      // console.log("isCard", isCard);
+      setIsLoading(true);
+    }
+  }, [isCard]);
 
   return (
     <>
-      {/* <Header
-        isToggleHeader={isToggleHeader}
-        isTitle="Каталог"
-        isTogglePage={isTogglePage}
-        setIsTogglePage={setIsTogglePage}
-      />
-      <section className={`page ${isTogglePage ? "page_active" : ""}`}> */}
-      blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit
-      libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis.
-      Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat
-      nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis
-      in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus.
-      Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis
-      diam. Pellentesque ut neque. Pellentesque habitant morbi tristique
-      senectus et netus et malesuada fames ac turpis egestas. In dui magna,
-      posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor
-      malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum,
-      porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede.
-      Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-      ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus
-      quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea
-      dictumst. Curabitur at lacus ac velit ornare lobortis. Curabitur a felis
-      in nunc fringilla tristique. Morbi mattis ullamcorper velit. Phasellus
-      gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt
-      et, tincidunt eget, semper nec, quam. Sed hendrerit. Morbi ac felis.
-      blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit
-      libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis.
-      Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat
-      nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis
-      in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus.
-      Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis
-      diam. Pellentesque ut neque. Pellentesque habitant morbi tristique
-      senectus et netus et malesuada fames ac turpis egestas. In dui magna,
-      posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor
-      malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum,
-      porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede.
-      Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-      ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus
-      quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea
-      dictumst. Curabitur at lacus ac velit ornare lobortis. Curabitur a felis
-      in nunc fringilla tristique. Morbi mattis ullamcorper velit. Phasellus
-      gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt
-      et, tincidunt eget, semper nec, quam. Sed hendrerit. Morbi ac
-      felis.blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit
-      libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis.
-      Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat
-      nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis
-      in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus.
-      Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis
-      diam. Pellentesque ut neque. Pellentesque habitant morbi tristique
-      senectus et netus et malesuada fames ac turpis egestas. In dui magna,
-      posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor
-      malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum,
-      porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede.
-      Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-      ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus
-      quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea
-      dictumst. Curabitur at lacus ac velit ornare lobortis. Curabitur a felis
-      in nunc fringilla tristique. Morbi mattis ullamcorper velit. Phasellus
-      gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt
-      et, tincidunt eget, semper nec, quam. Sed hendrerit. Morbi ac felis.
-      blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit
-      libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis.
-      {/* </section> */}
+      {isLoading ? (
+        <>
+          <section className="page__preview">
+            <div className="page__image-container">
+              <img
+                className="page__image"
+                src={`https://shikimori.one${isCard.image.original}`}
+                alt="Постер."
+                loading="lazy"
+              ></img>
+            </div>
+            <div className="page__title-container">
+              <div>
+                <h1 className="page__title">{isCard.russian}</h1>
+                <h2 className="page__subtitle">{isCard.name}</h2>
+                <p className="page__status">
+                  {isCard.ongoing ? "Онгоинг" : "Вышел"} |{" "}
+                  {isCard.episodes_aired}/{isCard.episodes}
+                </p>
+              </div>
+              <div className="page__buttons-container">
+                <div className="page__select-container">
+                  <button className="page__select-button">
+                    {selectedFruit.toUpperCase()} |
+                  </button>
+
+                  <select
+                    className="page__select"
+                    value={selectedFruit}
+                    onChange={(e) => setSelectedFruit(e.target.value)}
+                  >
+                    <option value="Cмотрю" selected="">
+                      Cмотрю
+                    </option>
+                    <option value="Запланировано">Запланировано</option>
+                    <option value="Просмотрено">Просмотрено</option>
+                    <option value="Брошено">Брошено</option>
+                    <option value="Отложено">Отложено</option>
+                  </select>
+                </div>
+                <button className="page__download-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="23"
+                    fill="none"
+                  >
+                    <path
+                      fill="#3A82F7"
+                      fill-rule="evenodd"
+                      d="M17.89 19.297c0 2.139-1.142 3.281-3.31 3.281H3.31c-2.158 0-3.31-1.133-3.31-3.281V9.785c0-2.139 1.152-3.281 3.31-3.281h2.618v2.178H3.496c-.86 0-1.318.44-1.318 1.328v9.062c0 .899.459 1.328 1.318 1.328h10.899c.85 0 1.318-.43 1.318-1.328V10.01c0-.889-.469-1.328-1.318-1.328h-2.403V6.504h2.588c2.168 0 3.31 1.142 3.31 3.281v9.512Z"
+                      clip-rule="evenodd"
+                    />
+                    <path
+                      fill="#3A82F7"
+                      d="M8.936 0a.99.99 0 0 0-.997.977v9.697l.079 1.445-.567-.732-1.28-1.367a.89.89 0 0 0-.663-.293c-.479 0-.88.351-.88.85 0 .253.099.448.274.624l3.262 3.135c.264.254.508.351.772.351.263 0 .517-.097.771-.351l3.262-3.135a.818.818 0 0 0 .283-.625c0-.498-.4-.85-.879-.85a.875.875 0 0 0-.664.293l-1.29 1.368-.565.732.087-1.445V.977C9.941.449 9.492 0 8.936 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 }

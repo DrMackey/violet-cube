@@ -36,16 +36,16 @@ class AnimeApi {
       });
   }
 
-  getProfileData() {
-    return fetch(`${this._url}/users/me`, {
+  getTitleData(titleUrl) {
+    return fetch(`${this._url}/animes${titleUrl}`, {
       headers: this._headers,
-      credentials: "include",
+      // credentials: "include",
     })
       .then((res) => {
         return this._getResponseData(res);
       })
       .then((res) => {
-        return res.data;
+        return res;
       });
   }
 }

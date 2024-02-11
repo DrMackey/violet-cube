@@ -11,21 +11,35 @@ export default function Catalog({
   setIsTogglePage,
   setIsToggleHeader,
 }) {
-  const ref = useRef(null);
   useEffect(() => {
+    // console.log("Монтирование Каталога");
+    handleHeader("header_scroll");
     return () => {
       setIsTogglePage(false);
       document.body.classList.remove("disabled-scroll");
     };
   }, []);
 
+  function handleHeader(state) {
+    setIsToggleHeader(state);
+  }
+
   const handleScroll = (event) => {
-    console.log("User scrolled:", event.target.scrollTop);
+    const currentScroll = event.target.scrollTop;
+
+    if (currentScroll >= 0) {
+      handleHeader("header_scroll");
+      if (currentScroll > 25) {
+        handleHeader("header_scroll header_scroll2");
+      }
+    } else {
+      handleHeader("");
+    }
   };
 
-  function navigateTo(card) {
+  function handleClick(card) {
     setIsTogglePage(true);
-    setIsToggleHeader("header_scroll header_scroll2");
+    setIsToggleHeader("header_scroll");
     document.body.classList.add("disabled-scroll");
   }
 
@@ -39,10 +53,11 @@ export default function Catalog({
         <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
         {isLoadCards
           ? onIsCards.map((card) => {
-              const reg = /\*|:|%|#|&| |-|\$/g;
+              const reg = /\*|:|%|#|&|×| |-|\$/g;
+              const link = card.url.slice(8);
 
               return (
-                <Link onClick={navigateTo} to={`${card.name.replace(reg, "")}`}>
+                <Link key={card.id} onClick={handleClick} to={`${link}`}>
                   <h2>{card.russian}</h2>
                   <img
                     src={`https://shikimori.one${card.image.x96}`}
@@ -55,7 +70,6 @@ export default function Catalog({
       </section>{" "}
       <section
         onScroll={handleScroll}
-        ref={ref}
         className={`page ${isTogglePage ? "page_active" : ""}`}
       >
         <Outlet />

@@ -12,7 +12,9 @@ export default function Header({
   const navigate = useNavigate();
   // ${isToggleHeader ? "header_scroll" : ""}
   function togglePage() {
-    navigate(-1);
+    setTimeout(() => {
+      navigate(-1);
+    }, 300);
     setIsTogglePage(false);
     document.body.classList.remove("disabled-scroll");
   }
