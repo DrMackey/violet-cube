@@ -13,7 +13,7 @@ export default function Catalog({
 }) {
   useEffect(() => {
     // console.log("Монтирование Каталога");
-    handleHeader("header_scroll");
+    handleHeader("");
     return () => {
       setIsTogglePage(false);
       document.body.classList.remove("disabled-scroll");

@@ -1,0 +1,38 @@
+.info-block__list {
+  margin: 0;
+  margin-top: 20px;
+  padding: 0;
+  --gap: 20px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: calc(var(--gap) / 2);
+
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gap);
+  list-style-type: none;
+  scrollbar-width: none;
+}
+
+.info-block__list::-webkit-scrollbar {
+  width: 0;
+}
+
+.info-block__list li {
+  scroll-snap-align: start;
+}
+
+.info-block__item {
+  width: 100px;
+  height: 100px;
+  background-color: #8d8d92;
+}
+
+.info-block__item:last-child {
+  margin-right: 20px;
+}
+
+.info-block__item:first-child {
+  margin-left: 20px;
+}
