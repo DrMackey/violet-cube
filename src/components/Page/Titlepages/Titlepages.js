@@ -31,7 +31,7 @@ export default function Titlepages({
               {selectedFruit.toUpperCase()} |
             </button>
 
-            <select
+            {/* <select
               className="page__select"
               value={selectedFruit}
               onChange={(e) => setSelectedFruit(e.target.value)}
@@ -43,7 +43,42 @@ export default function Titlepages({
               <option value="Просмотрено">Просмотрено</option>
               <option value="Брошено">Брошено</option>
               <option value="Отложено">Отложено</option>
-            </select>
+            </select> */}
+            <details className="drop-down">
+              <summary className="drop-down__active-button">
+                <svg
+                  className="drop-down__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="8"
+                  fill="none"
+                >
+                  <rect
+                    width="1.294"
+                    height="7.052"
+                    y="2.049"
+                    rx=".647"
+                    transform="rotate(-45 0 2.05)"
+                  />
+                  <rect
+                    width="1.294"
+                    height="7.052"
+                    x="9.068"
+                    y=".964"
+                    rx=".647"
+                    transform="rotate(43.928 9.068 .964)"
+                  />
+                </svg>
+              </summary>
+              <details-menu>
+                <div className="drop-down__list">
+                  <button className="drop-down__item">Запланировано</button>
+                  <button className="drop-down__item">Просмотрено</button>
+                  <button className="drop-down__item">Брошено</button>
+                  <button className="drop-down__item">Отложено</button>
+                </div>
+              </details-menu>
+            </details>
           </div>
           <button className="page__download-button">
             <svg
