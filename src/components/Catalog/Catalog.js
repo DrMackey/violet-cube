@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
+import Categories from "./Categories/Categories.js";
 import "./Catalog.css";
 
 export default function Catalog({
@@ -51,6 +52,8 @@ export default function Catalog({
         }`}
       >
         <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
+        <Categories />
+
         {isLoadCards
           ? onIsCards.map((card) => {
               const reg = /\*|:|%|#|&|×| |-|\$/g;
