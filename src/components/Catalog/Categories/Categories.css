@@ -5,7 +5,9 @@
   display: flex;
   gap: 7px;
   list-style-type: none;
-  overflow-y: scroll;
+  overflow: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 .categories__item:last-child {
