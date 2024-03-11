@@ -1,0 +1,115 @@
+/* @keyframes grow-progress {
+  0% {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 1);
+    border-bottom: 0.5px solid rgba(84, 84, 88, 0);
+  }
+  .3% {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 1);
+  }
+  .4% {
+    background-color: rgba(0, 0, 0, 1);
+    opacity: 1;
+    border-bottom: 0.5px solid rgba(84, 84, 88, 0);
+  }
+  .8% {
+    
+  }
+  .9% {
+    background-color: rgba(29, 29, 31, 0.72);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid rgba(84, 84, 88, 0.65);
+  }
+  100% {
+    background-color: rgba(29, 29, 31, 0.72);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid rgba(84, 84, 88, 0.65);
+  }
+} */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  
+  /* background: rgba(29, 29, 31, 0.72); */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* animation: grow-progress auto linear; */
+  /* animation-timeline: scroll(); */
+  /* animation-range: entry-crossing 0% entry-crossing 100%; */
+  /* opacity: 0; */
+  transition: all .2s;
+  /* transition: background-color 2s; */
+  /* z-index: 1; */
+  opacity: 0;
+}
+
+.header_scroll {
+  opacity: 1;
+}
+
+.header_scroll2 {
+  background-color: rgba(29, 29, 31, 0.72);
+  border-bottom: 0.5px solid rgba(84, 84, 88, 0.65);
+  backdrop-filter: blur(20px);
+}
+
+.header_search-page {
+  height: 90px;
+}
+
+.header__title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100dvw;
+  height: 40px;
+}
+
+.header__title {
+  flex-grow: 1;
+  flex-basis: 40%;
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header__button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  padding: 0 7px;
+  flex-grow: 1;
+  flex-basis: 30%;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #0a84ff;
+  overflow: hidden;
+}
+
+.header__button-subtitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.disabled {
+  opacity: 0;
+}

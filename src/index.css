@@ -1,0 +1,39 @@
+@import url(./vendor/fonts/Inter/inter.css);
+@import url(./vendor/normalize.css);
+
+body {
+  /* overflow: hidden; */
+  /* overflow-x: scroll; */
+  /* width: 100dvw;
+  max-width: 100dvw;
+  height: 100dvh; */
+  /* max-width: 425px;
+  margin: auto 0; */
+  background-color: black;
+  margin: 0;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.disabled-scroll {
+  overflow: hidden;
+}
+
+a, label{
+	-webkit-tap-highlight-color: transparent;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
