@@ -75,6 +75,7 @@
   flex-grow: 1;
   flex-basis: 40%;
   margin: 0;
+  font-family: var(--pro-text);
   text-align: center;
   font-weight: 600;
   font-size: 17px;

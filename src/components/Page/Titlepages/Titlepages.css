@@ -87,6 +87,7 @@
 }
 
 .page__select-button {
+  font-family: var(--pro-text);
   color: #3A82F7;
   background-color: rgba(0, 0, 0, 0);
   border: none;
