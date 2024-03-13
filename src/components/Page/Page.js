@@ -14,7 +14,6 @@ export default function Page({
   isCard,
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedFruit, setSelectedFruit] = useState("Смотрю");
   const location = useLocation();
 
   useEffect(() => {
@@ -34,11 +33,7 @@ export default function Page({
     <>
       {isLoading ? (
         <>
-          <Titlepages
-            isCard={isCard}
-            selectedFruit={selectedFruit}
-            setSelectedFruit={setSelectedFruit}
-          />
+          <Titlepages isCard={isCard} />
           <Infoblock />
           <Player />
         </>

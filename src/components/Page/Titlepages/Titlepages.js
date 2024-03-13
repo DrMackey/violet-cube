@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Titlepages.css";
 
-export default function Titlepages({
-  isCard,
-  selectedFruit,
-  setSelectedFruit,
-}) {
+export default function Titlepages({ isCard }) {
+  const [selectedFruit, setSelectedFruit] = useState("Смотрю");
+
   return (
     <section className="page__preview">
       <div className="page__image-container">
@@ -72,10 +70,36 @@ export default function Titlepages({
               </summary>
               <details-menu>
                 <div className="drop-down__list">
-                  <button className="drop-down__item">Запланировано</button>
-                  <button className="drop-down__item">Просмотрено</button>
-                  <button className="drop-down__item">Брошено</button>
-                  <button className="drop-down__item">Отложено</button>
+                  <button
+                    className="drop-down__item"
+                    onClick={() => setSelectedFruit("Смотрю")}
+                  >
+                    Смотрю
+                  </button>
+                  <button
+                    className="drop-down__item"
+                    onClick={() => setSelectedFruit("Запланировано")}
+                  >
+                    Запланировано
+                  </button>
+                  <button
+                    className="drop-down__item"
+                    onClick={() => setSelectedFruit("Просмотрено")}
+                  >
+                    Просмотрено
+                  </button>
+                  <button
+                    className="drop-down__item"
+                    onClick={() => setSelectedFruit("Брошено")}
+                  >
+                    Брошено
+                  </button>
+                  <button
+                    className="drop-down__item"
+                    onClick={() => setSelectedFruit("Отложено")}
+                  >
+                    Отложено
+                  </button>
                 </div>
               </details-menu>
             </details>

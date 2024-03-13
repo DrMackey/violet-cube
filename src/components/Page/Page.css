@@ -14,3 +14,17 @@
 .page_active {
   transform: translateX(0);
 }
+
+.stub-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: grey;
+}
+
+.active {
+  display: block;
+}
