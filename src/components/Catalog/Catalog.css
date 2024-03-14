@@ -1,4 +1,4 @@
-.catalog__page {
+.main-page {
   /* -webkit-overflow-scrolling: touch; */
   position: absolute;
   /* overflow: scroll; */
@@ -26,12 +26,12 @@
 }
 
 @media (min-width: 426px) {
-  .catalog__page {
+  .main-page {
     transform: translateX(0%);
   }
 }
 
-.catalog__page_active {
+.main-page_active {
   transform: translateX(-33dvw);
   /* overflow: hidden; */
   /* height: 100vh; */
@@ -39,7 +39,7 @@
 }
 
 @media (min-width: 426px) {
-  .catalog__page_active {
+  .main-page_active {
     transform: translateX(-33%);
   }
 }

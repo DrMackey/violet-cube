@@ -5,7 +5,7 @@ import "./Medialibrary.css";
 export default function Medialibrary({ isToggleHeader }) {
   return (
     <>
-      <section className="catalog__page">
+      <section className="main-page">
         <Titlepage isTitle="Медиатека" isToggleHeader={isToggleHeader} />
       </section>
     </>
