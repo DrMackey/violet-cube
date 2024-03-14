@@ -1,25 +1,28 @@
 .main {
+  /* -webkit-overflow-scrolling: touch; */
   /* padding: 0 20px; */
   position: relative;
-  /* width: 100dvw; */
+  width: 100dvw;
   height: 100dvh;
+  /* height: 100dvh; */
   
   
   /* overflow: scroll;
   overflow-x: hidden; */
-  flex-grow: 1;
+  /* flex-grow: 1; */
   scrollbar-width: none;
 
 
 
-  max-width: 100dvw;
-  height: calc(100dvh - 20px);
+  /* max-width: 100dvw; */
+  
   overflow: hidden;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 @media (min-width: 426px) {
   .main {
+    height: calc(100dvh - 20px);
     max-width: 425px;
     max-height: 852px;
     border: 1px solid rgba(84, 84, 88, 0.65);

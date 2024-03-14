@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
 import Categories from "./Categories/Categories.js";
@@ -13,6 +13,7 @@ export default function Catalog({
   setIsTogglePage,
   setIsToggleHeader,
 }) {
+  const [test, setTest] = useState();
   useEffect(() => {
     // console.log("Монтирование Каталога");
     handleHeader("");
@@ -28,6 +29,8 @@ export default function Catalog({
 
   const handleScroll = (event) => {
     const currentScroll = event.target.scrollTop;
+    setTest(currentScroll);
+    console.log(currentScroll);
 
     if (currentScroll >= 0) {
       handleHeader("header_scroll");
@@ -48,6 +51,7 @@ export default function Catalog({
   return (
     <>
       <section
+        onScroll={handleScroll}
         className={`catalog__page ${
           isTogglePage ? "catalog__page_active" : ""
         }`}
@@ -64,6 +68,7 @@ export default function Catalog({
         onScroll={handleScroll}
         className={`page ${isTogglePage ? "page_active" : ""}`}
       >
+        <div style={{ color: "white" }}>{test}</div>
         <Outlet />
       </section>
     </>

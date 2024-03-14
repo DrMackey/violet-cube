@@ -10,7 +10,14 @@
   --pro-rounded: "SF Pro Rounded";
 }
 
+* {
+  touch-action:pan-y pan-x;
+}
+
 body {
+  /* -webkit-overflow-scrolling: touch; */
+  touch-action:none;
+  overflow: hidden;
   /* overflow: hidden; */
   /* overflow-x: scroll; */
   /* width: 100dvw;
@@ -29,7 +36,7 @@ body {
 }
 
 .disabled-scroll {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 a, label{
@@ -52,10 +59,11 @@ code {
 
 @media (max-width: 425px) {
   #root {
+    /* -webkit-overflow-scrolling: touch; */
     display: flex;
   justify-content: center;
   align-items: center;
-    position: relative;
+    /* position: relative; */
     width: 100%;
     /* height: 100%; */
   }
