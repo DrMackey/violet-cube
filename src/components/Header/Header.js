@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 
 export default function Header({
@@ -8,15 +8,38 @@ export default function Header({
   isSearchPage,
   isTogglePage,
   setIsTogglePage,
+  checkHandleHeader,
 }) {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // isPageHandle();
+  }, [location, isToggleHeader]);
+
+  // function getParentLocation() {
+  //   const newArr = location.pathname.split("/");
+  //   return newArr;
+  // }
+
+  // function isPageHandle() {
+  //   if (getParentLocation().length > 1) {
+  //     console.log(isToggleHeader);
+  //   } else {
+  //     console.log(isToggleHeader.getParentLocation());
+  //     console.log(isToggleHeader);
+  //   }
+  // }
+
   // ${isToggleHeader ? "header_scroll" : ""}
   function togglePage() {
     setTimeout(() => {
       navigate(-1);
+      // checkHandleHeader();
     }, 300);
     setIsTogglePage(false);
-    document.body.classList.remove("disabled-scroll");
+
+    // document.body.classList.remove("disabled-scroll");
   }
 
   return (

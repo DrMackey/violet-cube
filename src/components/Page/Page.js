@@ -12,6 +12,7 @@ export default function Page({
   setIsTogglePage,
   getTitleData,
   isCard,
+  checkScrollСontent,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
@@ -20,6 +21,7 @@ export default function Page({
     setIsTogglePage(true);
     document.body.classList.add("disabled-scroll");
     getTitleData(location.pathname.slice(8));
+    checkScrollСontent();
   }, []);
 
   useEffect(() => {

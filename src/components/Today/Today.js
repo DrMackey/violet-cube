@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Titlepage from "../Titlepage/Titlepage.js";
 import "./Today.css";
 
-export default function Today() {
+export default function Today({ setScrollTopMain, handleScrollMain }) {
+  useEffect(() => {
+    setScrollTopMain(0);
+  }, []);
   return (
     <>
-      <section className="main-page">
+      <section className="main-page" onScroll={handleScrollMain}>
         <Titlepage isTitle="Сегодня" isToday="7 Февраля" />
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
         ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis

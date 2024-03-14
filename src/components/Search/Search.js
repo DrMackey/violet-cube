@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Titlepage from "../Titlepage/Titlepage.js";
 import Searchform from "../Searchform/Searchform.js";
 import "./Search.css";
 
-export default function Search({ isToggleHeader }) {
+export default function Search({
+  isToggleHeader,
+  setScrollTopMain,
+  handleScrollMain,
+}) {
+  useEffect(() => {
+    setScrollTopMain(0);
+  }, []);
   return (
     <>
-      <section className="main-page">
+      <section className="main-page" onScroll={handleScrollMain}>
         <Titlepage isTitle="Поиск" isToggleHeader={isToggleHeader} />
         <Searchform isToggleHeader={isToggleHeader} />
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo

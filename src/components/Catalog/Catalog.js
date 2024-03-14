@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
 import Categories from "./Categories/Categories.js";
@@ -12,35 +12,41 @@ export default function Catalog({
   isTogglePage,
   setIsTogglePage,
   setIsToggleHeader,
+  handleScrollMain,
+  handleScrollContent,
+  setScrollTopMain,
 }) {
-  const [test, setTest] = useState();
   useEffect(() => {
+    setScrollTopMain(0);
     // console.log("Монтирование Каталога");
-    handleHeader("");
+    // handleHeader("");
+    // setIsToggleHeader((isToggleHeader["catalog"] = 0));
     return () => {
       setIsTogglePage(false);
       document.body.classList.remove("disabled-scroll");
     };
   }, []);
 
-  function handleHeader(state) {
-    setIsToggleHeader(state);
-  }
+  // function handleHeader(state) {
+  //   setIsToggleHeader(state);
+  // }
 
-  const handleScroll = (event) => {
-    const currentScroll = event.target.scrollTop;
-    setTest(currentScroll);
-    console.log(currentScroll);
+  // const handleScroll = (event) => {
+  //   const currentScroll = event.target.scrollTop;
 
-    if (currentScroll >= 0) {
-      handleHeader("header_scroll");
-      if (currentScroll > 25) {
-        handleHeader("header_scroll header_scroll2");
-      }
-    } else {
-      handleHeader("");
-    }
-  };
+  // setIsToggleHeader({ "catalog": currentScroll });
+  // setTest(currentScroll);
+  // console.log(currentScroll);
+
+  // if (currentScroll >= 0) {
+  //   handleHeader("header_scroll");
+  //   if (currentScroll > 25) {
+  //     handleHeader("header_scroll header_scroll2");
+  //   }
+  // } else {
+  //   handleHeader("");
+  // }
+  // };
 
   function handleClick(card) {
     setIsTogglePage(true);
@@ -51,7 +57,7 @@ export default function Catalog({
   return (
     <>
       <section
-        onScroll={handleScroll}
+        onScroll={handleScrollMain}
         className={`main-page ${isTogglePage ? "main-page_active" : ""}`}
       >
         <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
@@ -261,10 +267,9 @@ export default function Catalog({
         hendrerit. Morbi ac felis.
       </section>
       <section
-        onScroll={handleScroll}
+        onScroll={handleScrollContent}
         className={`content-page ${isTogglePage ? "content-page_active" : ""}`}
       >
-        <div style={{ color: "white" }}>{test}</div>
         <Outlet />
       </section>
     </>

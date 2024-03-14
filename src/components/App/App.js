@@ -14,42 +14,72 @@ import "./App.css";
 
 function App() {
   const location = useLocation();
-  const [sportKeyLocation, setSportKeyLocation] = useState(location.pathname);
+
   const [isCards, setIsCards] = useState({});
   const [isCard, setIsCard] = useState({});
-
+  const [scrollTopСontent, setScrollTopСontent] = useState(Number);
+  const [scrollTopMain, setScrollTopMain] = useState(Number);
   const [isToggleHeader, setIsToggleHeader] = useState("");
   const [isTogglePage, setIsTogglePage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
 
   useEffect(() => {
-    setSportKeyLocation(location.pathname);
-    // console.log(location.pathname);
-  }, [location.pathname]);
+    getParentLocation();
+    checkScrollMain();
+  }, [location]);
+
+  useEffect(() => {
+    checkScrollMain();
+  }, [scrollTopMain]);
+
+  useEffect(() => {
+    if (isTogglePage) checkScrollСontent();
+  }, [scrollTopСontent]);
 
   useEffect(() => {
     getCards();
-    function handleHeader(state) {
-      setIsToggleHeader(state);
-    }
-
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset;
-
-      if (currentScroll > 14) {
-        handleHeader("header_scroll");
-        if (currentScroll > 25) {
-          handleHeader("header_scroll header_scroll2");
-        }
-      } else {
-        handleHeader("");
-      }
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleHeader);
-    };
+    checkScrollMain();
   }, []);
+
+  function checkScrollMain() {
+    if (scrollTopMain > -1) {
+      handleHeader("");
+      if (scrollTopMain > 25) {
+        handleHeader("header_scroll header_scroll2");
+      }
+    }
+  }
+
+  function checkScrollСontent() {
+    if (scrollTopСontent > -500) {
+      handleHeader("header_scroll");
+      if (scrollTopСontent > 25) {
+        handleHeader("header_scroll header_scroll2");
+      }
+    } else {
+      handleHeader("");
+    }
+  }
+
+  function getParentLocation() {
+    const newArr = location.pathname.split("/");
+  }
+
+  function handleHeader(state) {
+    setIsToggleHeader(state);
+  }
+
+  const handleScrollMain = (event) => {
+    setScrollTopMain(event.currentTarget.scrollTop);
+  };
+
+  const handleScrollContent = (event) => {
+    setScrollTopСontent(event.currentTarget.scrollTop);
+  };
+
+  function checkHandleHeader() {
+    checkScrollMain();
+  }
 
   function getCards() {
     setIsLoadCards(false);
@@ -81,14 +111,23 @@ function App() {
       <MediaQuery minWidth={426}>
         <div className="desktop-info">
           <h1 className="desktop-info__title">
-            Настольная версия сайта в разработке
+            Настольная версия сайта в разработке{" "}
+            {/* {`scrollTopСontent: ${scrollTopСontent}, scrollTopMain: ${scrollTopMain}`} */}
           </h1>
         </div>
         <div className="desktop-container">
           <main className="main">
             <Routes>
               <Route path="/" element={<Navigate to={"/today"} replace />} />
-              <Route path="/today" element={<Today />} />
+              <Route
+                path="/today"
+                element={
+                  <Today
+                    setScrollTopMain={setScrollTopMain}
+                    handleScrollMain={handleScrollMain}
+                  />
+                }
+              />
               <Route
                 path="/catalog"
                 element={
@@ -98,6 +137,7 @@ function App() {
                       isTitle="Каталог"
                       isTogglePage={isTogglePage}
                       setIsTogglePage={setIsTogglePage}
+                      checkHandleHeader={checkHandleHeader}
                     />
                     <Catalog
                       isToggleHeader={isToggleHeader}
@@ -106,6 +146,9 @@ function App() {
                       isTogglePage={isTogglePage}
                       setIsTogglePage={setIsTogglePage}
                       setIsToggleHeader={setIsToggleHeader}
+                      handleScrollContent={handleScrollContent}
+                      handleScrollMain={handleScrollMain}
+                      setScrollTopMain={setScrollTopMain}
                     />
                   </>
                 }
@@ -119,6 +162,7 @@ function App() {
                       setIsTogglePage={setIsTogglePage}
                       getTitleData={getTitleData}
                       isCard={isCard}
+                      checkScrollСontent={checkScrollСontent}
                     />
                   }
                 />
@@ -132,7 +176,11 @@ function App() {
                       isTitle="Медиатека"
                       isTogglePage={isTogglePage}
                     />
-                    <Medialibrary isToggleHeader={isToggleHeader} />
+                    <Medialibrary
+                      isToggleHeader={isToggleHeader}
+                      setScrollTopMain={setScrollTopMain}
+                      handleScrollMain={handleScrollMain}
+                    />
                   </>
                 }
               />
@@ -145,7 +193,11 @@ function App() {
                       isTitle="Поиск"
                       isSearchPage="header_search-page"
                     />
-                    <Search isToggleHeader={isToggleHeader} />
+                    <Search
+                      isToggleHeader={isToggleHeader}
+                      setScrollTopMain={setScrollTopMain}
+                      handleScrollMain={handleScrollMain}
+                    />
                   </>
                 }
               />
@@ -158,7 +210,15 @@ function App() {
         <main className="main">
           <Routes>
             <Route path="/" element={<Navigate to={"/today"} replace />} />
-            <Route path="/today" element={<Today />} />
+            <Route
+              path="/today"
+              element={
+                <Today
+                  setScrollTopMain={setScrollTopMain}
+                  handleScrollMain={handleScrollMain}
+                />
+              }
+            />
             <Route
               path="/catalog"
               element={
@@ -168,6 +228,7 @@ function App() {
                     isTitle="Каталог"
                     isTogglePage={isTogglePage}
                     setIsTogglePage={setIsTogglePage}
+                    checkHandleHeader={checkHandleHeader}
                   />
                   <Catalog
                     isToggleHeader={isToggleHeader}
@@ -176,6 +237,9 @@ function App() {
                     isTogglePage={isTogglePage}
                     setIsTogglePage={setIsTogglePage}
                     setIsToggleHeader={setIsToggleHeader}
+                    handleScrollContent={handleScrollContent}
+                    handleScrollMain={handleScrollMain}
+                    setScrollTopMain={setScrollTopMain}
                   />
                 </>
               }
@@ -189,6 +253,7 @@ function App() {
                     setIsTogglePage={setIsTogglePage}
                     getTitleData={getTitleData}
                     isCard={isCard}
+                    checkScrollСontent={checkScrollСontent}
                   />
                 }
               />
@@ -202,7 +267,11 @@ function App() {
                     isTitle="Медиатека"
                     isTogglePage={isTogglePage}
                   />
-                  <Medialibrary isToggleHeader={isToggleHeader} />
+                  <Medialibrary
+                    isToggleHeader={isToggleHeader}
+                    setScrollTopMain={setScrollTopMain}
+                    handleScrollMain={handleScrollMain}
+                  />
                 </>
               }
             />
@@ -215,7 +284,11 @@ function App() {
                     isTitle="Поиск"
                     isSearchPage="header_search-page"
                   />
-                  <Search isToggleHeader={isToggleHeader} />
+                  <Search
+                    isToggleHeader={isToggleHeader}
+                    setScrollTopMain={setScrollTopMain}
+                    handleScrollMain={handleScrollMain}
+                  />
                 </>
               }
             />
