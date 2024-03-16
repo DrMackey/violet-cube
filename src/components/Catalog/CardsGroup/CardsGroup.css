@@ -58,6 +58,7 @@
   display: flex;
   gap: 10px;
   width: calc(100dvw - 40px);
+  max-width: calc(425px - 40px);
   text-decoration: none;
 }
 
