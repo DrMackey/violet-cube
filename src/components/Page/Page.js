@@ -4,6 +4,7 @@ import Header from "../Header/Header.js";
 import Titlepages from "./Titlepages/Titlepages.js";
 import Infoblock from "./Infoblock/Infoblock.js";
 import Player from "./Player/Player.js";
+import Description from "./Description/Description.js";
 import "./Page.css";
 
 export default function Page({
@@ -38,6 +39,7 @@ export default function Page({
           <Titlepages isCard={isCard} />
           <Infoblock />
           <Player />
+          <Description />
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
           commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
           et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
