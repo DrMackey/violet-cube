@@ -1,0 +1,45 @@
+.description {
+  position: relative;
+  margin: 25px 20px;
+  margin-top: 13px;
+  
+}
+
+.description__paragraph {
+  margin: 0;
+  max-height: 1500px;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 128%;
+  letter-spacing: 0.04em;
+  color: #fff;
+  transition: all .5s ease-in-out;
+}
+
+.collapsed {
+  max-height: 55px;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  box-orient: vertical;
+
+  mask: linear-gradient(0deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 18.0001px, rgb(0, 0, 0) 18.0001px), linear-gradient(270deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 32.8px, rgb(0, 0, 0) 68.8002px)
+
+}
+
+.description__button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: 400;
+  font-size: 15px;
+  color: #3a82f7;
+}
