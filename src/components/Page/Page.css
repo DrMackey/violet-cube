@@ -40,3 +40,33 @@
 .active {
   display: block;
 }
+
+.studio-info {
+  margin: 0 20px;
+  margin-bottom: 7px;
+  padding-bottom: 38px;
+  border-bottom: solid 1px #323234;
+}
+
+.studio-info__link {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+}
+
+.studio-info__title {
+  padding-bottom: 1px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #3a82f7;
+}
+
+.studio-info__subtitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #8d8d92;
+}
