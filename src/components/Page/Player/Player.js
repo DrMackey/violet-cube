@@ -6,6 +6,7 @@ export default function Player() {
     <section>
       <ul className="player__horizontal-media-scroller">
         <li className="player__li">
+          <div className="player__li-content"></div>
           {/* <iframe
             className="player__video player__video_iframe"
             src="https://video.sibnet.ru/shell.php?videoid=5429208"
@@ -15,6 +16,7 @@ export default function Player() {
           ></iframe> */}
         </li>
         <li className="player__li">
+          <div className="player__li-content"></div>
           {/* <video width="750" height="500" controls>
             <source
               src="
@@ -36,6 +38,7 @@ export default function Player() {
           </video> */}
         </li>
         <li className="player__li">
+          <div className="player__li-content"></div>
           {/* <iframe
             className="player__video player__video_iframe"
             src="//kodik.info/seria/1273982/4535c92ae2a3b795f039f646394b302f/720p?translations=false&amp;min_age=18"
@@ -48,6 +51,7 @@ export default function Player() {
           ></iframe> */}
         </li>
         <li className="player__li">
+          <div className="player__li-content"></div>
           {/* <video
             className="player__video"
             controls="true"
@@ -60,10 +64,18 @@ export default function Player() {
             />
           </video> */}
         </li>
-        <li className="player__li"></li>
-        <li className="player__li"></li>
-        <li className="player__li"></li>
-        <li className="player__li"></li>
+        <li className="player__li">
+          <div className="player__li-content"></div>
+        </li>
+        <li className="player__li">
+          <div className="player__li-content"></div>
+        </li>
+        <li className="player__li">
+          <div className="player__li-content"></div>
+        </li>
+        <li className="player__li">
+          <div className="player__li-content"></div>
+        </li>
       </ul>
       <div className="player__nav">
         <div className="player__series">
