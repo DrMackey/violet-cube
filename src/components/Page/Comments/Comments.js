@@ -104,7 +104,7 @@ export default function Comments() {
           <li className="comments__item">
             <div className="comments__header">
               <div className="comments__title-wrapper">
-                <h3 className="comments__title">Timed play</h3>
+                <h3 className="comments__title-item">Timed play</h3>
                 <figure className="comments__title-stars">
                   <span className="comments__stars"></span>
                 </figure>
@@ -134,7 +134,7 @@ export default function Comments() {
           <li className="comments__item">
             <div className="comments__header">
               <div className="comments__title-wrapper">
-                <h3 className="comments__title">Very fun!</h3>
+                <h3 className="comments__title-item">Very fun!</h3>
                 <figure className="comments__title-stars">
                   <span className="comments__stars"></span>
                 </figure>

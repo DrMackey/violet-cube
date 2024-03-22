@@ -12,15 +12,6 @@
   line-height: 128%;
   letter-spacing: 0.04em;
   color: #fff;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -moz-box;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  line-clamp: 1;
-  box-orient: vertical;
 }
 
 
@@ -187,7 +178,7 @@
 .comments__item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
   justify-content: space-between;
   padding: 15px 20px;
   box-sizing: border-box;
@@ -226,6 +217,15 @@
   font-size: 14px;
   letter-spacing: 0.07em;
   color: #fff;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  box-orient: vertical;
 }
 
 .comments__title-stars {
