@@ -16,6 +16,8 @@ function App() {
   const location = useLocation();
 
   const [isCards, setIsCards] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingDone, setIsLoadingDone] = useState("");
   const [isCard, setIsCard] = useState({});
   const [scrollTopСontent, setScrollTopСontent] = useState(Number);
   const [scrollTopMain, setScrollTopMain] = useState(Number);
@@ -39,6 +41,10 @@ function App() {
   useEffect(() => {
     getCards();
     checkScrollMain();
+    setIsLoadingDone("done");
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
   function checkScrollMain() {
@@ -108,6 +114,11 @@ function App() {
 
   return (
     <>
+      {isLoading && (
+        <div className={`loader ${isLoadingDone}`}>
+          <img className="loader__img" src="./favicon.ico" alt="logo" />
+        </div>
+      )}
       <MediaQuery minWidth={426}>
         <div className="desktop-info">
           <h1 className="desktop-info__title">

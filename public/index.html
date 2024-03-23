@@ -36,22 +36,28 @@
         right: 0;
         left: 0;
         background-color: black;
+        z-index: 999;
+        opacity: 1;
+        transition: opacity 1s;
       }
       .loader__img {
         width: 64px;
         height: 64px;
+      }
+      .done {
+        opacity: 0;
       }
   </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-      <!-- <div class="loader">
+      <div class="loader">
         <img
           class="loader__img"
           src="./favicon.ico"
           alt="logo" />
-      </div> -->
+      </div>
     </div>
   </body>
 </html>
