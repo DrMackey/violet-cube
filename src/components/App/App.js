@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-import MediaQuery from "react-responsive";
+// import MediaQuery from "react-responsive";
 import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
 import Page from "../Page/Page.js";
@@ -119,194 +119,92 @@ function App() {
           <img className="loader__img" src="./favicon.ico" alt="logo" />
         </div>
       )}
-      <MediaQuery minWidth={426}>
-        <div className="desktop-info">
-          <h1 className="desktop-info__title">
-            Настольная версия сайта в разработке{" "}
-            {/* {`scrollTopСontent: ${scrollTopСontent}, scrollTopMain: ${scrollTopMain}`} */}
-          </h1>
-        </div>
-        <div className="desktop-container">
-          <main className="main">
-            <Routes>
-              <Route path="/" element={<Navigate to={"/today"} replace />} />
-              <Route
-                path="/today"
-                element={
-                  <Today
-                    setScrollTopMain={setScrollTopMain}
-                    handleScrollMain={handleScrollMain}
-                  />
-                }
-              />
-              <Route
-                path="/catalog"
-                element={
-                  <>
-                    <Header
-                      isToggleHeader={isToggleHeader}
-                      isTitle="Каталог"
-                      isTogglePage={isTogglePage}
-                      setIsTogglePage={setIsTogglePage}
-                      checkHandleHeader={checkHandleHeader}
-                    />
-                    <Catalog
-                      isToggleHeader={isToggleHeader}
-                      onIsCards={isCards}
-                      isLoadCards={isLoadCards}
-                      isTogglePage={isTogglePage}
-                      setIsTogglePage={setIsTogglePage}
-                      setIsToggleHeader={setIsToggleHeader}
-                      handleScrollContent={handleScrollContent}
-                      handleScrollMain={handleScrollMain}
-                      setScrollTopMain={setScrollTopMain}
-                    />
-                  </>
-                }
-              >
-                <Route
-                  path=":titleId"
-                  element={
-                    <Page
-                      isTogglePage={isTogglePage}
-                      isToggleHeader={isToggleHeader}
-                      setIsTogglePage={setIsTogglePage}
-                      getTitleData={getTitleData}
-                      isCard={isCard}
-                      checkScrollСontent={checkScrollСontent}
-                    />
-                  }
-                />
-              </Route>
-              <Route
-                path="/medialibrary"
-                element={
-                  <>
-                    <Header
-                      isToggleHeader={isToggleHeader}
-                      isTitle="Медиатека"
-                      isTogglePage={isTogglePage}
-                    />
-                    <Medialibrary
-                      isToggleHeader={isToggleHeader}
-                      setScrollTopMain={setScrollTopMain}
-                      handleScrollMain={handleScrollMain}
-                    />
-                  </>
-                }
-              />
-              <Route
-                path="/search"
-                element={
-                  <>
-                    <Header
-                      isToggleHeader={isToggleHeader}
-                      isTitle="Поиск"
-                      isSearchPage="header_search-page"
-                    />
-                    <Search
-                      isToggleHeader={isToggleHeader}
-                      setScrollTopMain={setScrollTopMain}
-                      handleScrollMain={handleScrollMain}
-                    />
-                  </>
-                }
-              />
-            </Routes>
-            <Navbar />
-          </main>
-        </div>
-      </MediaQuery>
-      <MediaQuery maxWidth={425}>
-        <main className="main">
-          <Routes>
-            <Route path="/" element={<Navigate to={"/today"} replace />} />
-            <Route
-              path="/today"
-              element={
-                <Today
-                  setScrollTopMain={setScrollTopMain}
-                  handleScrollMain={handleScrollMain}
-                />
-              }
+      <Routes>
+        <Route path="/" element={<Navigate to={"/today"} replace />} />
+        <Route
+          path="/today"
+          element={
+            <Today
+              setScrollTopMain={setScrollTopMain}
+              handleScrollMain={handleScrollMain}
             />
-            <Route
-              path="/catalog"
-              element={
-                <>
-                  <Header
-                    isToggleHeader={isToggleHeader}
-                    isTitle="Каталог"
-                    isTogglePage={isTogglePage}
-                    setIsTogglePage={setIsTogglePage}
-                    checkHandleHeader={checkHandleHeader}
-                  />
-                  <Catalog
-                    isToggleHeader={isToggleHeader}
-                    onIsCards={isCards}
-                    isLoadCards={isLoadCards}
-                    isTogglePage={isTogglePage}
-                    setIsTogglePage={setIsTogglePage}
-                    setIsToggleHeader={setIsToggleHeader}
-                    handleScrollContent={handleScrollContent}
-                    handleScrollMain={handleScrollMain}
-                    setScrollTopMain={setScrollTopMain}
-                  />
-                </>
-              }
-            >
-              <Route
-                path=":titleId"
-                element={
-                  <Page
-                    isTogglePage={isTogglePage}
-                    isToggleHeader={isToggleHeader}
-                    setIsTogglePage={setIsTogglePage}
-                    getTitleData={getTitleData}
-                    isCard={isCard}
-                    checkScrollСontent={checkScrollСontent}
-                  />
-                }
+          }
+        />
+        <Route
+          path="/catalog"
+          element={
+            <>
+              <Header
+                isToggleHeader={isToggleHeader}
+                isTitle="Каталог"
+                isTogglePage={isTogglePage}
+                setIsTogglePage={setIsTogglePage}
+                checkHandleHeader={checkHandleHeader}
               />
-            </Route>
-            <Route
-              path="/medialibrary"
-              element={
-                <>
-                  <Header
-                    isToggleHeader={isToggleHeader}
-                    isTitle="Медиатека"
-                    isTogglePage={isTogglePage}
-                  />
-                  <Medialibrary
-                    isToggleHeader={isToggleHeader}
-                    setScrollTopMain={setScrollTopMain}
-                    handleScrollMain={handleScrollMain}
-                  />
-                </>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <>
-                  <Header
-                    isToggleHeader={isToggleHeader}
-                    isTitle="Поиск"
-                    isSearchPage="header_search-page"
-                  />
-                  <Search
-                    isToggleHeader={isToggleHeader}
-                    setScrollTopMain={setScrollTopMain}
-                    handleScrollMain={handleScrollMain}
-                  />
-                </>
-              }
-            />
-          </Routes>
-          <Navbar />
-        </main>
-      </MediaQuery>
+              <Catalog
+                isToggleHeader={isToggleHeader}
+                onIsCards={isCards}
+                isLoadCards={isLoadCards}
+                isTogglePage={isTogglePage}
+                setIsTogglePage={setIsTogglePage}
+                setIsToggleHeader={setIsToggleHeader}
+                handleScrollContent={handleScrollContent}
+                handleScrollMain={handleScrollMain}
+                setScrollTopMain={setScrollTopMain}
+              />
+            </>
+          }
+        >
+          <Route
+            path=":titleId"
+            element={
+              <Page
+                isTogglePage={isTogglePage}
+                isToggleHeader={isToggleHeader}
+                setIsTogglePage={setIsTogglePage}
+                getTitleData={getTitleData}
+                isCard={isCard}
+                checkScrollСontent={checkScrollСontent}
+              />
+            }
+          />
+        </Route>
+        <Route
+          path="/medialibrary"
+          element={
+            <>
+              <Header
+                isToggleHeader={isToggleHeader}
+                isTitle="Медиатека"
+                isTogglePage={isTogglePage}
+              />
+              <Medialibrary
+                isToggleHeader={isToggleHeader}
+                setScrollTopMain={setScrollTopMain}
+                handleScrollMain={handleScrollMain}
+              />
+            </>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <>
+              <Header
+                isToggleHeader={isToggleHeader}
+                isTitle="Поиск"
+                isSearchPage="header_search-page"
+              />
+              <Search
+                isToggleHeader={isToggleHeader}
+                setScrollTopMain={setScrollTopMain}
+                handleScrollMain={handleScrollMain}
+              />
+            </>
+          }
+        />
+      </Routes>
+      <Navbar />
     </>
   );
 }
