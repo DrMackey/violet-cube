@@ -7,6 +7,7 @@ import Player from "./Player/Player.js";
 import Description from "./Description/Description.js";
 import StudioInfo from "./StudioInfo/StudioInfo.js";
 import Comments from "./Comments/Comments.js";
+import FullInfoblock from "./FullInfoblock/FullInfoblock.js";
 import "./Page.css";
 
 export default function Page({
@@ -44,6 +45,7 @@ export default function Page({
           <Description />
           <StudioInfo />
           <Comments />
+          <FullInfoblock />
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
           commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
           et magnis dis parturient montes, nascetur ridiculus mus. Donec quam

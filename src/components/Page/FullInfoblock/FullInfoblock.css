@@ -1,0 +1,65 @@
+.full-info-block__title-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+  margin-bottom: 6px;
+}
+
+.full-info-block__title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 128%;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.full-info-block__list {
+  margin: 0 20px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.full-info-block__item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: #323234 solid 1px;
+}
+
+.full-info-block__item:last-child {
+  border-bottom: none;
+}
+
+.full-info-block__item-title {
+  margin: 16px 0 13px 0;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #8d8d92;
+}
+
+.full-info-block__item-subtitle {
+  margin: 16px 0 13px 0;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-align: right;
+  color: #fff;
+}
+
+.full-info-block__button {
+  margin: 16px 0 13px 0;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-align: right;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  cursor: pointer;
+}
+
+.full-info-block__button::after {
+  content: url(../../../images/Group\ 22.svg);
+  padding-left: 10px;
+}
