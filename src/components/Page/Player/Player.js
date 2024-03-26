@@ -1,23 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, useMotionValue } from "framer-motion";
 import "./Player.css";
 
-export default function Player() {
+const DRAG_BUFFER = 50;
+
+export default function Player({ isVideo, isLoadVideo }) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [isVideoIndex, setIsVideoIndex] = useState(0);
+
+  const dragX = useMotionValue(0);
+
+  const onDragStart = () => {
+    setIsDragging(true);
+  };
+
+  const onDragEnd = () => {
+    setIsDragging(false);
+
+    const x = dragX.get();
+
+    if (x <= -DRAG_BUFFER && isVideoIndex < isVideo.length - 1) {
+      setIsVideoIndex((pv) => pv + 1);
+    } else if (x >= DRAG_BUFFER && isVideoIndex > 0) {
+      setIsVideoIndex((pv) => pv - 1);
+    }
+  };
+
   return (
-    <section>
-      <ul className="player__horizontal-media-scroller">
-        <li className="player__li">
-          <div className="player__li-content"></div>
-          {/* <iframe
+    <section className="player">
+      <motion.ul
+        className="player__horizontal-media-scroller"
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        animate={{
+          translateX: `-${isVideoIndex * 100}%`,
+        }}
+        transition={{
+          type: "spring",
+          mass: 3,
+          stiffness: 400,
+          damping: 50,
+        }}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        style={{
+          x: dragX,
+        }}
+      >
+        {isLoadVideo &&
+          isVideo.map((e, i) => {
+            const link = e.url;
+            return (
+              <li key={e.id} className="player__li">
+                <div className="player__li-content">
+                  {/* {isVideoIndex === i && (
+                    <iframe
+                      title={e.id}
+                      className="player__video player__video_iframe"
+                      src={link}
+                      frameborder="0"
+                      // scrolling="no"
+                      allowfullscreen
+                    ></iframe>
+                  )} */}
+                </div>
+                {/* <p>{e.author}</p> */}
+              </li>
+            );
+          })}
+        {/* <li className="player__li">
+          <div className="player__li-content"></div> */}
+        {/* <iframe
             className="player__video player__video_iframe"
             src="https://video.sibnet.ru/shell.php?videoid=5429208"
             frameborder="0"
             scrolling="no"
             allowfullscreen
           ></iframe> */}
-        </li>
+        {/* </li>
         <li className="player__li">
-          <div className="player__li-content"></div>
-          {/* <video width="750" height="500" controls>
+          <div className="player__li-content"></div> */}
+        {/* <video width="750" height="500" controls>
             <source
               src="
               https://dv15.sibnet.ru/50/92/90/5092909.mp4?st=RORBWqJ1SyPGtJMOkTatcA&e=1708562000&stor=15&noip=1"
@@ -25,7 +88,7 @@ export default function Player() {
             />
           </video> */}
 
-          {/* <video
+        {/* <video
             className="player__video"
             controls="true"
             autoplay=""
@@ -36,10 +99,10 @@ export default function Player() {
               type="video/mp4"
             />
           </video> */}
-        </li>
+        {/* </li>
         <li className="player__li">
-          <div className="player__li-content"></div>
-          {/* <iframe
+          <div className="player__li-content"></div> */}
+        {/* <iframe
             className="player__video player__video_iframe"
             src="//kodik.info/seria/1273982/4535c92ae2a3b795f039f646394b302f/720p?translations=false&amp;min_age=18"
             frameborder="0"
@@ -49,10 +112,10 @@ export default function Player() {
             allowfullscreen=""
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe> */}
-        </li>
+        {/* </li>
         <li className="player__li">
-          <div className="player__li-content"></div>
-          {/* <video
+          <div className="player__li-content"></div> */}
+        {/* <video
             className="player__video"
             controls="true"
             autoplay=""
@@ -63,7 +126,7 @@ export default function Player() {
               type="video/mp4"
             />
           </video> */}
-        </li>
+        {/* </li>
         <li className="player__li">
           <div className="player__li-content"></div>
         </li>
@@ -75,13 +138,16 @@ export default function Player() {
         </li>
         <li className="player__li">
           <div className="player__li-content"></div>
-        </li>
-      </ul>
+        </li> */}
+      </motion.ul>
       <div className="player__nav">
         <div className="player__series">
           <p className="player__series-title">
-            Серия<span className="player__series-title-span">1</span>/
-            <span>24</span>
+            Серия
+            <span className="player__series-title-span">
+              {isVideoIndex + 1}
+            </span>
+            /<span>{isVideo.length}</span>
           </p>
           <p className="player__time-watch">
             <svg

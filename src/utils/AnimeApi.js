@@ -1,6 +1,7 @@
 class AnimeApi {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl, videoUrl, headers }) {
     this._url = baseUrl;
+    this._videourl = videoUrl;
     this._headers = headers;
   }
 
@@ -48,10 +49,24 @@ class AnimeApi {
         return res;
       });
   }
+
+  getTitleVideo(titleId) {
+    return fetch(`${this._videourl}/shikivideos/${titleId}`, {
+      headers: this._headers,
+      // credentials: "include",
+    })
+      .then((res) => {
+        return this._getResponseData(res);
+      })
+      .then((res) => {
+        return res;
+      });
+  }
 }
 
 const animeApi = new AnimeApi({
   baseUrl: "https://shikimori.one/api",
+  videoUrl: "https://smarthard.net/api",
   headers: {
     "Content-Type": "application/json",
   },
