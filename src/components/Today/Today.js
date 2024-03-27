@@ -9,7 +9,7 @@ export default function Today({ setScrollTopMain, handleScrollMain }) {
   return (
     <>
       <section className="main-page" onScroll={handleScrollMain}>
-        <Titlepage isTitle="Сегодня" isToday="7 Февраля" />
+        <Titlepage isTitle="Сегодня" isToday="28 Января" />
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
         ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
         dis parturient montes, nascetur ridiculus mus. Donec quam felis,

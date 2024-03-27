@@ -8,8 +8,10 @@ export default function Titlepage({ isTitle, isToggleHeader, isToday }) {
         isToggleHeader ? "titlepage__container_scroll" : ""
       }`}
     >
-      <h1 className="titlepage__subtitle">{isTitle}</h1>
-      {isToday}
+      <div className="titlepage__subtitle-container">
+        <h1 className="titlepage__subtitle">{isTitle}</h1>
+        <p className="titlepage__today">{isToday}</p>
+      </div> 
       <button className="titlepage__profile">
         <svg
           xmlns="http://www.w3.org/2000/svg"
