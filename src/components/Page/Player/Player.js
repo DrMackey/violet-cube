@@ -1,50 +1,79 @@
-import React, { useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+import { DragDealer } from "./DragDealer.ts";
 import "./Player.css";
 
-const DRAG_BUFFER = 50;
+const elemPrefix = "test";
+const getId = (index) => `${elemPrefix}${index}`;
+const getItems = () =>
+  Array(20)
+    .fill(0)
+    .map((_, ind) => ({ id: `element-${ind}` }));
 
 export default function Player({ isVideo, isLoadVideo }) {
   const [isDragging, setIsDragging] = useState(false);
-  const [isVideoIndex, setIsVideoIndex] = useState(0);
+  const [isVideoIndex, setIsVideoIndex] = useState({
+    scrollLeft: 1,
+    clientWidth: 1,
+  });
 
-  const dragX = useMotionValue(0);
+  const { scrollLeft, clientWidth } = isVideoIndex;
 
-  const onDragStart = () => {
-    setIsDragging(true);
-  };
+  const [items, setItems] = useState(getItems);
+  const [selected, setSelected] = useState([]);
 
-  const onDragEnd = () => {
-    setIsDragging(false);
+  const isItemSelected = (id) => !!selected.find((el) => el === id);
 
-    const x = dragX.get();
+  const handleClick =
+    (id) =>
+    ({ getItemById, scrollToItem }) => {
+      const itemSelected = isItemSelected(id);
 
-    if (x <= -DRAG_BUFFER && isVideoIndex < isVideo.length - 1) {
-      setIsVideoIndex((pv) => pv + 1);
-    } else if (x >= DRAG_BUFFER && isVideoIndex > 0) {
-      setIsVideoIndex((pv) => pv - 1);
+      setSelected((currentSelected) =>
+        itemSelected
+          ? currentSelected.filter((el) => el !== id)
+          : currentSelected.concat(id)
+      );
+    };
+
+  // const [items] = React.useState(getItems);
+
+  // NOTE: for drag by mouse
+  const dragState = React.useRef(new DragDealer());
+
+  const handleDrag =
+    ({ scrollContainer }) =>
+    (ev) =>
+      dragState.current.dragMove(ev, (posDiff) => {
+        if (scrollContainer.current) {
+          scrollContainer.current.scrollLeft += posDiff;
+        }
+      });
+
+  // const [selected, setSelected] = React.useState<string>("");
+  const handleItemClick = (itemId) => () => {
+    if (dragState.current.dragging) {
+      return false;
     }
+    setSelected(selected !== itemId ? itemId : "");
   };
 
   return (
     <section className="player">
-      <motion.ul
+      <ul
         className="player__horizontal-media-scroller"
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        animate={{
-          translateX: `-${isVideoIndex * 100}%`,
+        onClick={(e) => {
+          console.log(e.clientX, e.clientY);
         }}
-        transition={{
-          type: "spring",
-          mass: 3,
-          stiffness: 400,
-          damping: 50,
+        onWheel={(e) => {
+          console.log(e);
         }}
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
-        style={{
-          x: dragX,
+        onScroll={(e) => {
+          setIsVideoIndex({
+            scrollLeft: e.target.scrollLeft,
+            clientWidth: e.target.clientWidth,
+          });
+          console.log(isVideoIndex.scrollLeft, isVideoIndex.clientWidth);
         }}
       >
         {isLoadVideo &&
@@ -53,7 +82,7 @@ export default function Player({ isVideo, isLoadVideo }) {
             return (
               <li key={e.id} className="player__li">
                 <div className="player__li-content">
-                  {/* {isVideoIndex === i && (
+                  {isVideoIndex === i && (
                     <iframe
                       title={e.id}
                       className="player__video player__video_iframe"
@@ -62,90 +91,18 @@ export default function Player({ isVideo, isLoadVideo }) {
                       // scrolling="no"
                       allowfullscreen
                     ></iframe>
-                  )} */}
+                  )}
                 </div>
-                {/* <p>{e.author}</p> */}
               </li>
             );
           })}
-        {/* <li className="player__li">
-          <div className="player__li-content"></div> */}
-        {/* <iframe
-            className="player__video player__video_iframe"
-            src="https://video.sibnet.ru/shell.php?videoid=5429208"
-            frameborder="0"
-            scrolling="no"
-            allowfullscreen
-          ></iframe> */}
-        {/* </li>
-        <li className="player__li">
-          <div className="player__li-content"></div> */}
-        {/* <video width="750" height="500" controls>
-            <source
-              src="
-              https://dv15.sibnet.ru/50/92/90/5092909.mp4?st=RORBWqJ1SyPGtJMOkTatcA&e=1708562000&stor=15&noip=1"
-              type="video/mp4"
-            />
-          </video> */}
-
-        {/* <video
-            className="player__video"
-            controls="true"
-            autoplay=""
-            name="media"
-          >
-            <source
-              src="https://dv15.sibnet.ru/50/92/90/5092909.mp4?st=RORBWqJ1SyPGtJMOkTatcA&amp;e=1708562000&amp;stor=15&amp;noip=1"
-              type="video/mp4"
-            />
-          </video> */}
-        {/* </li>
-        <li className="player__li">
-          <div className="player__li-content"></div> */}
-        {/* <iframe
-            className="player__video player__video_iframe"
-            src="//kodik.info/seria/1273982/4535c92ae2a3b795f039f646394b302f/720p?translations=false&amp;min_age=18"
-            frameborder="0"
-            webkitallowfullscreen="true"
-            mozallowfullscreen="true"
-            scrolling="no"
-            allowfullscreen=""
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe> */}
-        {/* </li>
-        <li className="player__li">
-          <div className="player__li-content"></div> */}
-        {/* <video
-            className="player__video"
-            controls="true"
-            autoplay=""
-            name="media"
-          >
-            <source
-              src="blob:http://kodik.info/67eb8b91-f726-4e90-8905-053b8f24c854"
-              type="video/mp4"
-            />
-          </video> */}
-        {/* </li>
-        <li className="player__li">
-          <div className="player__li-content"></div>
-        </li>
-        <li className="player__li">
-          <div className="player__li-content"></div>
-        </li>
-        <li className="player__li">
-          <div className="player__li-content"></div>
-        </li>
-        <li className="player__li">
-          <div className="player__li-content"></div>
-        </li> */}
-      </motion.ul>
+      </ul>
       <div className="player__nav">
         <div className="player__series">
           <p className="player__series-title">
             Серия
             <span className="player__series-title-span">
-              {isVideoIndex + 1}
+              {Math.trunc(scrollLeft / (clientWidth - 30) + 1.5)}
             </span>
             /<span>{isVideo.length}</span>
           </p>
