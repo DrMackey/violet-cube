@@ -1,108 +1,56 @@
-import React, { useState, useEffect, useRef } from "react";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import { DragDealer } from "./DragDealer.ts";
+import React, { useState, useEffect } from "react";
+import { Carousel, Slide, Slider } from "react-scroll-snap-anime-slider";
 import "./Player.css";
 
-const elemPrefix = "test";
-const getId = (index) => `${elemPrefix}${index}`;
-const getItems = () =>
-  Array(20)
-    .fill(0)
-    .map((_, ind) => ({ id: `element-${ind}` }));
-
 export default function Player({ isVideo, isLoadVideo }) {
-  const [isDragging, setIsDragging] = useState(false);
-  const [isVideoIndex, setIsVideoIndex] = useState({
-    scrollLeft: 1,
-    clientWidth: 1,
-  });
-
-  const { scrollLeft, clientWidth } = isVideoIndex;
-
-  const [items, setItems] = useState(getItems);
-  const [selected, setSelected] = useState([]);
-
-  const isItemSelected = (id) => !!selected.find((el) => el === id);
-
-  const handleClick =
-    (id) =>
-    ({ getItemById, scrollToItem }) => {
-      const itemSelected = isItemSelected(id);
-
-      setSelected((currentSelected) =>
-        itemSelected
-          ? currentSelected.filter((el) => el !== id)
-          : currentSelected.concat(id)
-      );
-    };
-
-  // const [items] = React.useState(getItems);
-
-  // NOTE: for drag by mouse
-  const dragState = React.useRef(new DragDealer());
-
-  const handleDrag =
-    ({ scrollContainer }) =>
-    (ev) =>
-      dragState.current.dragMove(ev, (posDiff) => {
-        if (scrollContainer.current) {
-          scrollContainer.current.scrollLeft += posDiff;
-        }
-      });
-
-  // const [selected, setSelected] = React.useState<string>("");
-  const handleItemClick = (itemId) => () => {
-    if (dragState.current.dragging) {
-      return false;
-    }
-    setSelected(selected !== itemId ? itemId : "");
-  };
+  const [isCurrentSlide, setIsCurrentSlide] = useState(0);
+  let onCurrentSlide = 0;
+  const localCurrentSlide = { index: Number };
 
   return (
     <section className="player">
-      <ul
-        className="player__horizontal-media-scroller"
-        onClick={(e) => {
-          console.log(e.clientX, e.clientY);
-        }}
-        onWheel={(e) => {
-          console.log(e);
-        }}
-        onScroll={(e) => {
-          setIsVideoIndex({
-            scrollLeft: e.target.scrollLeft,
-            clientWidth: e.target.clientWidth,
-          });
-          console.log(isVideoIndex.scrollLeft, isVideoIndex.clientWidth);
-        }}
-      >
-        {isLoadVideo &&
-          isVideo.map((e, i) => {
-            const link = e.url;
-            return (
-              <li key={e.id} className="player__li">
-                <div className="player__li-content">
-                  {isVideoIndex === i && (
-                    <iframe
-                      title={e.id}
-                      className="player__video player__video_iframe"
-                      src={link}
-                      frameborder="0"
-                      // scrolling="no"
-                      allowfullscreen
-                    ></iframe>
-                  )}
-                </div>
-              </li>
-            );
-          })}
-      </ul>
+      {isLoadVideo && (
+        <Carousel
+          totalSlides={isVideo.length}
+          visibleSlides={1}
+          trayPadding={"15px"}
+          slideMargin={5}
+          onSlide={({ currentSlide }) => {
+            localCurrentSlide.index = currentSlide;
+          }}
+        >
+          <Slider>
+            {isVideo.map((e, i) => {
+              const link = e.url;
+              return (
+                <Slide key={e.id}>
+                  <div className="player__li">
+                    <div className="player__li-content">
+                      {isCurrentSlide === i && (
+                        <iframe
+                          title={e.id}
+                          className="player__video player__video_iframe"
+                          src={link}
+                          frameborder="0"
+                          // scrolling="no"
+                          allowfullscreen
+                        ></iframe>
+                      )}
+                    </div>
+                  </div>
+                </Slide>
+              );
+            })}
+          </Slider>
+        </Carousel>
+      )}
       <div className="player__nav">
         <div className="player__series">
           <p className="player__series-title">
             Серия
             <span className="player__series-title-span">
-              {Math.trunc(scrollLeft / (clientWidth - 30) + 1.5)}
+              {localCurrentSlide.index}
+              {/* {Math.trunc(scrollLeft / (clientWidth - 30) + 1.5)} */}
             </span>
             /<span>{isVideo.length}</span>
           </p>

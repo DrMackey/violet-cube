@@ -46,14 +46,6 @@
   scroll-snap-align: center;
 }
 
-.cards-group__item:last-child {
-  margin-right: 20px;
-}
-
-.cards-group__item:nth-child(-n+3) {
-  margin-left: 20px;
-}
-
 .card {
   display: flex;
   gap: 10px;
@@ -102,4 +94,11 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.cards-group .rssas-slider-tray {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-auto-flow: column;
+  row-gap: 15px;
 }

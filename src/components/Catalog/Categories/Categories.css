@@ -1,3 +1,7 @@
+.categories {
+  padding: 8px 0;
+}
+
 .categories__list {
   padding: 0;
   padding: 8px 0;
@@ -8,14 +12,6 @@
   overflow: hidden;
   overflow-x: scroll;
   scrollbar-width: none;
-}
-
-.categories__item:last-child {
-  margin-right: 20px;
-}
-
-.categories__item:first-child {
-  margin-left: 20px;
 }
 
 .categories__button {
@@ -43,4 +39,12 @@
   font-size: 14px;
   letter-spacing: 0.02em;
   color: #fff;
+}
+
+.categories .rssas-slide {
+  width: fit-content !important; 
+}
+
+.categories .rssas-slider-tray {
+  gap: 7px;
 }

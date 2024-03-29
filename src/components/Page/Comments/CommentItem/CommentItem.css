@@ -1,0 +1,115 @@
+
+.comments__item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border-radius: 9px;
+  background: #1c1c1e;
+  max-width: calc(425px - 40px);
+  width: calc(100dvw - 40px);
+}
+
+.comments__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comments__title-wrapper {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments__title-item {
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.07em;
+  color: #fff;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  box-orient: vertical;
+}
+
+.comments__title-stars {
+  margin: 0;
+}
+
+.comments__time-container {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #8e8d93;
+}
+
+.comments__nickname {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  box-orient: vertical;
+ }
+
+.comments__stars {
+  background-image: url(../../../../images/five-star-rating-gold.svg);
+  height: 11px;
+  display: inline-block;
+  background-size: 69px 11px;
+  background-position: -5px;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.comments__content {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 128%;
+  letter-spacing: 0.05em;
+  color: #fefefe;
+
+    /* max-height: 55px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    line-clamp: 7;
+    box-orient: vertical;
+    mask: linear-gradient(0deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 18.0001px, rgb(0, 0, 0) 18.0001px), linear-gradient(270deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 32.8px, rgb(0, 0, 0) 68.8002px);
+}
+
+.comments__content-container {
+  position: relative;
+}
+
+.comments__button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: 400;
+  font-size: 15px;
+  color: #3a82f7;
+}
