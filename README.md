@@ -50,7 +50,7 @@ cd <Имя-папки>
 - Склонируйте этот репозиторий:
 
 ```
-git clone https://github.com/endjoyer/movies-explorer-frontend
+git clone https://github.com/DrMackey/violet-cube
 ```
 
 - Установите все зависимости:
