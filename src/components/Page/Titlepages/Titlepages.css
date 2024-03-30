@@ -123,6 +123,7 @@
 
 .drop-down {
   /* position: relative; */
+  z-index: 888;
 }
 
 .drop-down__active-button::-webkit-details-marker {
