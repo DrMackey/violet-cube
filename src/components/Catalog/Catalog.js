@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
+import PreviewCards from "./PreviewCards/PreviewCards.js";
 import Categories from "./Categories/Categories.js";
 import CardsGroup from "./CardsGroup/CardsGroup.js";
 import "./Catalog.css";
@@ -62,6 +63,7 @@ export default function Catalog({
       >
         <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
         <Categories />
+        <PreviewCards />
         <CardsGroup
           onIsCards={onIsCards}
           isLoadCards={isLoadCards}
