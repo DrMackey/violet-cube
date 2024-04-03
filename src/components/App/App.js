@@ -22,13 +22,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingDone, setIsLoadingDone] = useState("");
   const [isCard, setIsCard] = useState({});
-  const [isVideo, setIsVideo] = useState({});
   const [scrollTopСontent, setScrollTopСontent] = useState(Number);
   const [scrollTopMain, setScrollTopMain] = useState(Number);
   const [isToggleHeader, setIsToggleHeader] = useState("");
   const [isTogglePage, setIsTogglePage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
-  const [isLoadVideo, setIsLoadVideo] = useState(false);
 
   useEffect(() => {
     getParentLocation();
@@ -117,6 +115,7 @@ function App() {
       });
   }
 
+<<<<<<< HEAD
   function getTitleVideo(titleId) {
     setIsLoadVideo(false);
     api
@@ -150,6 +149,8 @@ function App() {
       });
   }
 
+=======
+>>>>>>> bad5cfab5906b66aa62f97dcbf9c7ecd626d2d88
   return (
     <>
       {isLoading && (
@@ -199,12 +200,13 @@ function App() {
               <Page
                 isTogglePage={isTogglePage}
                 isToggleHeader={isToggleHeader}
-                isLoadVideo={isLoadVideo}
                 setIsTogglePage={setIsTogglePage}
                 getTitleData={getTitleData}
+<<<<<<< HEAD
                 getKodikVideo={getKodikVideo}
+=======
+>>>>>>> bad5cfab5906b66aa62f97dcbf9c7ecd626d2d88
                 isCard={isCard}
-                isVideo={isVideo}
                 checkScrollСontent={checkScrollСontent}
               />
             }
