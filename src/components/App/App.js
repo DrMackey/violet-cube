@@ -12,9 +12,6 @@ import Medialibrary from "../Medialibrary/Medialibrary.js";
 import api from "../../utils/AnimeApi.js";
 import "./App.css";
 
-// const { KODIK_TOKEN } = process.env;
-const KODIK_TOKEN = "171ed6214cbc96e12b431da930826723";
-
 function App() {
   const location = useLocation();
 

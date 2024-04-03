@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel, Slide, Slider } from "react-scroll-snap-anime-slider";
 import "./Player.css";
 
 export default function Player({ isUrlVideos, isLoadVideo }) {
+  const [selectedFruit, setSelectedFruit] = useState("KODIK");
   const localCurrentSlide = { index: Number };
   // const lastSeason = isVideo[0].last_season;
   // const seriesObj = isVideo[0].seasons[lastSeason].episodes;
@@ -86,6 +87,50 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
             </option>
             <option value="Sibnet">Sibnet</option>
           </select> */}
+          <details className="player__select">
+            <summary className="dplayer__select__active-button">
+              {selectedFruit}
+              <svg
+                className="player__select__icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="8"
+                fill="none"
+              >
+                <rect
+                  width="1.294"
+                  height="7.052"
+                  y="2.049"
+                  rx=".647"
+                  transform="rotate(-45 0 2.05)"
+                />
+                <rect
+                  width="1.294"
+                  height="7.052"
+                  x="9.068"
+                  y=".964"
+                  rx=".647"
+                  transform="rotate(43.928 9.068 .964)"
+                />
+              </svg>
+            </summary>
+            <details-menu>
+              <div className="player__select__list">
+                <button
+                  className="player__select__item"
+                  onClick={() => setSelectedFruit("KODIK")}
+                >
+                  KODIK
+                </button>
+                <button
+                  className="player__select__item"
+                  onClick={() => setSelectedFruit("SIBNET")}
+                >
+                  SIBNET
+                </button>
+              </div>
+            </details-menu>
+          </details>
           <p className="player__choice_subtitle">Встроенная реклама</p>
         </div>
       </div>
