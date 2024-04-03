@@ -1,7 +1,8 @@
 class AnimeApi {
-  constructor({ baseUrl, videoUrl, headers }) {
+  constructor({ baseUrl, videoUrl, kodikUrl, headers }) {
     this._url = baseUrl;
     this._videourl = videoUrl;
+    this._kodikurl = kodikUrl;
     this._headers = headers;
   }
 
@@ -13,7 +14,7 @@ class AnimeApi {
   }
 
   getInitialCards() {
-    return fetch(`${this._url}/animes?limit=50`, {
+    return fetch(`${this._url}/animes?limit=50&order=popularity`, {
       // credentials: "include",
     })
       .then((res) => {
@@ -62,11 +63,31 @@ class AnimeApi {
         return res;
       });
   }
+  //&translation_id=609
+
+  getKodikVideo(titleId, KODIK_TOKEN) {
+    return fetch(
+      `${this._kodikurl}/search?token=${KODIK_TOKEN}&shikimori_id=${titleId}&with_episodes=true&with_material_data=true`,
+      {
+        // method: "GET",
+        // headers: this._headers,
+        // credentials: "include",
+        // Origin: "http://violet-cube.drmackey.keenetic.link",
+      }
+    )
+      .then((res) => {
+        return this._getResponseData(res);
+      })
+      .then((res) => {
+        return res;
+      });
+  }
 }
 
 const animeApi = new AnimeApi({
   baseUrl: "https://shikimori.one/api",
   videoUrl: "https://smarthard.net/api",
+  kodikUrl: "https://kodikapi.com",
   headers: {
     "Content-Type": "application/json",
   },

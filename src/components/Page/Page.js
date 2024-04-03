@@ -16,13 +16,15 @@ export default function Page({
   isLoadVideo,
   setIsTogglePage,
   getTitleData,
-  getTitleVideo,
+  getKodikVideo,
   isCard,
   isVideo,
   checkScrollСontent,
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSeries, setIsLoadingSeries] = useState(false);
   const [isLoadingDone, setIsLoadingDone] = useState("");
+  const [isUrlVideos, setIsUrlVideos] = useState();
   const location = useLocation();
 
   useEffect(() => {
@@ -32,18 +34,36 @@ export default function Page({
     checkScrollСontent();
     setIsLoadingDone();
     setIsLoadingDone("done");
+
     setTimeout(() => {
       setIsLoading(true);
     }, 1000);
   }, []);
 
   useEffect(() => {
+    if (isLoadVideo) {
+      console.log(isVideo, "isVideo");
+      setIsUrlVideos(() => getSeries(isVideo));
+      setIsLoadingSeries(true);
+    }
+  }, [isLoadVideo]);
+
+  useEffect(() => {
+    console.log(isCard, "isCard.id");
     if (Object.keys(isCard).length !== 0) {
-      // console.log("isCard", isCard);
-      setIsLoading(true);
-      getTitleVideo(isCard.id);
+      getKodikVideo(isCard.id);
     }
   }, [isCard]);
+
+  function getSeries(voiceovers) {
+    return voiceovers.map((e) => {
+      const lastSeason = e.last_season;
+      if (lastSeason > 0) {
+        const seriesObj = e.seasons[lastSeason].episodes;
+        return Object.values(seriesObj);
+      }
+    });
+  }
 
   return (
     // <>
@@ -51,7 +71,7 @@ export default function Page({
     <>
       <Titlepages isLoading={isLoading} isCard={isCard} />
       <Infoblock />
-      <Player isVideo={isVideo} isLoadVideo={isLoadVideo} />
+      <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} />
       <Description />
       <StudioInfo />
       <Comments />

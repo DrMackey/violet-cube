@@ -32,11 +32,12 @@
   border-radius: 17px;
   outline: 1px solid rgba(84, 84, 88, .65);
   white-space: nowrap;
-
+  overflow: hidden;
   background-color: #1C1C1E;
 }
 
 .player__li-content {
+  overflow: hidden;
   max-width: calc(425px - 40px);
   width: calc(100dvw - 40px);
   aspect-ratio: 177 / 82;

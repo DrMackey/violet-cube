@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Carousel, Slide, Slider } from "react-scroll-snap-anime-slider";
 import "./Player.css";
 
-export default function Player({ isVideo, isLoadVideo }) {
-  const [isCurrentSlide, setIsCurrentSlide] = useState(0);
-  let onCurrentSlide = 0;
+export default function Player({ isUrlVideos, isLoadVideo }) {
   const localCurrentSlide = { index: Number };
+  // const lastSeason = isVideo[0].last_season;
+  // const seriesObj = isVideo[0].seasons[lastSeason].episodes;
+  const maxEpisodes = 3;
+
+  useEffect(() => {
+    if (isLoadVideo) {
+      console.log(isUrlVideos[0].length, "isLoadVideo");
+    }
+  }, [isLoadVideo]);
 
   return (
     <section className="player">
       {isLoadVideo && (
         <Carousel
-          totalSlides={isVideo.length}
+          totalSlides={isUrlVideos[0].length}
           visibleSlides={1}
           trayPadding={"15px"}
           slideMargin={5}
@@ -20,21 +27,24 @@ export default function Player({ isVideo, isLoadVideo }) {
           }}
         >
           <Slider>
-            {isVideo.map((e, i) => {
-              const link = e.url;
+            {isUrlVideos[0].map((e, i) => {
+              console.log(e, "video");
+              const link = e;
               return (
-                <Slide key={e.id}>
+                <Slide key={i}>
                   <div className="player__li">
                     <div className="player__li-content">
-                      {isCurrentSlide === i && (
+                      {maxEpisodes > i ? (
                         <iframe
-                          title={e.id}
+                          title={i}
                           className="player__video player__video_iframe"
                           src={link}
                           frameborder="0"
-                          // scrolling="no"
+                          scrolling="no"
                           allowfullscreen
                         ></iframe>
+                      ) : (
+                        ""
                       )}
                     </div>
                   </div>
@@ -52,7 +62,7 @@ export default function Player({ isVideo, isLoadVideo }) {
               {localCurrentSlide.index}
               {/* {Math.trunc(scrollLeft / (clientWidth - 30) + 1.5)} */}
             </span>
-            /<span>{isVideo.length}</span>
+            /<span>{isLoadVideo ? isUrlVideos[0].length : "0"}</span>
           </p>
           <p className="player__time-watch">
             <svg
@@ -70,12 +80,12 @@ export default function Player({ isVideo, isLoadVideo }) {
           </p>
         </div>
         <div className="player__choice">
-          <select className="player__select">
+          {/* <select className="player__select">
             <option value="KODIK" selected="">
               KODIK
             </option>
             <option value="Sibnet">Sibnet</option>
-          </select>
+          </select> */}
           <p className="player__choice_subtitle">Встроенная реклама</p>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default function PreviewCards() {
         <Slider>
           {isCards.map((e, i) => {
             return (
-              <Slide key={e.id}>
+              <Slide key={i}>
                 <Link className="preview-card">
                   <p className="preview-card__subtitle">ПРЕДЗАКАЗ</p>
                   <h2 className="preview-card__title">

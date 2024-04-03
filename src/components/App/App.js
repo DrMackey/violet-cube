@@ -12,6 +12,9 @@ import Medialibrary from "../Medialibrary/Medialibrary.js";
 import api from "../../utils/AnimeApi.js";
 import "./App.css";
 
+// const { KODIK_TOKEN } = process.env;
+const KODIK_TOKEN = "171ed6214cbc96e12b431da930826723";
+
 function App() {
   const location = useLocation();
 
@@ -128,6 +131,25 @@ function App() {
       });
   }
 
+  function getKodikVideo(titleId) {
+    setIsLoadVideo(false);
+    api
+      .getKodikVideo(titleId, KODIK_TOKEN)
+      .then((res) => {
+        setIsVideo(res.results);
+        return res;
+      })
+      .then((res) => {
+        console.log(res, "video", res.total);
+        if (res.total > 0) {
+          setIsLoadVideo(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <>
       {isLoading && (
@@ -180,7 +202,7 @@ function App() {
                 isLoadVideo={isLoadVideo}
                 setIsTogglePage={setIsTogglePage}
                 getTitleData={getTitleData}
-                getTitleVideo={getTitleVideo}
+                getKodikVideo={getKodikVideo}
                 isCard={isCard}
                 isVideo={isVideo}
                 checkScrollСontent={checkScrollСontent}
