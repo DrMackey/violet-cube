@@ -115,7 +115,6 @@ function App() {
       });
   }
 
-<<<<<<< HEAD
   function getTitleVideo(titleId) {
     setIsLoadVideo(false);
     api
@@ -149,8 +148,6 @@ function App() {
       });
   }
 
-=======
->>>>>>> bad5cfab5906b66aa62f97dcbf9c7ecd626d2d88
   return (
     <>
       {isLoading && (
@@ -202,10 +199,7 @@ function App() {
                 isToggleHeader={isToggleHeader}
                 setIsTogglePage={setIsTogglePage}
                 getTitleData={getTitleData}
-<<<<<<< HEAD
                 getKodikVideo={getKodikVideo}
-=======
->>>>>>> bad5cfab5906b66aa62f97dcbf9c7ecd626d2d88
                 isCard={isCard}
                 checkScrollСontent={checkScrollСontent}
               />
