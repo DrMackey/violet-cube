@@ -6,6 +6,7 @@ export default function Medialibrary({
   isToggleHeader,
   setScrollTopMain,
   handleScrollMain,
+  setIsToggleBottomPage
 }) {
   useEffect(() => {
     setScrollTopMain(0);
@@ -13,7 +14,7 @@ export default function Medialibrary({
   return (
     <>
       <section className="main-page" onScroll={handleScrollMain}>
-        <Titlepage isTitle="Медиатека" isToggleHeader={isToggleHeader} />
+        <Titlepage isTitle="Медиатека" isToggleHeader={isToggleHeader} setIsToggleBottomPage={setIsToggleBottomPage}/>
       </section>
     </>
   );

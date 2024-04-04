@@ -16,6 +16,7 @@ export default function Catalog({
   handleScrollMain,
   handleScrollContent,
   setScrollTopMain,
+  setIsToggleBottomPage
 }) {
   useEffect(() => {
     setScrollTopMain(0);
@@ -61,7 +62,7 @@ export default function Catalog({
         onScroll={handleScrollMain}
         className={`main-page ${isTogglePage ? "main-page_active" : ""}`}
       >
-        <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} />
+        <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} setIsToggleBottomPage={setIsToggleBottomPage}/>
         <Categories />
         <PreviewCards />
         <CardsGroup

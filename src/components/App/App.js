@@ -13,6 +13,8 @@ import Medialibrary from "../Medialibrary/Medialibrary.js";
 import api from "../../utils/AnimeApi.js";
 import "./App.css";
 
+const KODIK_TOKEN = "171ed6214cbc96e12b431da930826723"
+
 
 function App() {
   const location = useLocation();
@@ -190,6 +192,7 @@ function App() {
                 handleScrollContent={handleScrollContent}
                 handleScrollMain={handleScrollMain}
                 setScrollTopMain={setScrollTopMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
               />
             </>
           }
@@ -225,6 +228,7 @@ function App() {
                 isToggleHeader={isToggleHeader}
                 setScrollTopMain={setScrollTopMain}
                 handleScrollMain={handleScrollMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
               />
             </>
           }
@@ -242,6 +246,7 @@ function App() {
                 isToggleHeader={isToggleHeader}
                 setScrollTopMain={setScrollTopMain}
                 handleScrollMain={handleScrollMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
               />
             </>
           }

@@ -5,12 +5,13 @@ import "./CardsGroup.css";
 
 export default function CardsGroup({ onIsCards, isLoadCards, handleClick }) {
   return (
+    <>{isLoadCards && (
     <section className="cards-group">
       <div className="cards-group__title-container">
         <h2 className="cards-group__title">Смотрят сегодня</h2>
         <button className="cards-group__button">Все</button>
       </div>
-      {isLoadCards && (
+      
         <Carousel
           totalSlides={onIsCards.length}
           visibleSlides={1}
@@ -47,7 +48,9 @@ export default function CardsGroup({ onIsCards, isLoadCards, handleClick }) {
             })}
           </Slider>
         </Carousel>
-      )}
+      
     </section>
+    )}
+    </>
   );
 }
