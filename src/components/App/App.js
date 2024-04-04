@@ -5,12 +5,14 @@ import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
 import Page from "../Page/Page.js";
 import Navbar from "../Navbar/Navbar.js";
+import BottomPage from "../BottomPage/BottomPage.js";
 import Today from "../Today/Today.js";
 import Catalog from "../Catalog/Catalog.js";
 import Search from "../Search/Search.js";
 import Medialibrary from "../Medialibrary/Medialibrary.js";
 import api from "../../utils/AnimeApi.js";
 import "./App.css";
+
 
 function App() {
   const location = useLocation();
@@ -24,6 +26,7 @@ function App() {
   const [scrollTopMain, setScrollTopMain] = useState(Number);
   const [isToggleHeader, setIsToggleHeader] = useState("");
   const [isTogglePage, setIsTogglePage] = useState(false);
+  const [isToggleBottomPage, setIsToggleBottomPage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
   const [isLoadVideo, setIsLoadVideo] = useState(false);
 
@@ -162,6 +165,7 @@ function App() {
             <Today
               setScrollTopMain={setScrollTopMain}
               handleScrollMain={handleScrollMain}
+              setIsToggleBottomPage={setIsToggleBottomPage}
             />
           }
         />
@@ -244,6 +248,7 @@ function App() {
         />
       </Routes>
       <Navbar />
+      <BottomPage isToggleBottomPage={isToggleBottomPage} setIsToggleBottomPage={setIsToggleBottomPage}/>
     </>
   );
 }
