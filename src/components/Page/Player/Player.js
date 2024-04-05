@@ -88,31 +88,34 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
             <option value="Sibnet">Sibnet</option>
           </select> */}
           <details className="player__select">
-            <summary className="dplayer__select__active-button">
-              {selectedFruit}
-              <svg
-                className="player__select__icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="8"
-                fill="none"
-              >
-                <rect
-                  width="1.294"
-                  height="7.052"
-                  y="2.049"
-                  rx=".647"
-                  transform="rotate(-45 0 2.05)"
-                />
-                <rect
-                  width="1.294"
-                  height="7.052"
-                  x="9.068"
-                  y=".964"
-                  rx=".647"
-                  transform="rotate(43.928 9.068 .964)"
-                />
-              </svg>
+            <summary className="player__select__active-button">
+              <div className="player__select__active-button-title-container">
+                <p className="player__select__title">{selectedFruit}</p>
+                <svg
+                  className="player__select__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="8"
+                  fill="none"
+                >
+                  <rect
+                    width="1.294"
+                    height="7.052"
+                    y="2.049"
+                    rx=".647"
+                    transform="rotate(-45 0 2.05)"
+                  />
+                  <rect
+                    width="1.294"
+                    height="7.052"
+                    x="9.068"
+                    y=".964"
+                    rx=".647"
+                    transform="rotate(43.928 9.068 .964)"
+                  />
+                </svg>
+              </div>
+              <p className="player__choice_subtitle">Встроенная реклама</p>
             </summary>
             <details-menu>
               <div className="player__select__list">
@@ -131,7 +134,6 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
               </div>
             </details-menu>
           </details>
-          <p className="player__choice_subtitle">Встроенная реклама</p>
         </div>
       </div>
     </section>
