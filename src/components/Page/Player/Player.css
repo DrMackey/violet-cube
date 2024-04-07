@@ -57,8 +57,13 @@
 
 .player__series {
   display: flex;
-  
+  flex-direction: column;
   flex-grow: 1;
+  gap: 1px;
+}
+
+.player__series-title-container {
+  display: flex;
 }
 
 .player__series-title {
@@ -94,12 +99,12 @@
   margin-left: 3px;
 }
 
-.player__choice {
+.player-choice {
   flex-grow: 1;
   text-align: right;
 }
 
-.player__select {
+.player-select {
   margin: 0;
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -109,7 +114,7 @@
   color: #8d8d92;
 }
 
-.player__choice_subtitle {
+.player-choice__subtitle {
   margin: 0;
   font-weight: 400;
   font-size: 8px;
@@ -126,40 +131,37 @@
   cursor: grabbing;
 }
 
-.player__select {
-  /* position: relative; */
+.player-select {
   z-index: 888;
 }
 
-.player__select__active-button::-webkit-details-marker {
+.player-select__active-button::-webkit-details-marker {
   display: none;
 }
 
-.player__select__icon {
+.player-select__icon {
   margin-top: 2px;
   fill: #8d8d92;
 }
 
-.player__select__active-button {
-  /* height: 100%; */
+.player-select__active-button {
   padding: 0 10px;
   display: flex;
   flex-direction: column;
 }
 
-.player__select__active-button-title-container {
+.player-select__active-button-title-container {
   position: relative;
   display: flex;
-  /* align-items: center; */
   justify-content: flex-end;
   gap: 7px;
 }
 
-.player__select__title {
+.player-select__title {
   margin: 0;
 }
 
-.player__select__list {
+.player-select__list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -172,7 +174,7 @@
   z-index: 888;
 }
 
-.player__select__item {
+.player-select__item {
   width: 100%;
   padding: 8px 31px;
   background-color: rgba(0, 0, 0, 0);
@@ -185,6 +187,70 @@
   color: #fff;
 }
 
-.player__select__item:last-child {
+.player-select__item:last-child {
+  border: none;
+}
+
+.voice-acting {
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.07em;
+  color: #8d8d92;
+}
+
+.voice-acting__active-button::-webkit-details-marker {
+  display: none;
+}
+
+.voice-acting__icon {
+  margin-top: 2px;
+  fill: #8d8d92;
+}
+
+.voice-acting__active-button {
+  display: flex;
+  flex-direction: column;
+}
+
+.voice-acting__active-button-title-container {
+  position: relative;
+  display: flex;
+  gap: 5px;
+}
+
+.voice-acting__title {
+  margin: 0;
+}
+
+.voice-acting__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  left: 15px;
+  backdrop-filter: blur(20px);
+  background: rgba(44, 44, 47, 0.72);
+  border-radius: 13px;
+  width: 250px;
+  z-index: 888;
+}
+
+.voice-acting__item {
+  width: 100%;
+  padding: 8px 31px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  border-bottom: solid #424245 1px;
+  text-align: start;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 137%;
+  color: #fff;
+}
+
+.voice-acting__item:last-child {
   border: none;
 }
