@@ -123,6 +123,7 @@
 
 .drop-down {
   /* position: relative; */
+  cursor: pointer;
   z-index: 888;
 }
 

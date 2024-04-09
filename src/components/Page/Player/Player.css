@@ -132,6 +132,7 @@
 }
 
 .player-select {
+  cursor: pointer;
   z-index: 888;
 }
 
@@ -199,6 +200,7 @@
   font-size: 12px;
   letter-spacing: 0.07em;
   color: #8d8d92;
+  cursor: pointer;
 }
 
 .voice-acting__active-button::-webkit-details-marker {
