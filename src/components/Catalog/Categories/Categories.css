@@ -23,6 +23,7 @@
   border-radius: 11px;
   padding: 7px 14px 7px 8px;
   background: #2c2c2e;
+  cursor: pointer;
 }
 
 .categories__button-icon {
