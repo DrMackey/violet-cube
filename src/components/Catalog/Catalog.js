@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
 import PreviewCards from "./PreviewCards/PreviewCards.js";
 import Categories from "./Categories/Categories.js";
-import CardsGroup from "./CardsGroup/CardsGroup.js";
+import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Catalog.css";
 
 export default function Catalog({
@@ -16,7 +16,7 @@ export default function Catalog({
   handleScrollMain,
   handleScrollContent,
   setScrollTopMain,
-  setIsToggleBottomPage
+  setIsToggleBottomPage,
 }) {
   useEffect(() => {
     setScrollTopMain(0);
@@ -62,7 +62,11 @@ export default function Catalog({
         onScroll={handleScrollMain}
         className={`main-page ${isTogglePage ? "main-page_active" : ""}`}
       >
-        <Titlepage isTitle="Каталог" isToggleHeader={isToggleHeader} setIsToggleBottomPage={setIsToggleBottomPage}/>
+        <Titlepage
+          isTitle="Каталог"
+          isToggleHeader={isToggleHeader}
+          setIsToggleBottomPage={setIsToggleBottomPage}
+        />
         <Categories />
         <PreviewCards />
         <CardsGroup

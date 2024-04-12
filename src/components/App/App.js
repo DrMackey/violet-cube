@@ -13,8 +13,7 @@ import Medialibrary from "../Medialibrary/Medialibrary.js";
 import api from "../../utils/AnimeApi.js";
 import "./App.css";
 
-const KODIK_TOKEN = "171ed6214cbc96e12b431da930826723"
-
+const KODIK_TOKEN = "171ed6214cbc96e12b431da930826723";
 
 function App() {
   const location = useLocation();
@@ -205,12 +204,15 @@ function App() {
                 isToggleHeader={isToggleHeader}
                 isLoadVideo={isLoadVideo}
                 setIsTogglePage={setIsTogglePage}
+                setIsToggleHeader={setIsToggleHeader}
                 getTitleData={getTitleData}
                 getKodikVideo={getKodikVideo}
                 getTitleVideo={getTitleVideo}
                 isCard={isCard}
                 isVideo={isVideo}
                 checkScrollСontent={checkScrollСontent}
+                onIsCards={isCards}
+                isLoadCards={isLoadCards}
               />
             }
           />
@@ -253,7 +255,10 @@ function App() {
         />
       </Routes>
       <Navbar />
-      <BottomPage isToggleBottomPage={isToggleBottomPage} setIsToggleBottomPage={setIsToggleBottomPage}/>
+      <BottomPage
+        isToggleBottomPage={isToggleBottomPage}
+        setIsToggleBottomPage={setIsToggleBottomPage}
+      />
     </>
   );
 }

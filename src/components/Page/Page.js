@@ -8,6 +8,7 @@ import Description from "./Description/Description.js";
 import StudioInfo from "./StudioInfo/StudioInfo.js";
 import Comments from "./Comments/Comments.js";
 import FullInfoblock from "./FullInfoblock/FullInfoblock.js";
+import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Page.css";
 
 export default function Page({
@@ -15,11 +16,14 @@ export default function Page({
   isToggleHeader,
   isLoadVideo,
   setIsTogglePage,
+  setIsToggleHeader,
   getTitleData,
   getKodikVideo,
   isCard,
   isVideo,
   checkScrollСontent,
+  onIsCards,
+  isLoadCards,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingSeries, setIsLoadingSeries] = useState(false);
@@ -55,6 +59,12 @@ export default function Page({
     }
   }, [isCard]);
 
+  function handleClick(card) {
+    setIsTogglePage(true);
+    setIsToggleHeader("header_scroll");
+    document.body.classList.add("disabled-scroll");
+  }
+
   function getSeries(voiceovers) {
     return voiceovers.map((e) => {
       const lastSeason = e.last_season;
@@ -76,6 +86,16 @@ export default function Page({
       <StudioInfo />
       <Comments />
       <FullInfoblock />
+      <CardsGroup
+        onIsCards={onIsCards}
+        isLoadCards={isLoadCards}
+        handleClick={handleClick}
+      />
+      <CardsGroup
+        onIsCards={onIsCards}
+        isLoadCards={isLoadCards}
+        handleClick={handleClick}
+      />
       {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
     </>
     //   )}
