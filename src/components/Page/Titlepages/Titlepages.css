@@ -86,6 +86,11 @@
   border-radius: 100px;
 }
 
+.page__select-container_active {
+  background-color: #3A82F7;
+  color: #FFFFFF;
+}
+
 .page__select-button {
   font-family: var(--pro-text);
   color: #3A82F7;
@@ -97,6 +102,10 @@
   font-size: 13px;
   line-height: 154%;
   letter-spacing: -0.04em;
+}
+
+.page__select-button_active {
+  color: #FFF;
 }
 
 .page__select {
@@ -117,6 +126,7 @@
   border: none;
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
+  border-radius: 100px 0;
 }
 
 
@@ -134,6 +144,10 @@
 
 .drop-down__icon {
   fill: #3A82F7;
+}
+
+.drop-down__icon_active {
+  fill: #FFF;
 }
 
 .drop-down__active-button {
@@ -167,6 +181,11 @@
   font-size: 16px;
   line-height: 137%;
   color: #fff;
+  cursor: pointer;
+}
+
+.drop-down__item:hover {
+  background-color: rgba(255, 255, 255, 0.10);
 }
 
 .drop-down__item:last-child {

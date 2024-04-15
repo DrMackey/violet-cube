@@ -29,7 +29,6 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
         >
           <Slider>
             {isUrlVideos[0].map((e, i) => {
-              console.log(e, "video");
               const link = e;
               return (
                 <Slide key={i}>

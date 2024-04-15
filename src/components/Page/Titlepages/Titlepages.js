@@ -3,6 +3,7 @@ import "./Titlepages.css";
 
 export default function Titlepages({ isLoading, isCard }) {
   const [selectedFruit, setSelectedFruit] = useState("Смотрю");
+  const [isButtonChange, setIsButtonChange] = useState(false);
 
   return (
     <>
@@ -26,8 +27,17 @@ export default function Titlepages({ isLoading, isCard }) {
               </p>
             </div>
             <div className="page__buttons-container">
-              <div className="page__select-container">
-                <button className="page__select-button">
+              <div
+                className={`page__select-container ${
+                  isButtonChange && `page__select-container_active`
+                }`}
+              >
+                <button
+                  className={`page__select-button ${
+                    isButtonChange && `page__select-button_active`
+                  }`}
+                  onClick={() => setIsButtonChange(!isButtonChange)}
+                >
                   {selectedFruit.toUpperCase()} |
                 </button>
 
@@ -47,7 +57,9 @@ export default function Titlepages({ isLoading, isCard }) {
                 <details className="drop-down">
                   <summary className="drop-down__active-button">
                     <svg
-                      className="drop-down__icon"
+                      className={`drop-down__icon ${
+                        isButtonChange && `drop-down__icon_active`
+                      }`}
                       xmlns="http://www.w3.org/2000/svg"
                       width="10"
                       height="8"
