@@ -4,6 +4,7 @@ import "./Player.css";
 
 export default function Player({ isUrlVideos, isLoadVideo }) {
   const [selectedFruit, setSelectedFruit] = useState("KODIK");
+  const [selectedSeries, setSelectedSeries] = useState(1);
   const localCurrentSlide = { index: Number };
   // const lastSeason = isVideo[0].last_season;
   // const seriesObj = isVideo[0].seasons[lastSeason].episodes;
@@ -15,6 +16,10 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
     }
   }, [isLoadVideo]);
 
+  function mathSeries(e) {
+    setSelectedSeries(Math.trunc(e.scrollLeft / e.slideWidth + 1.5));
+  }
+
   return (
     <section className="player">
       {isLoadVideo && (
@@ -23,9 +28,7 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
           visibleSlides={1}
           trayPadding={"15px"}
           slideMargin={5}
-          onSlide={({ currentSlide }) => {
-            localCurrentSlide.index = currentSlide;
-          }}
+          onSlide={(e) => mathSeries(e)}
         >
           <Slider>
             {isUrlVideos[0].map((e, i) => {
@@ -61,6 +64,7 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
               Серия
               <span className="player__series-title-span">
                 {localCurrentSlide.index}
+                {selectedSeries}
               </span>
               /<span>{isLoadVideo ? isUrlVideos[0].length : "0"}</span>
             </p>
