@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation, Outlet } from "react-router-dom";
 // import MediaQuery from "react-responsive";
 import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
@@ -107,7 +107,7 @@ function App() {
       });
   }
 
-  function getTitleData(titleUrl) {
+  function getTitleData(titleUrl, setIsCard) {
     api
       .getTitleData(titleUrl)
       .then((res) => {
@@ -197,7 +197,7 @@ function App() {
           }
         >
           <Route
-            path=":titleId"
+            path=":titleId/*"
             element={
               <Page
                 isTogglePage={isTogglePage}

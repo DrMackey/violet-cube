@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
+import Page from "../Page/Page.js";
+import { useLocation, Link, Route, Routes } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
 import PreviewCards from "./PreviewCards/PreviewCards.js";
 import Categories from "./Categories/Categories.js";
@@ -17,6 +19,15 @@ export default function Catalog({
   handleScrollContent,
   setScrollTopMain,
   setIsToggleBottomPage,
+
+  isLoadVideo,
+
+  getTitleData,
+  getTitleVideo,
+  getKodikVideo,
+  isCard,
+  isVideo,
+  checkScrollСontent,
 }) {
   useEffect(() => {
     setScrollTopMain(0);
@@ -273,12 +284,36 @@ export default function Catalog({
         libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Sed
         hendrerit. Morbi ac felis.
       </section>
-      <section
+      {/* <section
         onScroll={handleScrollContent}
         className={`content-page ${isTogglePage ? "content-page_active" : ""}`}
       >
         <Outlet />
-      </section>
+      </section> */}
+      <Outlet />
+
+      {/* <Routes>
+        <Route
+          path=":titleId"
+          element={
+            <Page
+              isTogglePage={isTogglePage}
+              isToggleHeader={isToggleHeader}
+              isLoadVideo={isLoadVideo}
+              setIsTogglePage={setIsTogglePage}
+              setIsToggleHeader={setIsToggleHeader}
+              getTitleData={getTitleData}
+              getKodikVideo={getKodikVideo}
+              getTitleVideo={getTitleVideo}
+              isCard={isCard}
+              isVideo={isVideo}
+              checkScrollСontent={checkScrollСontent}
+              onIsCards={onIsCards}
+              isLoadCards={isLoadCards}
+            />
+          }
+        />
+      </Routes> */}
     </>
   );
 }

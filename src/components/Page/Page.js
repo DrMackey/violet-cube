@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
 import Header from "../Header/Header.js";
 import Titlepages from "./Titlepages/Titlepages.js";
 import Infoblock from "./Infoblock/Infoblock.js";
@@ -12,14 +12,14 @@ import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Page.css";
 
 export default function Page({
-  isTogglePage,
+  // isTogglePage,
   isToggleHeader,
   isLoadVideo,
-  setIsTogglePage,
+  // setIsTogglePage,
   setIsToggleHeader,
   getTitleData,
   getKodikVideo,
-  isCard,
+  // isCard,
   isVideo,
   checkScrollСontent,
   onIsCards,
@@ -29,12 +29,20 @@ export default function Page({
   const [isLoadingSeries, setIsLoadingSeries] = useState(false);
   const [isLoadingDone, setIsLoadingDone] = useState("");
   const [isUrlVideos, setIsUrlVideos] = useState();
+  const [isTogglePage, setIsTogglePage] = useState(false);
+  const [isCard, setIsCard] = useState({});
   const location = useLocation();
 
   useEffect(() => {
     setIsTogglePage(true);
     document.body.classList.add("disabled-scroll");
-    getTitleData(location.pathname.slice(8));
+    getTitleData(
+      location.pathname.slice(
+        location.pathname.lastIndexOf("/"),
+        location.pathname.length
+      ),
+      setIsCard
+    );
     checkScrollСontent();
     setIsLoadingDone();
     setIsLoadingDone("done");
@@ -76,29 +84,62 @@ export default function Page({
   }
 
   return (
-    // <>
-    //   {isLoading && (
     <>
-      <Titlepages isLoading={isLoading} isCard={isCard} />
-      <Infoblock />
-      <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} />
-      <Description />
-      <StudioInfo />
-      <Comments />
-      <FullInfoblock />
-      <CardsGroup
-        onIsCards={onIsCards}
-        isLoadCards={isLoadCards}
-        handleClick={handleClick}
-      />
-      <CardsGroup
-        onIsCards={onIsCards}
-        isLoadCards={isLoadCards}
-        handleClick={handleClick}
-      />
-      {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
+      <section
+        key={location.pathname.slice(
+          location.pathname.lastIndexOf("/"),
+          location.pathname.length
+        )}
+        // onScroll={handleScrollContent}
+        className={`content-page ${isTogglePage && "content-page_active"}`}
+      >
+        {/* // <> */}
+        {/* //   {isLoading && ( */}
+        {/* <> */}
+        <Titlepages isLoading={isLoading} isCard={isCard} />
+        <Infoblock />
+        {/* <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} /> */}
+        <Description />
+        <StudioInfo />
+        <Comments />
+        <FullInfoblock />
+        <CardsGroup
+          onIsCards={onIsCards}
+          isLoadCards={isLoadCards}
+          handleClick={handleClick}
+        />
+        <CardsGroup
+          onIsCards={onIsCards}
+          isLoadCards={isLoadCards}
+          handleClick={handleClick}
+        />
+        {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
+
+        {/* </> */}
+      </section>
+      <Outlet />
+      <Routes>
+        <Route
+          path=":titleId/*"
+          element={
+            <Page
+              isTogglePage={isTogglePage}
+              isToggleHeader={isToggleHeader}
+              isLoadVideo={isLoadVideo}
+              setIsTogglePage={setIsTogglePage}
+              setIsToggleHeader={setIsToggleHeader}
+              getTitleData={getTitleData}
+              getKodikVideo={getKodikVideo}
+              // getTitleVideo={getTitleVideo}
+              isCard={isCard}
+              isVideo={isVideo}
+              checkScrollСontent={checkScrollСontent}
+              onIsCards={onIsCards}
+              isLoadCards={isLoadCards}
+            />
+          }
+        />
+      </Routes>
     </>
-    //   )}
-    // </>
   );
 }
