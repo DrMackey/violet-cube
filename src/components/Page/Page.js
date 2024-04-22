@@ -12,10 +12,11 @@ import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Page.css";
 
 export default function Page({
-  // isTogglePage,
   isToggleHeader,
   isLoadVideo,
-  // setIsTogglePage,
+  setIsTogglePage,
+  isTogglePage,
+  onSetIsTogglePage,
   setIsToggleHeader,
   getTitleData,
   getKodikVideo,
@@ -24,17 +25,21 @@ export default function Page({
   checkScrollСontent,
   onIsCards,
   isLoadCards,
+  handleTogglePage,
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(false);
   const [isLoadingSeries, setIsLoadingSeries] = useState(false);
   const [isLoadingDone, setIsLoadingDone] = useState("");
   const [isUrlVideos, setIsUrlVideos] = useState();
-  const [isTogglePage, setIsTogglePage] = useState(false);
+  const [isIndexPage, setIsIndexPage] = useState();
   const [isCard, setIsCard] = useState({});
   const location = useLocation();
 
   useEffect(() => {
-    setIsTogglePage(true);
+    console.log("Я страница тайтала и я смонтировалась");
+    setIsIndexPage(`${Object.keys(isTogglePage).length}`);
+
     document.body.classList.add("disabled-scroll");
     getTitleData(
       location.pathname.slice(
@@ -61,14 +66,26 @@ export default function Page({
   }, [isLoadVideo]);
 
   useEffect(() => {
-    console.log(isCard, "isCard.id");
     if (Object.keys(isCard).length !== 0) {
       getKodikVideo(isCard.id);
     }
   }, [isCard]);
 
+  // useEffect(() => {
+  //   if (isIndexPage) {
+  //     handleTogglePage(isIndexPage);
+  //   }
+  // }, [isIndexPage]);
+
+  useEffect(() => {
+    console.log("1.", isTogglePage, isIndexPage);
+    if (isTogglePage[isIndexPage]) {
+      setIsLoadingPage(true);
+    }
+  }, [isTogglePage]);
+
   function handleClick(card) {
-    setIsTogglePage(true);
+    // setIsTogglePage(true);
     setIsToggleHeader("header_scroll");
     document.body.classList.add("disabled-scroll");
   }
@@ -91,7 +108,7 @@ export default function Page({
           location.pathname.length
         )}
         // onScroll={handleScrollContent}
-        className={`content-page ${isTogglePage && "content-page_active"}`}
+        className={`content-page ${isLoadingPage && "content-page_active"}`}
       >
         {/* // <> */}
         {/* //   {isLoading && ( */}
@@ -136,6 +153,7 @@ export default function Page({
               checkScrollСontent={checkScrollСontent}
               onIsCards={onIsCards}
               isLoadCards={isLoadCards}
+              handleTogglePage={handleTogglePage}
             />
           }
         />

@@ -26,7 +26,7 @@ function App() {
   const [scrollTopСontent, setScrollTopСontent] = useState(Number);
   const [scrollTopMain, setScrollTopMain] = useState(Number);
   const [isToggleHeader, setIsToggleHeader] = useState("");
-  const [isTogglePage, setIsTogglePage] = useState(false);
+  const [isTogglePage, setIsTogglePage] = useState({});
   const [isToggleBottomPage, setIsToggleBottomPage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
   const [isLoadVideo, setIsLoadVideo] = useState(false);
@@ -51,7 +51,35 @@ function App() {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
+
+    window.addEventListener("navigate", (event) => {
+      // Exit early if this navigation shouldn't be intercepted,
+      // e.g. if the navigation is cross-origin, or a download request
+      // if (shouldNotIntercept(event)) return;
+      console.log("Произошел преход назад");
+
+      const url = new URL(event.destination.url);
+
+      if (url.pathname.startsWith("/articles/")) {
+        event.intercept({
+          async handler() {
+            console.log("Произошел преход назад");
+            // The URL has already changed, so show a placeholder while
+            // fetching the new content, such as a spinner or loading page
+            // renderArticlePagePlaceholder();
+
+            // Fetch the new content and display when ready
+            // const articleContent = await getArticleContent(url.pathname);
+            // renderArticlePage(articleContent);
+          },
+        });
+      }
+    });
   }, []);
+
+  function handleTogglePage(indexPage) {
+    setIsTogglePage((state) => ({ ...state, [indexPage]: true }));
+  }
 
   function checkScrollMain() {
     if (scrollTopMain > -1) {
@@ -171,7 +199,7 @@ function App() {
           }
         />
         <Route
-          path="/catalog"
+          path="/catalog/*"
           element={
             <>
               <Header
@@ -192,18 +220,26 @@ function App() {
                 handleScrollMain={handleScrollMain}
                 setScrollTopMain={setScrollTopMain}
                 setIsToggleBottomPage={setIsToggleBottomPage}
+                isLoadVideo={isLoadVideo}
+                getTitleData={getTitleData}
+                getKodikVideo={getKodikVideo}
+                getTitleVideo={getTitleVideo}
+                isCard={isCard}
+                isVideo={isVideo}
+                checkScrollСontent={checkScrollСontent}
+                handleTogglePage={handleTogglePage}
               />
             </>
           }
         >
-          <Route
+          {/* <Route
             path=":titleId/*"
             element={
               <Page
-                isTogglePage={isTogglePage}
                 isToggleHeader={isToggleHeader}
                 isLoadVideo={isLoadVideo}
                 setIsTogglePage={setIsTogglePage}
+                isTogglePage={isTogglePage}
                 setIsToggleHeader={setIsToggleHeader}
                 getTitleData={getTitleData}
                 getKodikVideo={getKodikVideo}
@@ -213,9 +249,10 @@ function App() {
                 checkScrollСontent={checkScrollСontent}
                 onIsCards={isCards}
                 isLoadCards={isLoadCards}
+                handleTogglePage={handleTogglePage}
               />
             }
-          />
+          /> */}
         </Route>
         <Route
           path="/medialibrary"
