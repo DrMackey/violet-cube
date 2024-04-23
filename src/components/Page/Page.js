@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
+import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import Header from "../Header/Header.js";
 import Titlepages from "./Titlepages/Titlepages.js";
 import Infoblock from "./Infoblock/Infoblock.js";
@@ -38,13 +39,13 @@ export default function Page({
   const indexPage = location.pathname.match(/\//g).length - 1;
 
   useEffect(() => {
-    console.log(
-      "Я страница тайтала и я смонтировалась и мой индекс",
-      isTogglePage.length,
-      isTogglePage,
-      isLoadingPage[indexPage],
-      indexPage
-    );
+    // console.log(
+    //   "Я страница тайтала и я смонтировалась и мой индекс",
+    //   isTogglePage.length,
+    //   isTogglePage,
+    //   isLoadingPage[indexPage],
+    //   indexPage
+    // );
     setIsIndexPage(indexPage);
 
     document.body.classList.add("disabled-scroll");
@@ -64,7 +65,7 @@ export default function Page({
       setIsLoading(true);
     }, 1000);
 
-    return () => console.log("Я страница тайтала и я размонтировалась");
+    // return () => console.log("Я страница тайтала и я размонтировалась");
   }, []);
 
   useEffect(() => {
@@ -88,7 +89,7 @@ export default function Page({
   // }, [isIndexPage]);
 
   useEffect(() => {
-    console.log("4.", isTogglePage);
+    // console.log("4.", isTogglePage);
     if (isTogglePage[indexPage]) {
       setIsLoadingPage(true);
     } else {
@@ -146,29 +147,34 @@ export default function Page({
         {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
       </section>
       <Outlet />
-      {/* <Routes>
+      <Routes>
         <Route
           path=":titleId/*"
           element={
-            <Page
+            <VirtualNavigation
               isTogglePage={isTogglePage}
-              isToggleHeader={isToggleHeader}
-              isLoadVideo={isLoadVideo}
-              setIsTogglePage={setIsTogglePage}
-              setIsToggleHeader={setIsToggleHeader}
-              getTitleData={getTitleData}
-              getKodikVideo={getKodikVideo}
-              // getTitleVideo={getTitleVideo}
-              isCard={isCard}
-              isVideo={isVideo}
-              checkScrollСontent={checkScrollСontent}
-              onIsCards={onIsCards}
-              isLoadCards={isLoadCards}
               handleTogglePage={handleTogglePage}
+              setIsTogglePage={setIsTogglePage}
             />
+            // <Page
+            //   isTogglePage={isTogglePage}
+            //   isToggleHeader={isToggleHeader}
+            //   isLoadVideo={isLoadVideo}
+            //   setIsTogglePage={setIsTogglePage}
+            //   setIsToggleHeader={setIsToggleHeader}
+            //   getTitleData={getTitleData}
+            //   getKodikVideo={getKodikVideo}
+            //   // getTitleVideo={getTitleVideo}
+            //   isCard={isCard}
+            //   isVideo={isVideo}
+            //   checkScrollСontent={checkScrollСontent}
+            //   onIsCards={onIsCards}
+            //   isLoadCards={isLoadCards}
+            //   handleTogglePage={handleTogglePage}
+            // />
           }
         />
-      </Routes> */}
+      </Routes>
     </>
   );
 }

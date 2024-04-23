@@ -108,16 +108,17 @@ export default function Catalog({
               checkScrollСontent={checkScrollСontent}
               onIsCards={onIsCards}
               isLoadCards={isLoadCards}
+              handleTogglePage={handleTogglePage}
             />
           );
         }
       })}
 
-      <Outlet />
+      {/* <Outlet /> */}
 
       <Routes>
         <Route
-          path=":titleId/*"
+          path=":titleId"
           element={
             <VirtualNavigation
               isTogglePage={isTogglePage}

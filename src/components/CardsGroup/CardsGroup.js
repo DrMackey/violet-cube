@@ -1,9 +1,10 @@
 import React from "react";
 import { Carousel, Slide, Slider } from "react-scroll-snap-anime-slider";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./CardsGroup.css";
 
 export default function CardsGroup({ onIsCards, isLoadCards, handleClick }) {
+  const location = useLocation();
   return (
     <>
       {isLoadCards && (
@@ -29,7 +30,7 @@ export default function CardsGroup({ onIsCards, isLoadCards, handleClick }) {
                         className="card"
                         key={card.id}
                         onClick={handleClick}
-                        to={`${link}`}
+                        to={`${location.pathname}/${link}`}
                       >
                         <div className="card__image-container">
                           <img

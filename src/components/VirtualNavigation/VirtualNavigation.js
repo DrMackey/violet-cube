@@ -19,7 +19,7 @@ export default function VirtualNavigation({
     //   ),
     //   setIsCard
     // );
-    // console.log("Я смонтирован");
+    console.log("Я смонтирован", location.pathname.match(/\//g).length);
 
     return () => {
       const indexPage = location.pathname.match(/\//g).length - 1;
@@ -30,6 +30,7 @@ export default function VirtualNavigation({
       setTimeout(() => {
         setIsTogglePage(newTogglePage.splice(indexPage, 1));
       }, 300);
+      console.log("Я размонтирован", location.pathname.match(/\//g).length);
     };
   }, []);
 
@@ -42,26 +43,15 @@ export default function VirtualNavigation({
   return (
     <>
       {/* <div></div> */}
-      {/* <Outlet />
-      <Routes>
+      {/* <Outlet /> */}
+      {/* <Routes>
         <Route
           path=":titleId/*"
           element={
-            <Page
+            <VirtualNavigation
               isTogglePage={isTogglePage}
-              isToggleHeader={isToggleHeader}
-              isLoadVideo={isLoadVideo}
-              setIsTogglePage={setIsTogglePage}
-              setIsToggleHeader={setIsToggleHeader}
-              getTitleData={getTitleData}
-              getKodikVideo={getKodikVideo}
-              // getTitleVideo={getTitleVideo}
-              isCard={isCard}
-              isVideo={isVideo}
-              checkScrollСontent={checkScrollСontent}
-              onIsCards={onIsCards}
-              isLoadCards={isLoadCards}
               handleTogglePage={handleTogglePage}
+              setIsTogglePage={setIsTogglePage}
             />
           }
         />
