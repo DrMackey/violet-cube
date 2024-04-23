@@ -33,11 +33,11 @@ export default function Header({
 
   // ${isToggleHeader ? "header_scroll" : ""}
   function togglePage() {
-    setTimeout(() => {
-      navigate(-1);
-      // checkHandleHeader();
-    }, 300);
-    setIsTogglePage(false);
+    // setTimeout(() => {
+    navigate(-1);
+    // checkHandleHeader();
+    // }, 300);
+    // setIsTogglePage(false);
 
     // document.body.classList.remove("disabled-scroll");
   }

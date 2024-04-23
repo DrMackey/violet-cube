@@ -36,7 +36,7 @@ export default function Catalog({
     // handleHeader("");
     // setIsToggleHeader((isToggleHeader["catalog"] = 0));
     return () => {
-      setIsTogglePage(false);
+      // setIsTogglePage(false);
       document.body.classList.remove("disabled-scroll");
     };
   }, []);
@@ -63,7 +63,9 @@ export default function Catalog({
   // };
 
   function handleClick(card) {
-    setIsTogglePage(true);
+    const newTogglePage = isTogglePage.slice();
+    newTogglePage[0] = true;
+    setIsTogglePage(newTogglePage);
     setIsToggleHeader("header_scroll");
     document.body.classList.add("disabled-scroll");
   }
@@ -72,7 +74,7 @@ export default function Catalog({
     <>
       <section
         onScroll={handleScrollMain}
-        className={`main-page ${isTogglePage ? "main-page_active" : ""}`}
+        className={`main-page ${isTogglePage[0] && "main-page_active"}`}
       >
         <Titlepage
           isTitle="Каталог"
@@ -88,25 +90,27 @@ export default function Catalog({
         />
       </section>
 
-      {Object.keys(isTogglePage).map((e) => {
-        console.log(e, "obj e");
-        return (
-          <Page
-            isTogglePage={isTogglePage}
-            isToggleHeader={isToggleHeader}
-            isLoadVideo={isLoadVideo}
-            setIsTogglePage={setIsTogglePage}
-            setIsToggleHeader={setIsToggleHeader}
-            getTitleData={getTitleData}
-            getKodikVideo={getKodikVideo}
-            getTitleVideo={getTitleVideo}
-            isCard={isCard}
-            isVideo={isVideo}
-            checkScrollСontent={checkScrollСontent}
-            onIsCards={onIsCards}
-            isLoadCards={isLoadCards}
-          />
-        );
+      {isTogglePage.map((el, index) => {
+        if (index > 0) {
+          return (
+            <Page
+              key={index}
+              isTogglePage={isTogglePage}
+              isToggleHeader={isToggleHeader}
+              isLoadVideo={isLoadVideo}
+              setIsTogglePage={setIsTogglePage}
+              setIsToggleHeader={setIsToggleHeader}
+              getTitleData={getTitleData}
+              getKodikVideo={getKodikVideo}
+              getTitleVideo={getTitleVideo}
+              isCard={isCard}
+              isVideo={isVideo}
+              checkScrollСontent={checkScrollСontent}
+              onIsCards={onIsCards}
+              isLoadCards={isLoadCards}
+            />
+          );
+        }
       })}
 
       <Outlet />
@@ -118,6 +122,7 @@ export default function Catalog({
             <VirtualNavigation
               isTogglePage={isTogglePage}
               handleTogglePage={handleTogglePage}
+              setIsTogglePage={setIsTogglePage}
             />
             // <Page
             //   isTogglePage={isTogglePage}

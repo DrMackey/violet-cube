@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
 
-export default function VirtualNavigation({ isTogglePage, handleTogglePage }) {
+export default function VirtualNavigation({
+  isTogglePage,
+  setIsTogglePage,
+  handleTogglePage,
+}) {
   const [isIndexPage, setIsIndexPage] = useState();
   const location = useLocation();
 
   useEffect(() => {
-    setIsIndexPage(`${Object.keys(isTogglePage).length}`);
+    setIsIndexPage(`${location.pathname.match(/\//g).length}`);
 
     // getTitleData(
     //   location.pathname.slice(
@@ -15,9 +19,18 @@ export default function VirtualNavigation({ isTogglePage, handleTogglePage }) {
     //   ),
     //   setIsCard
     // );
-    console.log("Я смонтирован");
+    // console.log("Я смонтирован");
 
-    return () => console.log("Я размонтирован");
+    return () => {
+      const indexPage = location.pathname.match(/\//g).length - 1;
+      const newTogglePage = isTogglePage.slice();
+      newTogglePage[indexPage] = false;
+      newTogglePage[0] = false;
+      setIsTogglePage(newTogglePage);
+      setTimeout(() => {
+        setIsTogglePage(newTogglePage.splice(indexPage, 1));
+      }, 300);
+    };
   }, []);
 
   useEffect(() => {

@@ -26,7 +26,7 @@ function App() {
   const [scrollTopСontent, setScrollTopСontent] = useState(Number);
   const [scrollTopMain, setScrollTopMain] = useState(Number);
   const [isToggleHeader, setIsToggleHeader] = useState("");
-  const [isTogglePage, setIsTogglePage] = useState({});
+  const [isTogglePage, setIsTogglePage] = useState([false]);
   const [isToggleBottomPage, setIsToggleBottomPage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
   const [isLoadVideo, setIsLoadVideo] = useState(false);
@@ -51,34 +51,15 @@ function App() {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
-    window.addEventListener("navigate", (event) => {
-      // Exit early if this navigation shouldn't be intercepted,
-      // e.g. if the navigation is cross-origin, or a download request
-      // if (shouldNotIntercept(event)) return;
-      console.log("Произошел преход назад");
-
-      const url = new URL(event.destination.url);
-
-      if (url.pathname.startsWith("/articles/")) {
-        event.intercept({
-          async handler() {
-            console.log("Произошел преход назад");
-            // The URL has already changed, so show a placeholder while
-            // fetching the new content, such as a spinner or loading page
-            // renderArticlePagePlaceholder();
-
-            // Fetch the new content and display when ready
-            // const articleContent = await getArticleContent(url.pathname);
-            // renderArticlePage(articleContent);
-          },
-        });
-      }
-    });
   }, []);
 
   function handleTogglePage(indexPage) {
-    setIsTogglePage((state) => ({ ...state, [indexPage]: true }));
+    // console.log("1.", isTogglePage);
+    const newTogglePage = isTogglePage.slice();
+    newTogglePage[indexPage - 1] = true;
+    newTogglePage[0] = true;
+    console.log("2.", newTogglePage);
+    setIsTogglePage(newTogglePage);
   }
 
   function checkScrollMain() {
@@ -135,11 +116,13 @@ function App() {
       });
   }
 
-  function getTitleData(titleUrl, setIsCard) {
+  function getTitleData(titleUrl, setIsCard, setIsLoading) {
+    setIsLoading(false);
     api
       .getTitleData(titleUrl)
       .then((res) => {
         setIsCard(res);
+        setIsLoading(true);
       })
       .catch((err) => {
         console.log(err);
@@ -169,7 +152,7 @@ function App() {
         return res;
       })
       .then((res) => {
-        console.log(res, "video", res.total);
+        // console.log(res, "video", res.total);
         if (res.total > 0) {
           setIsLoadVideo(true);
         }

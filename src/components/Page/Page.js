@@ -35,10 +35,17 @@ export default function Page({
   const [isIndexPage, setIsIndexPage] = useState();
   const [isCard, setIsCard] = useState({});
   const location = useLocation();
+  const indexPage = location.pathname.match(/\//g).length - 1;
 
   useEffect(() => {
-    console.log("Я страница тайтала и я смонтировалась");
-    setIsIndexPage(`${Object.keys(isTogglePage).length}`);
+    console.log(
+      "Я страница тайтала и я смонтировалась и мой индекс",
+      isTogglePage.length,
+      isTogglePage,
+      isLoadingPage[indexPage],
+      indexPage
+    );
+    setIsIndexPage(indexPage);
 
     document.body.classList.add("disabled-scroll");
     getTitleData(
@@ -46,7 +53,8 @@ export default function Page({
         location.pathname.lastIndexOf("/"),
         location.pathname.length
       ),
-      setIsCard
+      setIsCard,
+      setIsLoading
     );
     checkScrollСontent();
     setIsLoadingDone();
@@ -55,11 +63,13 @@ export default function Page({
     setTimeout(() => {
       setIsLoading(true);
     }, 1000);
+
+    return () => console.log("Я страница тайтала и я размонтировалась");
   }, []);
 
   useEffect(() => {
     if (isLoadVideo) {
-      console.log(isVideo, "isVideo");
+      // console.log(isVideo, "isVideo");
       setIsUrlVideos(() => getSeries(isVideo));
       setIsLoadingSeries(true);
     }
@@ -78,9 +88,11 @@ export default function Page({
   // }, [isIndexPage]);
 
   useEffect(() => {
-    console.log("1.", isTogglePage, isIndexPage);
-    if (isTogglePage[isIndexPage]) {
+    console.log("4.", isTogglePage);
+    if (isTogglePage[indexPage]) {
       setIsLoadingPage(true);
+    } else {
+      setIsLoadingPage(false);
     }
   }, [isTogglePage]);
 
@@ -110,32 +122,31 @@ export default function Page({
         // onScroll={handleScrollContent}
         className={`content-page ${isLoadingPage && "content-page_active"}`}
       >
-        {/* // <> */}
-        {/* //   {isLoading && ( */}
-        {/* <> */}
-        <Titlepages isLoading={isLoading} isCard={isCard} />
-        <Infoblock />
-        {/* <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} /> */}
-        <Description />
-        <StudioInfo />
-        <Comments />
-        <FullInfoblock />
-        <CardsGroup
-          onIsCards={onIsCards}
-          isLoadCards={isLoadCards}
-          handleClick={handleClick}
-        />
-        <CardsGroup
-          onIsCards={onIsCards}
-          isLoadCards={isLoadCards}
-          handleClick={handleClick}
-        />
+        {isLoading && (
+          <>
+            <Titlepages isLoading={isLoading} isCard={isCard} />
+            <Infoblock />
+            {/* <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} /> */}
+            <Description />
+            <StudioInfo />
+            <Comments />
+            <FullInfoblock />
+            <CardsGroup
+              onIsCards={onIsCards}
+              isLoadCards={isLoadCards}
+              handleClick={handleClick}
+            />
+            <CardsGroup
+              onIsCards={onIsCards}
+              isLoadCards={isLoadCards}
+              handleClick={handleClick}
+            />
+          </>
+        )}
         {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
-
-        {/* </> */}
       </section>
       <Outlet />
-      <Routes>
+      {/* <Routes>
         <Route
           path=":titleId/*"
           element={
@@ -157,7 +168,7 @@ export default function Page({
             />
           }
         />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
