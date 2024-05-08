@@ -44,6 +44,10 @@ function App() {
     if (isTogglePage) checkScrollСontent();
   }, [scrollTopСontent]);
 
+  // useEffect(() => {
+  //   console.log("isTogglePage", isTogglePage);
+  // }, [isTogglePage]);
+
   useEffect(() => {
     getCards();
     checkScrollMain();
@@ -54,7 +58,7 @@ function App() {
   }, []);
 
   function handleTogglePage(indexPage) {
-    // console.log("1.", isTogglePage);
+    // console.log("2.", typeof indexPage);
     const newTogglePage = isTogglePage.slice();
     newTogglePage[indexPage - 1] = true;
     newTogglePage[0] = true;

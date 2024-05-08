@@ -10,12 +10,14 @@ export default function Titlepages({ isLoading, isCard }) {
       {isLoading && (
         <section className="page__preview">
           <div className="page__image-container">
-            <img
-              className="page__image"
-              src={`https://shikimori.one${isCard.image.original}`}
-              alt="Постер."
-              loading="lazy"
-            ></img>
+            {isCard.image.original && (
+              <img
+                className="page__image"
+                src={`https://shikimori.one${isCard.image.original}`}
+                alt="Постер."
+                loading="lazy"
+              ></img>
+            )}
           </div>
           <div className="page__title-container">
             <div>

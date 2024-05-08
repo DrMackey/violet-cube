@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
+import {
+  useLocation,
+  Link,
+  Route,
+  Routes,
+  Outlet,
+  useParams,
+} from "react-router-dom";
 
 export default function VirtualNavigation({
   isTogglePage,
@@ -8,6 +15,9 @@ export default function VirtualNavigation({
 }) {
   const [isIndexPage, setIsIndexPage] = useState();
   const location = useLocation();
+
+  // let params = useParams();
+  // console.log(params);
 
   useEffect(() => {
     setIsIndexPage(`${location.pathname.match(/\//g).length}`);
@@ -23,12 +33,20 @@ export default function VirtualNavigation({
 
     return () => {
       const indexPage = location.pathname.match(/\//g).length - 1;
-      const newTogglePage = isTogglePage.slice();
+      // const newTogglePage = isTogglePage.slice();
+      const newTogglePage = isTogglePage;
       newTogglePage[indexPage] = false;
-      newTogglePage[0] = false;
+      if (newTogglePage.length === 2) {
+        newTogglePage[0] = false;
+      }
       setIsTogglePage(newTogglePage);
       setTimeout(() => {
-        setIsTogglePage(newTogglePage.splice(indexPage, 1));
+        const popHandler = () => {
+          const a = [...newTogglePage];
+          a.pop();
+          return setIsTogglePage(a);
+        };
+        popHandler();
       }, 300);
       console.log("Я размонтирован", location.pathname.match(/\//g).length);
     };
@@ -43,8 +61,8 @@ export default function VirtualNavigation({
   return (
     <>
       {/* <div></div> */}
-      {/* <Outlet /> */}
-      {/* <Routes>
+      <Outlet />
+      <Routes>
         <Route
           path=":titleId/*"
           element={
@@ -55,7 +73,7 @@ export default function VirtualNavigation({
             />
           }
         />
-      </Routes> */}
+      </Routes>
     </>
   );
 }

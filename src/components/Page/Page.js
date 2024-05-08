@@ -13,6 +13,7 @@ import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Page.css";
 
 export default function Page({
+  indexPage,
   isToggleHeader,
   isLoadVideo,
   setIsTogglePage,
@@ -36,7 +37,8 @@ export default function Page({
   const [isIndexPage, setIsIndexPage] = useState();
   const [isCard, setIsCard] = useState({});
   const location = useLocation();
-  const indexPage = location.pathname.match(/\//g).length - 1;
+  // const indexPage = location.pathname.match(/\//g).length - 1;
+  // const indexPage = isIndexPage;
 
   useEffect(() => {
     // console.log(
@@ -89,11 +91,12 @@ export default function Page({
   // }, [isIndexPage]);
 
   useEffect(() => {
-    // console.log("4.", isTogglePage);
+    console.log("3.", isTogglePage, indexPage, isTogglePage[indexPage]);
     if (isTogglePage[indexPage]) {
       setIsLoadingPage(true);
     } else {
       setIsLoadingPage(false);
+      console.log("4.", isLoadingPage);
     }
   }, [isTogglePage]);
 
@@ -116,10 +119,10 @@ export default function Page({
   return (
     <>
       <section
-        key={location.pathname.slice(
-          location.pathname.lastIndexOf("/"),
-          location.pathname.length
-        )}
+        // key={location.pathname.slice(
+        //   location.pathname.lastIndexOf("/"),
+        //   location.pathname.length
+        // )}
         // onScroll={handleScrollContent}
         className={`content-page ${isLoadingPage && "content-page_active"}`}
       >
@@ -146,7 +149,7 @@ export default function Page({
         )}
         {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
       </section>
-      <Outlet />
+      {/* <Outlet />
       <Routes>
         <Route
           path=":titleId/*"
@@ -156,25 +159,9 @@ export default function Page({
               handleTogglePage={handleTogglePage}
               setIsTogglePage={setIsTogglePage}
             />
-            // <Page
-            //   isTogglePage={isTogglePage}
-            //   isToggleHeader={isToggleHeader}
-            //   isLoadVideo={isLoadVideo}
-            //   setIsTogglePage={setIsTogglePage}
-            //   setIsToggleHeader={setIsToggleHeader}
-            //   getTitleData={getTitleData}
-            //   getKodikVideo={getKodikVideo}
-            //   // getTitleVideo={getTitleVideo}
-            //   isCard={isCard}
-            //   isVideo={isVideo}
-            //   checkScrollСontent={checkScrollСontent}
-            //   onIsCards={onIsCards}
-            //   isLoadCards={isLoadCards}
-            //   handleTogglePage={handleTogglePage}
-            // />
           }
         />
-      </Routes>
+      </Routes> */}
     </>
   );
 }

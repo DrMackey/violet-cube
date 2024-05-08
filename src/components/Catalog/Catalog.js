@@ -92,9 +92,11 @@ export default function Catalog({
 
       {isTogglePage.map((el, index) => {
         if (index > 0) {
+          console.log("2. Обновил массив страниц", isTogglePage);
           return (
             <Page
               key={index}
+              indexPage={index}
               isTogglePage={isTogglePage}
               isToggleHeader={isToggleHeader}
               isLoadVideo={isLoadVideo}
@@ -118,28 +120,13 @@ export default function Catalog({
 
       <Routes>
         <Route
-          path=":titleId"
+          path=":titleId/*"
           element={
             <VirtualNavigation
               isTogglePage={isTogglePage}
               handleTogglePage={handleTogglePage}
               setIsTogglePage={setIsTogglePage}
             />
-            // <Page
-            //   isTogglePage={isTogglePage}
-            //   isToggleHeader={isToggleHeader}
-            //   isLoadVideo={isLoadVideo}
-            //   setIsTogglePage={setIsTogglePage}
-            //   setIsToggleHeader={setIsToggleHeader}
-            //   getTitleData={getTitleData}
-            //   getKodikVideo={getKodikVideo}
-            //   getTitleVideo={getTitleVideo}
-            //   isCard={isCard}
-            //   isVideo={isVideo}
-            //   checkScrollСontent={checkScrollСontent}
-            //   onIsCards={onIsCards}
-            //   isLoadCards={isLoadCards}
-            // />
           }
         />
       </Routes>
