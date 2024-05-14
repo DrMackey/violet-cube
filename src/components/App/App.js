@@ -44,9 +44,9 @@ function App() {
     if (isTogglePage) checkScrollСontent();
   }, [scrollTopСontent]);
 
-  // useEffect(() => {
-  //   console.log("isTogglePage", isTogglePage);
-  // }, [isTogglePage]);
+  useEffect(() => {
+    console.log("isTogglePage", isTogglePage);
+  }, [isTogglePage]);
 
   useEffect(() => {
     getCards();
@@ -55,7 +55,20 @@ function App() {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
+
+    // setIsTogglePage(generateTogglePage());
+    // generateTogglePage();
   }, []);
+
+  function generateTogglePage() {
+    const preArray = new Array(location.pathname.match(/\//g).length - 1);
+    const newArray = Array(preArray.length);
+
+    return preArray.map((elm, index) => {
+      console.log("preArray", preArray);
+      return (newArray[index] = false);
+    });
+  }
 
   function handleTogglePage(indexPage) {
     // console.log("2.", typeof indexPage);

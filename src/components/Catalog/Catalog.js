@@ -92,7 +92,6 @@ export default function Catalog({
 
       {isTogglePage.map((el, index) => {
         if (index > 0) {
-          console.log("2. Обновил массив страниц", isTogglePage);
           return (
             <Page
               key={index}
