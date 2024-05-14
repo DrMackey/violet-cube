@@ -32,7 +32,7 @@
 }
 
 .main-page_active {
-  transform: translateX(-33dvw);
+  /* transform: translateX(-33dvw); */
   /* overflow: hidden; */
   /* height: 100vh; */
   /* display: none; */
@@ -40,6 +40,6 @@
 
 @media (min-width: 426px) {
   .main-page_active {
-    transform: translateX(-33%);
+    /* transform: translateX(-33%); */
   }
 }

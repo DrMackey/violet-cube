@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Page from "../Page/Page.js";
 import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import { useLocation, Link, Route, Routes } from "react-router-dom";
@@ -72,7 +73,10 @@ export default function Catalog({
 
   return (
     <>
-      <section
+      <motion.section
+        exit={{ x: "-33%" }}
+        initial={{ x: 0 }}
+        animate={{ x: 0 }}
         onScroll={handleScrollMain}
         className={`main-page ${isTogglePage[0] && "main-page_active"}`}
       >
@@ -88,9 +92,9 @@ export default function Catalog({
           isLoadCards={isLoadCards}
           handleClick={handleClick}
         />
-      </section>
+      </motion.section>
 
-      {isTogglePage.map((el, index) => {
+      {/* {isTogglePage.map((el, index) => {
         if (index > 0) {
           return (
             <Page
@@ -113,11 +117,12 @@ export default function Catalog({
             />
           );
         }
-      })}
+      })} */}
+      {/* <AnimatePresence> */}
+      <Outlet />
+      {/* </AnimatePresence> */}
 
-      {/* <Outlet /> */}
-
-      <Routes>
+      {/* <Routes>
         <Route
           path=":titleId/*"
           element={
@@ -128,7 +133,7 @@ export default function Catalog({
             />
           }
         />
-      </Routes>
+      </Routes> */}
     </>
   );
 }

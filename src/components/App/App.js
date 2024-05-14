@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, useLocation, Outlet } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 // import MediaQuery from "react-responsive";
 import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
@@ -186,111 +187,113 @@ function App() {
           <img className="loader__img" src="./favicon.ico" alt="logo" />
         </div>
       )}
-      <Routes>
-        <Route path="/" element={<Navigate to={"/today"} replace />} />
-        <Route
-          path="/today"
-          element={
-            <Today
-              setScrollTopMain={setScrollTopMain}
-              handleScrollMain={handleScrollMain}
-              setIsToggleBottomPage={setIsToggleBottomPage}
-            />
-          }
-        />
-        <Route
-          path="/catalog/*"
-          element={
-            <>
-              <Header
-                isToggleHeader={isToggleHeader}
-                isTitle="Каталог"
-                isTogglePage={isTogglePage}
-                setIsTogglePage={setIsTogglePage}
-                checkHandleHeader={checkHandleHeader}
-              />
-              <Catalog
-                isToggleHeader={isToggleHeader}
-                onIsCards={isCards}
-                isLoadCards={isLoadCards}
-                isTogglePage={isTogglePage}
-                setIsTogglePage={setIsTogglePage}
-                setIsToggleHeader={setIsToggleHeader}
-                handleScrollContent={handleScrollContent}
-                handleScrollMain={handleScrollMain}
-                setScrollTopMain={setScrollTopMain}
-                setIsToggleBottomPage={setIsToggleBottomPage}
-                isLoadVideo={isLoadVideo}
-                getTitleData={getTitleData}
-                getKodikVideo={getKodikVideo}
-                getTitleVideo={getTitleVideo}
-                isCard={isCard}
-                isVideo={isVideo}
-                checkScrollСontent={checkScrollСontent}
-                handleTogglePage={handleTogglePage}
-              />
-            </>
-          }
-        >
-          {/* <Route
-            path=":titleId/*"
+      <LocationProvider>
+        <Routes location={location} key={location.key}>
+          <Route path="/" element={<Navigate to={"/today"} replace />} />
+          <Route
+            path="/today"
             element={
-              <Page
-                isToggleHeader={isToggleHeader}
-                isLoadVideo={isLoadVideo}
-                setIsTogglePage={setIsTogglePage}
-                isTogglePage={isTogglePage}
-                setIsToggleHeader={setIsToggleHeader}
-                getTitleData={getTitleData}
-                getKodikVideo={getKodikVideo}
-                getTitleVideo={getTitleVideo}
-                isCard={isCard}
-                isVideo={isVideo}
-                checkScrollСontent={checkScrollСontent}
-                onIsCards={isCards}
-                isLoadCards={isLoadCards}
-                handleTogglePage={handleTogglePage}
+              <Today
+                setScrollTopMain={setScrollTopMain}
+                handleScrollMain={handleScrollMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
               />
             }
-          /> */}
-        </Route>
-        <Route
-          path="/medialibrary"
-          element={
-            <>
-              <Header
-                isToggleHeader={isToggleHeader}
-                isTitle="Медиатека"
-                isTogglePage={isTogglePage}
-              />
-              <Medialibrary
-                isToggleHeader={isToggleHeader}
-                setScrollTopMain={setScrollTopMain}
-                handleScrollMain={handleScrollMain}
-                setIsToggleBottomPage={setIsToggleBottomPage}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <>
-              <Header
-                isToggleHeader={isToggleHeader}
-                isTitle="Поиск"
-                isSearchPage="header_search-page"
-              />
-              <Search
-                isToggleHeader={isToggleHeader}
-                setScrollTopMain={setScrollTopMain}
-                handleScrollMain={handleScrollMain}
-                setIsToggleBottomPage={setIsToggleBottomPage}
-              />
-            </>
-          }
-        />
-      </Routes>
+          />
+          <Route
+            path="/catalog/*"
+            element={
+              <>
+                <Header
+                  isToggleHeader={isToggleHeader}
+                  isTitle="Каталог"
+                  isTogglePage={isTogglePage}
+                  setIsTogglePage={setIsTogglePage}
+                  checkHandleHeader={checkHandleHeader}
+                />
+                <Catalog
+                  isToggleHeader={isToggleHeader}
+                  onIsCards={isCards}
+                  isLoadCards={isLoadCards}
+                  isTogglePage={isTogglePage}
+                  setIsTogglePage={setIsTogglePage}
+                  setIsToggleHeader={setIsToggleHeader}
+                  handleScrollContent={handleScrollContent}
+                  handleScrollMain={handleScrollMain}
+                  setScrollTopMain={setScrollTopMain}
+                  setIsToggleBottomPage={setIsToggleBottomPage}
+                  isLoadVideo={isLoadVideo}
+                  getTitleData={getTitleData}
+                  getKodikVideo={getKodikVideo}
+                  getTitleVideo={getTitleVideo}
+                  isCard={isCard}
+                  isVideo={isVideo}
+                  checkScrollСontent={checkScrollСontent}
+                  handleTogglePage={handleTogglePage}
+                />
+              </>
+            }
+          >
+            <Route
+              path=":titleId/"
+              element={
+                <Page
+                  isToggleHeader={isToggleHeader}
+                  isLoadVideo={isLoadVideo}
+                  setIsTogglePage={setIsTogglePage}
+                  isTogglePage={isTogglePage}
+                  setIsToggleHeader={setIsToggleHeader}
+                  getTitleData={getTitleData}
+                  getKodikVideo={getKodikVideo}
+                  getTitleVideo={getTitleVideo}
+                  isCard={isCard}
+                  isVideo={isVideo}
+                  checkScrollСontent={checkScrollСontent}
+                  onIsCards={isCards}
+                  isLoadCards={isLoadCards}
+                  handleTogglePage={handleTogglePage}
+                />
+              }
+            />
+          </Route>
+          <Route
+            path="/medialibrary"
+            element={
+              <>
+                <Header
+                  isToggleHeader={isToggleHeader}
+                  isTitle="Медиатека"
+                  isTogglePage={isTogglePage}
+                />
+                <Medialibrary
+                  isToggleHeader={isToggleHeader}
+                  setScrollTopMain={setScrollTopMain}
+                  handleScrollMain={handleScrollMain}
+                  setIsToggleBottomPage={setIsToggleBottomPage}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <>
+                <Header
+                  isToggleHeader={isToggleHeader}
+                  isTitle="Поиск"
+                  isSearchPage="header_search-page"
+                />
+                <Search
+                  isToggleHeader={isToggleHeader}
+                  setScrollTopMain={setScrollTopMain}
+                  handleScrollMain={handleScrollMain}
+                  setIsToggleBottomPage={setIsToggleBottomPage}
+                />
+              </>
+            }
+          />
+        </Routes>
+      </LocationProvider>
       <Navbar />
       <BottomPage
         isToggleBottomPage={isToggleBottomPage}
@@ -298,6 +301,10 @@ function App() {
       />
     </>
   );
+}
+
+function LocationProvider({ children }) {
+  return <AnimatePresence>{children}</AnimatePresence>;
 }
 
 export default App;

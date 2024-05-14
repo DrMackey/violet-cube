@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
+import { motion } from "framer-motion";
 import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import Header from "../Header/Header.js";
 import Titlepages from "./Titlepages/Titlepages.js";
@@ -118,7 +119,10 @@ export default function Page({
 
   return (
     <>
-      <section
+      <motion.section
+        exit={{ x: "100%" }}
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
         // key={location.pathname.slice(
         //   location.pathname.lastIndexOf("/"),
         //   location.pathname.length
@@ -148,11 +152,11 @@ export default function Page({
           </>
         )}
         {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
-      </section>
-      {/* <Outlet />
+      </motion.section>
+      {/* <Outlet /> */}
       <Routes>
-        <Route
-          path=":titleId/*"
+        {/* <Route
+          path=":titleId/"
           element={
             <VirtualNavigation
               isTogglePage={isTogglePage}
@@ -160,8 +164,29 @@ export default function Page({
               setIsTogglePage={setIsTogglePage}
             />
           }
+        /> */}
+        <Route
+          path=":titleId/*"
+          element={
+            <Page
+              isToggleHeader={isToggleHeader}
+              isLoadVideo={isLoadVideo}
+              setIsTogglePage={setIsTogglePage}
+              isTogglePage={isTogglePage}
+              setIsToggleHeader={setIsToggleHeader}
+              getTitleData={getTitleData}
+              getKodikVideo={getKodikVideo}
+              // getTitleVideo={getTitleVideo}
+              isCard={isCard}
+              isVideo={isVideo}
+              checkScrollСontent={checkScrollСontent}
+              onIsCards={onIsCards}
+              isLoadCards={isLoadCards}
+              handleTogglePage={handleTogglePage}
+            />
+          }
         />
-      </Routes> */}
+      </Routes>
     </>
   );
 }
