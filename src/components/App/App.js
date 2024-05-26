@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, useLocation, Outlet } from "react-router-dom";
+// import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 // import MediaQuery from "react-responsive";
 import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
@@ -14,6 +15,7 @@ import api from "../../utils/AnimeApi.js";
 import "./App.css";
 
 const KODIK_TOKEN = "171ed6214cbc96e12b431da930826723";
+const PAGE_STATUS_CLASSES = ["inactive", "active", "closed"];
 
 function App() {
   const location = useLocation();
@@ -27,6 +29,32 @@ function App() {
   const [scrollTopMain, setScrollTopMain] = useState(Number);
   const [isToggleHeader, setIsToggleHeader] = useState("");
   const [isTogglePage, setIsTogglePage] = useState([false]);
+  const [activePage, setActivePage] = useState([
+    {
+      tabActive: true,
+      baseURL: ["today"],
+      lastURL: [],
+      pagesStatus: [],
+    },
+    {
+      tabActive: false,
+      baseURL: ["catalog"],
+      lastURL: ["catalog"],
+      pagesStatus: [],
+    },
+    {
+      tabActive: false,
+      baseURL: ["medialibrary"],
+      lastURL: [],
+      pagesStatus: [],
+    },
+    {
+      tabActive: false,
+      baseURL: ["search"],
+      lastURL: [],
+      pagesStatus: [],
+    },
+  ]);
   const [isToggleBottomPage, setIsToggleBottomPage] = useState(false);
   const [isLoadCards, setIsLoadCards] = useState(false);
   const [isLoadVideo, setIsLoadVideo] = useState(false);
@@ -34,7 +62,38 @@ function App() {
   useEffect(() => {
     getParentLocation();
     checkScrollMain();
+
+    // handleTabActive();
+    setActivePage((prev) => handleTabActive(prev));
+    // setActivePage((prev) => handleLastURL(prev));
   }, [location]);
+
+  useEffect(() => {
+    // console.log(activePage);
+  }, [activePage]);
+
+  const setHomePage = location.pathname.split("/"); // ['', 'catalog', '16498-shingeki-no-kyojin']
+  setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
+  let indexPage;
+
+  activePage.map((e, i) => {
+    if (setHomePage[0] === e.baseURL[0]) {
+      indexPage = i;
+    }
+  });
+  // useEffect(() => {
+  //   const newPagesStatus = activePage[indexPage].lastURL.map((e, i, m) => {
+  //     console.log("i", i, setHomePage.length, m);
+  //     if (i === setHomePage.length - 2) {
+  //       return PAGE_STATUS_CLASSES[0];
+  //     } else if (i === setHomePage.length - 1) {
+  //       return PAGE_STATUS_CLASSES[1];
+  //     } else {
+  //       return PAGE_STATUS_CLASSES[2];
+  //     }
+  //   });
+  //   activePage[indexPage].pagesStatus = newPagesStatus;
+  // }, [activePage]);
 
   useEffect(() => {
     checkScrollMain();
@@ -44,9 +103,9 @@ function App() {
     if (isTogglePage) checkScrollСontent();
   }, [scrollTopСontent]);
 
-  useEffect(() => {
-    console.log("isTogglePage", isTogglePage);
-  }, [isTogglePage]);
+  // useEffect(() => {
+  //   console.log("isTogglePage", isTogglePage);
+  // }, [isTogglePage]);
 
   useEffect(() => {
     getCards();
@@ -100,8 +159,125 @@ function App() {
   }
 
   function getParentLocation() {
-    const newArr = location.pathname.split("/");
+    const localStatusPages = activePage.slice(); //копия массива
+    const setHomePage = location.pathname.split("/");
+
+    setHomePage.shift();
+    // const newActivePages = localStatusPages.map((e) => {
+    //   if (e.baseURL[0] === setHomePage[0]) {
+    //     e.tabActive = true;
+    //     e.lastURL = setHomePage;
+    //     // console.log("e", e);
+    //     const test = checkPagesStatus(e);
+    //     console.log("tests", test);
+    //     return test;
+    //   } else {
+    //     e.tabActive = false;
+    //     return e;
+    //   }
+    // });
+
+    // setActivePage(newActivePages);
   }
+
+  function checkPagesStatus(e) {
+    e.pagesStatus = e.lastURL.map((e, i, m) => {
+      if (i === m.length - 2) {
+        return PAGE_STATUS_CLASSES[1];
+      } else if (i === m.length - 1) {
+        return PAGE_STATUS_CLASSES[2];
+      } else {
+        return PAGE_STATUS_CLASSES[2];
+      }
+    });
+
+    return e;
+  }
+
+  function handleTabActive(prev) {
+    const setHomePage = location.pathname.split("/"); // ['', 'catalog', '16498-shingeki-no-kyojin']
+    setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
+
+    const newActivePage = prev.map((e) => {
+      if (setHomePage[0] === e.baseURL[0]) {
+        e.tabActive = true;
+        return e;
+      } else {
+        e.tabActive = false;
+        return e;
+      }
+    });
+
+    handleLastURL();
+    handlePageStatus();
+
+    return newActivePage;
+  }
+
+  function handlePageStatus() {
+    const setHomePage = location.pathname.split("/"); // ['', 'catalog', '16498-shingeki-no-kyojin']
+    setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
+    let indexPage;
+
+    activePage.map((e, i) => {
+      if (setHomePage[0] === e.baseURL[0]) {
+        indexPage = i;
+      }
+    });
+
+    const newPagesStatus = activePage[indexPage].lastURL.map((e, i, m) => {
+      console.log("i", i, setHomePage.length, m);
+      if (i <= setHomePage.length - 2) {
+        return PAGE_STATUS_CLASSES[0];
+      } else if (i < setHomePage.length) {
+        return PAGE_STATUS_CLASSES[1];
+      } else {
+        return PAGE_STATUS_CLASSES[2];
+      }
+    });
+    // console.log("newPagesStatus", newPagesStatus);
+
+    activePage[indexPage].pagesStatus = newPagesStatus;
+  }
+
+  function handleLastURL() {
+    const setHomePage = location.pathname.split("/"); // ['', 'catalog', '16498-shingeki-no-kyojin']
+    setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
+    let indexPage;
+
+    activePage.map((e, i) => {
+      if (setHomePage[0] === e.baseURL[0]) {
+        indexPage = i;
+      }
+    });
+
+    if (
+      setHomePage[0] === activePage[indexPage].baseURL[0] &&
+      setHomePage.length >= activePage[indexPage].lastURL.length
+    ) {
+      sleep(0).then(() => {
+        activePage[indexPage].lastURL = setHomePage;
+        // console.log("1. ", activePage);
+        // const test = (activePage[indexPage].pagesStatus[
+        //   setHomePage.length - 1
+        // ] = PAGE_STATUS_CLASSES[2]);
+        // console.log("2. ", activePage[indexPage]);
+        // console.log("sleep", activePage[indexPage].lastURL);
+        setActivePage((prev) => (prev = activePage));
+      });
+    } else if (
+      setHomePage[0] === activePage[indexPage].baseURL[0] &&
+      setHomePage.length < activePage[indexPage].lastURL.length
+    ) {
+      sleep(300).then(() => {
+        activePage[indexPage].lastURL = setHomePage;
+        activePage[indexPage].pagesStatus.pop();
+        setActivePage((prev) => (prev = activePage));
+      });
+    }
+  }
+
+  const sleep = (ms) => new Promise((res) => setTimeout(() => res(), ms));
 
   function handleHeader(state) {
     setIsToggleHeader(state);
@@ -126,7 +302,7 @@ function App() {
       .then((res) => {
         setIsCards(res);
         setIsLoadCards(true);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -186,9 +362,65 @@ function App() {
           <img className="loader__img" src="./favicon.ico" alt="logo" />
         </div>
       )}
+      <Header
+        isToggleHeader={isToggleHeader}
+        isTitle="Page"
+        isTogglePage={isTogglePage}
+        setIsTogglePage={setIsTogglePage}
+        checkHandleHeader={checkHandleHeader}
+      />
       <Routes>
         <Route path="/" element={<Navigate to={"/today"} replace />} />
         <Route
+          path="/:mainUrl/*"
+          element={
+            <>
+              <Today
+                onActivePage={activePage}
+                setScrollTopMain={setScrollTopMain}
+                handleScrollMain={handleScrollMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
+              />
+              <Catalog
+                onActivePage={activePage}
+                isToggleHeader={isToggleHeader}
+                onIsCards={isCards}
+                isLoadCards={isLoadCards}
+                isTogglePage={isTogglePage}
+                setIsTogglePage={setIsTogglePage}
+                setIsToggleHeader={setIsToggleHeader}
+                handleScrollContent={handleScrollContent}
+                handleScrollMain={handleScrollMain}
+                setScrollTopMain={setScrollTopMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
+                isLoadVideo={isLoadVideo}
+                getTitleData={getTitleData}
+                getKodikVideo={getKodikVideo}
+                getTitleVideo={getTitleVideo}
+                isCard={isCard}
+                isVideo={isVideo}
+                checkScrollСontent={checkScrollСontent}
+                handleTogglePage={handleTogglePage}
+              />
+              <Medialibrary
+                onActivePage={activePage}
+                isToggleHeader={isToggleHeader}
+                setScrollTopMain={setScrollTopMain}
+                handleScrollMain={handleScrollMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
+              />
+              <Search
+                onActivePage={activePage}
+                isToggleHeader={isToggleHeader}
+                setScrollTopMain={setScrollTopMain}
+                handleScrollMain={handleScrollMain}
+                setIsToggleBottomPage={setIsToggleBottomPage}
+              />
+            </>
+          }
+        />
+
+        {/* <Route
           path="/today"
           element={
             <Today
@@ -231,29 +463,7 @@ function App() {
               />
             </>
           }
-        >
-          {/* <Route
-            path=":titleId/*"
-            element={
-              <Page
-                isToggleHeader={isToggleHeader}
-                isLoadVideo={isLoadVideo}
-                setIsTogglePage={setIsTogglePage}
-                isTogglePage={isTogglePage}
-                setIsToggleHeader={setIsToggleHeader}
-                getTitleData={getTitleData}
-                getKodikVideo={getKodikVideo}
-                getTitleVideo={getTitleVideo}
-                isCard={isCard}
-                isVideo={isVideo}
-                checkScrollСontent={checkScrollСontent}
-                onIsCards={isCards}
-                isLoadCards={isLoadCards}
-                handleTogglePage={handleTogglePage}
-              />
-            }
-          /> */}
-        </Route>
+        ></Route>
         <Route
           path="/medialibrary"
           element={
@@ -289,9 +499,9 @@ function App() {
               />
             </>
           }
-        />
+        /> */}
       </Routes>
-      <Navbar />
+      <Navbar onActivePage={activePage} />
       <BottomPage
         isToggleBottomPage={isToggleBottomPage}
         setIsToggleBottomPage={setIsToggleBottomPage}

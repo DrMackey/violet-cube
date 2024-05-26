@@ -3,18 +3,28 @@ import Titlepage from "../Titlepage/Titlepage.js";
 import "./Medialibrary.css";
 
 export default function Medialibrary({
+  onActivePage,
   isToggleHeader,
   setScrollTopMain,
   handleScrollMain,
-  setIsToggleBottomPage
+  setIsToggleBottomPage,
 }) {
   useEffect(() => {
     setScrollTopMain(0);
   }, []);
   return (
     <>
-      <section className="main-page" onScroll={handleScrollMain}>
-        <Titlepage isTitle="Медиатека" isToggleHeader={isToggleHeader} setIsToggleBottomPage={setIsToggleBottomPage}/>
+      <section
+        className={`main-page ${
+          onActivePage[2].tabActive && "main-page_selected"
+        }`}
+        onScroll={handleScrollMain}
+      >
+        <Titlepage
+          isTitle="Медиатека"
+          isToggleHeader={isToggleHeader}
+          setIsToggleBottomPage={setIsToggleBottomPage}
+        />
       </section>
     </>
   );

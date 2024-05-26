@@ -1,16 +1,24 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-export default function Navbar() {
-  const { pathname } = useLocation();
+export default function Navbar({ onActivePage }) {
+  function getToLink(index) {
+    const { tabActive, baseURL, lastURL } = onActivePage[index];
+
+    if (lastURL.length > baseURL.length && tabActive === false) {
+      return "/" + lastURL.join("/");
+    } else {
+      return "/" + baseURL.join("/");
+    }
+  }
 
   return (
     <nav className="navbar">
       <Link
-        to="/today"
+        to={getToLink(0)}
         className={`navbar__link ${
-          pathname === "/today" ? "navbar__link_active" : ""
+          onActivePage[0].tabActive && "navbar__link_active"
         }`}
       >
         <div className="navbar__icon-container">
@@ -19,9 +27,9 @@ export default function Navbar() {
         <p className="navbar__title">Сегодня</p>
       </Link>
       <Link
-        to="/catalog"
+        to={getToLink(1)}
         className={`navbar__link ${
-          pathname === "/catalog" ? "navbar__link_active" : ""
+          onActivePage[1].tabActive && "navbar__link_active"
         }`}
       >
         <div className="navbar__icon-container">
@@ -30,9 +38,9 @@ export default function Navbar() {
         <p className="navbar__title">Каталог</p>
       </Link>
       <Link
-        to="/medialibrary"
+        to={getToLink(2)}
         className={`navbar__link ${
-          pathname === "/medialibrary" ? "navbar__link_active" : ""
+          onActivePage[2].tabActive && "navbar__link_active"
         }`}
       >
         <div className="navbar__icon-container">
@@ -41,9 +49,9 @@ export default function Navbar() {
         <p className="navbar__title">Медиатека</p>
       </Link>
       <Link
-        to="/search"
+        to={getToLink(3)}
         className={`navbar__link ${
-          pathname === "/search" ? "navbar__link_active" : ""
+          onActivePage[3].tabActive && "navbar__link_active"
         }`}
       >
         <div className="navbar__icon-container">

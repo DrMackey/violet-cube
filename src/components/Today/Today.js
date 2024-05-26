@@ -2,14 +2,28 @@ import React, { useEffect } from "react";
 import Titlepage from "../Titlepage/Titlepage.js";
 import "./Today.css";
 
-export default function Today({ setScrollTopMain, handleScrollMain, setIsToggleBottomPage }) {
+export default function Today({
+  onActivePage,
+  setScrollTopMain,
+  handleScrollMain,
+  setIsToggleBottomPage,
+}) {
   useEffect(() => {
     setScrollTopMain(0);
   }, []);
   return (
     <>
-      <section className="main-page" onScroll={handleScrollMain}>
-        <Titlepage isTitle="Сегодня" isToday="28 Января" setIsToggleBottomPage={setIsToggleBottomPage}/>
+      <section
+        className={`main-page ${
+          onActivePage[0].tabActive && "main-page_selected"
+        }`}
+        onScroll={handleScrollMain}
+      >
+        <Titlepage
+          isTitle="Сегодня"
+          isToday="28 Января"
+          setIsToggleBottomPage={setIsToggleBottomPage}
+        />
         <div
           className="today__card"
           style={{ backgroundColor: "#302924" }}

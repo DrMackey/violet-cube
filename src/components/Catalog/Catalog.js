@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import Page from "../Page/Page.js";
-import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
+// import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import { useLocation, Link, Route, Routes } from "react-router-dom";
 import Titlepage from "../Titlepage/Titlepage.js";
 import PreviewCards from "./PreviewCards/PreviewCards.js";
@@ -10,6 +10,7 @@ import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Catalog.css";
 
 export default function Catalog({
+  onActivePage,
   isToggleHeader,
   onIsCards,
   isLoadCards,
@@ -74,61 +75,50 @@ export default function Catalog({
     <>
       <section
         onScroll={handleScrollMain}
-        className={`main-page ${isTogglePage[0] && "main-page_active"}`}
+        className={`main-page ${
+          onActivePage[1].tabActive && "main-page_selected"
+        }`}
       >
-        <Titlepage
-          isTitle="Каталог"
-          isToggleHeader={isToggleHeader}
-          setIsToggleBottomPage={setIsToggleBottomPage}
-        />
-        <Categories />
-        <PreviewCards />
-        <CardsGroup
-          onIsCards={onIsCards}
-          isLoadCards={isLoadCards}
-          handleClick={handleClick}
-        />
-      </section>
-
-      {isTogglePage.map((el, index) => {
-        if (index > 0) {
-          return (
-            <Page
-              key={index}
-              indexPage={index}
-              isTogglePage={isTogglePage}
-              isToggleHeader={isToggleHeader}
-              isLoadVideo={isLoadVideo}
-              setIsTogglePage={setIsTogglePage}
-              setIsToggleHeader={setIsToggleHeader}
-              getTitleData={getTitleData}
-              getKodikVideo={getKodikVideo}
-              getTitleVideo={getTitleVideo}
-              isCard={isCard}
-              isVideo={isVideo}
-              checkScrollСontent={checkScrollСontent}
-              onIsCards={onIsCards}
-              isLoadCards={isLoadCards}
-              handleTogglePage={handleTogglePage}
-            />
-          );
-        }
-      })}
-
-      {/* <Outlet /> */}
-
-      <Routes>
-        <Route
-          path=":titleId/*"
-          element={
-            <VirtualNavigation
-              isTogglePage={isTogglePage}
-              handleTogglePage={handleTogglePage}
-              setIsTogglePage={setIsTogglePage}
-            />
+        <section className={`catlog-page ${onActivePage[1].pagesStatus[0]}`}>
+          <Titlepage
+            isTitle="Каталог"
+            isToggleHeader={isToggleHeader}
+            setIsToggleBottomPage={setIsToggleBottomPage}
+          />
+          <Categories />
+          <PreviewCards />
+          <CardsGroup
+            onIsCards={onIsCards}
+            isLoadCards={isLoadCards}
+            handleClick={handleClick}
+          />
+        </section>
+        {onActivePage[1].lastURL.map((el, index) => {
+          if (index >= 1) {
+            return (
+              <Page
+                key={index}
+                indexPage={index}
+                isStatusPage={onActivePage[1].pagesStatus}
+                isTogglePage={isTogglePage}
+                isToggleHeader={isToggleHeader}
+                isLoadVideo={isLoadVideo}
+                setIsTogglePage={setIsTogglePage}
+                setIsToggleHeader={setIsToggleHeader}
+                getTitleData={getTitleData}
+                getKodikVideo={getKodikVideo}
+                getTitleVideo={getTitleVideo}
+                isCard={isCard}
+                isVideo={isVideo}
+                checkScrollСontent={checkScrollСontent}
+                onIsCards={onIsCards}
+                isLoadCards={isLoadCards}
+                handleTogglePage={handleTogglePage}
+              />
+            );
           }
-        />
-      </Routes>
+        })}
+      </section>
     </>
   );
 }

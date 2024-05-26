@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
-import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
+// import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import Header from "../Header/Header.js";
 import Titlepages from "./Titlepages/Titlepages.js";
 import Infoblock from "./Infoblock/Infoblock.js";
@@ -14,6 +14,7 @@ import "./Page.css";
 
 export default function Page({
   indexPage,
+  isStatusPage,
   isToggleHeader,
   isLoadVideo,
   setIsTogglePage,
@@ -41,13 +42,6 @@ export default function Page({
   // const indexPage = isIndexPage;
 
   useEffect(() => {
-    // console.log(
-    //   "Я страница тайтала и я смонтировалась и мой индекс",
-    //   isTogglePage.length,
-    //   isTogglePage,
-    //   isLoadingPage[indexPage],
-    //   indexPage
-    // );
     setIsIndexPage(indexPage);
 
     document.body.classList.add("disabled-scroll");
@@ -66,8 +60,9 @@ export default function Page({
     setTimeout(() => {
       setIsLoading(true);
     }, 1000);
+    isStatusPage[indexPage] = "active";
 
-    // return () => console.log("Я страница тайтала и я размонтировалась");
+    // return () => (isStatusPage[indexPage] = "inactive");
   }, []);
 
   useEffect(() => {
@@ -91,12 +86,12 @@ export default function Page({
   // }, [isIndexPage]);
 
   useEffect(() => {
-    console.log("3.", isTogglePage, indexPage, isTogglePage[indexPage]);
+    // console.log("3.", isTogglePage, indexPage, isTogglePage[indexPage]);
     if (isTogglePage[indexPage]) {
       setIsLoadingPage(true);
     } else {
       setIsLoadingPage(false);
-      console.log("4.", isLoadingPage);
+      // console.log("4.", isLoadingPage);
     }
   }, [isTogglePage]);
 
@@ -124,7 +119,7 @@ export default function Page({
         //   location.pathname.length
         // )}
         // onScroll={handleScrollContent}
-        className={`content-page ${isLoadingPage && "content-page_active"}`}
+        className={`content-page ${isStatusPage[indexPage]}`}
       >
         {isLoading && (
           <>
@@ -149,19 +144,6 @@ export default function Page({
         )}
         {!isLoading && <div className={`loader ${isLoadingDone}`}></div>}
       </section>
-      {/* <Outlet />
-      <Routes>
-        <Route
-          path=":titleId/*"
-          element={
-            <VirtualNavigation
-              isTogglePage={isTogglePage}
-              handleTogglePage={handleTogglePage}
-              setIsTogglePage={setIsTogglePage}
-            />
-          }
-        />
-      </Routes> */}
     </>
   );
 }

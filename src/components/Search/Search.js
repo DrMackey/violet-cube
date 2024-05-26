@@ -4,18 +4,28 @@ import Searchform from "../Searchform/Searchform.js";
 import "./Search.css";
 
 export default function Search({
+  onActivePage,
   isToggleHeader,
   setScrollTopMain,
   handleScrollMain,
-  setIsToggleBottomPage
+  setIsToggleBottomPage,
 }) {
   useEffect(() => {
     setScrollTopMain(0);
   }, []);
   return (
     <>
-      <section className="main-page" onScroll={handleScrollMain}>
-        <Titlepage isTitle="Поиск" isToggleHeader={isToggleHeader} setIsToggleBottomPage={setIsToggleBottomPage}/>
+      <section
+        className={`main-page ${
+          onActivePage[3].tabActive && "main-page_selected"
+        }`}
+        onScroll={handleScrollMain}
+      >
+        <Titlepage
+          isTitle="Поиск"
+          isToggleHeader={isToggleHeader}
+          setIsToggleBottomPage={setIsToggleBottomPage}
+        />
         <Searchform isToggleHeader={isToggleHeader} />
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
         ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
