@@ -6,6 +6,13 @@ import { ReactComponent as Magnifyingglass } from "../../images/navbar-icons/mag
 import { ReactComponent as Play } from "../../images/navbar-icons/play.square.svg";
 import { ReactComponent as Rectangle } from "../../images/navbar-icons/rectangle.grid.svg";
 
+const NAVBAR_TABS = [
+  { title: "Сегодня", icon: <Doc /> },
+  { title: "Каталог", icon: <Rectangle /> },
+  { title: "Медиатека", icon: <Play /> },
+  { title: "Поиск", icon: <Magnifyingglass /> },
+];
+
 export default function Navbar({ onActivePage }) {
   function getToLink(index) {
     const { tabActive, baseURL, lastURL } = onActivePage[index];
@@ -19,51 +26,20 @@ export default function Navbar({ onActivePage }) {
 
   return (
     <nav className="navbar">
-      <Link
-        to={getToLink(0)}
-        className={`navbar__link ${
-          onActivePage[0].tabActive && "navbar__link_active"
-        }`}
-      >
-        <div className="navbar__icon-container">
-          <Doc />
-        </div>
-        <p className="navbar__title">Сегодня</p>
-      </Link>
-      <Link
-        to={getToLink(1)}
-        className={`navbar__link ${
-          onActivePage[1].tabActive && "navbar__link_active"
-        }`}
-      >
-        <div className="navbar__icon-container">
-          <Rectangle />
-        </div>
-        <p className="navbar__title">Каталог</p>
-      </Link>
-      <Link
-        to={getToLink(2)}
-        className={`navbar__link ${
-          onActivePage[2].tabActive && "navbar__link_active"
-        }`}
-      >
-        <div className="navbar__icon-container">
-          <Play />
-        </div>
-        <p className="navbar__title">Медиатека</p>
-      </Link>
-      <Link
-        to={getToLink(3)}
-        className={`navbar__link ${
-          onActivePage[3].tabActive && "navbar__link_active"
-        }`}
-      >
-        <div className="navbar__icon-container">
-          <Magnifyingglass />
-        </div>
-
-        <p className="navbar__title">Поиск</p>
-      </Link>
+      {NAVBAR_TABS.map((tab, id) => {
+        return (
+          <Link
+            key={id}
+            to={getToLink(id)}
+            className={`navbar__link ${
+              onActivePage[id].tabActive && "navbar__link_active"
+            }`}
+          >
+            <div className="navbar__icon-container">{tab.icon}</div>
+            <p className="navbar__title">{tab.title}</p>
+          </Link>
+        );
+      })}
     </nav>
   );
 }
