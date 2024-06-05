@@ -1,11 +1,9 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  gap: 25px;
-  padding: 0 10px;
-  /* position: sticky; */
+  gap: 5px;
+  /* padding: 0 10px; */
   position: absolute;
-  /* position: fixed; */
   position: -webkit-sticky;
   top: calc(100% - 50px);
   bottom: 0;
