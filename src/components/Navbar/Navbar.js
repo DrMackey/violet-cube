@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { ReactComponent as Doc } from "../../images/navbar-icons/doc.text.svg";
+import { ReactComponent as Magnifyingglass } from "../../images/navbar-icons/magnifyingglass.svg";
+import { ReactComponent as Play } from "../../images/navbar-icons/play.square.svg";
+import { ReactComponent as Rectangle } from "../../images/navbar-icons/rectangle.grid.svg";
 
 export default function Navbar({ onActivePage }) {
   function getToLink(index) {
@@ -22,7 +26,7 @@ export default function Navbar({ onActivePage }) {
         }`}
       >
         <div className="navbar__icon-container">
-          <div className="navbar__icon"></div>
+          <Doc />
         </div>
         <p className="navbar__title">Сегодня</p>
       </Link>
@@ -33,7 +37,7 @@ export default function Navbar({ onActivePage }) {
         }`}
       >
         <div className="navbar__icon-container">
-          <div className="navbar__icon"></div>
+          <Rectangle />
         </div>
         <p className="navbar__title">Каталог</p>
       </Link>
@@ -44,7 +48,7 @@ export default function Navbar({ onActivePage }) {
         }`}
       >
         <div className="navbar__icon-container">
-          <div className="navbar__icon"></div>
+          <Play />
         </div>
         <p className="navbar__title">Медиатека</p>
       </Link>
@@ -55,14 +59,7 @@ export default function Navbar({ onActivePage }) {
         }`}
       >
         <div className="navbar__icon-container">
-          <svg
-            className="navbar__icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-          >
-            <path d="M10.21 20.226c2.217 0 4.262-.71 5.934-1.893l6.294 6.233c.292.29.677.434 1.088.434.863 0 1.474-.657 1.474-1.5 0-.394-.133-.775-.425-1.051l-6.253-6.208a10.012 10.012 0 0 0 2.098-6.128C20.42 4.55 15.825 0 10.21 0 4.607 0 0 4.537 0 10.113c0 5.563 4.594 10.113 10.21 10.113Zm0-2.183c-4.382 0-8.006-3.59-8.006-7.93s3.624-7.93 8.006-7.93c4.381 0 8.006 3.59 8.006 7.93s-3.625 7.93-8.006 7.93Z" />
-          </svg>
+          <Magnifyingglass />
         </div>
 
         <p className="navbar__title">Поиск</p>

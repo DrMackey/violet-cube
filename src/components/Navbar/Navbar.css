@@ -40,10 +40,12 @@
 
 .navbar__icon-container {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   flex-grow: 1;
+  padding: 5px 0;
 }
 
 .navbar__title {
-  margin: 3px 0;
+  margin: 0;
+  margin-bottom: 3px;
 }
