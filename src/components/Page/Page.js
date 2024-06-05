@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation, Link, Route, Routes, Outlet } from "react-router-dom";
 // import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
+import { useAnimate } from "framer-motion";
 import Header from "../Header/Header.js";
 import Titlepages from "./Titlepages/Titlepages.js";
 import Infoblock from "./Infoblock/Infoblock.js";
@@ -40,6 +41,17 @@ export default function Page({
   const location = useLocation();
   // const indexPage = location.pathname.match(/\//g).length - 1;
   // const indexPage = isIndexPage;
+  const divRef = useRef();
+
+  const [scope, animate] = useAnimate();
+
+  const handleAnimate = (transformValue) =>
+    animate(
+      scope.current,
+      { transform: transformValue },
+      { duration: 0.3 },
+      { ease: "easeInOut" }
+    );
 
   useEffect(() => {
     setIsIndexPage(indexPage);
@@ -61,9 +73,18 @@ export default function Page({
       setIsLoading(true);
     }, 1000);
     isStatusPage[indexPage] = "active";
-
-    // return () => (isStatusPage[indexPage] = "inactive");
+    handleAnimate(`translateX(0)`);
   }, []);
+
+  useEffect(() => {
+    if (isStatusPage[indexPage] === "active") {
+      handleAnimate(`translateX(0)`);
+    } else if (isStatusPage[indexPage] === "inactive") {
+      handleAnimate(`translateX(-33%)`);
+    } else if (isStatusPage[indexPage] === "closed") {
+      handleAnimate(`translateX(100%)`);
+    }
+  }, [isStatusPage]);
 
   useEffect(() => {
     if (isLoadVideo) {
@@ -114,18 +135,20 @@ export default function Page({
   return (
     <>
       <section
+        ref={scope}
         // key={location.pathname.slice(
         //   location.pathname.lastIndexOf("/"),
         //   location.pathname.length
         // )}
         // onScroll={handleScrollContent}
-        className={`content-page ${isStatusPage[indexPage]}`}
+        // className={`content-page ${isStatusPage[indexPage]}`}
+        className={`content-page`}
       >
         {isLoading && (
           <>
             <Titlepages isLoading={isLoading} isCard={isCard} />
             <Infoblock />
-            {/* <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} /> */}
+            <Player isUrlVideos={isUrlVideos} isLoadVideo={isLoadingSeries} />
             <Description />
             <StudioInfo />
             <Comments />

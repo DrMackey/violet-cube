@@ -79,7 +79,7 @@ export default function Catalog({
           onActivePage[1].tabActive && "main-page_selected"
         }`}
       >
-        <section className={`catlog-page ${onActivePage[1].pagesStatus[0]}`}>
+        <section className={`catalog-page ${onActivePage[1].pagesStatus[0]}`}>
           <Titlepage
             isTitle="Каталог"
             isToggleHeader={isToggleHeader}

@@ -4,7 +4,7 @@
   align-items: center;
   padding: 10px 20px;
   opacity: 1;
-  transition: opacity .2s;
+  /* transition: opacity .2s; */
 }
 
 .titlepage__container_scroll {

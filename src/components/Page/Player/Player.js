@@ -37,7 +37,7 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
                 <Slide key={i}>
                   <div className="player__li">
                     <div className="player__li-content">
-                      {maxEpisodes > i ? (
+                      {/* {maxEpisodes > i ? (
                         <iframe
                           title={i}
                           className="player__video player__video_iframe"
@@ -48,7 +48,7 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
                         ></iframe>
                       ) : (
                         ""
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </Slide>

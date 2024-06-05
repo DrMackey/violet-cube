@@ -13,7 +13,6 @@
   background-color: rgb(0, 0, 0);
   box-sizing: border-box;
   scrollbar-width: none;
-  
 }
 
 @media (min-width: 426px) {
@@ -38,7 +37,6 @@
   transition: all .3s ease-in-out;
   box-sizing: border-box;
   scrollbar-width: none;
-  animation: slideInactiveIn .3s;
 }
 
 @media (min-width: 426px) {
@@ -49,14 +47,11 @@
 }
 
 .inactive {
-  
-  animation: slideInactiveOutMobile .3s;
   transform: translateX(-33dvw);
 }
 
 @media (min-width: 426px) {
   .inactive {
-    animation: slideInactiveOut .3s;
     transform: translateX(-33%);
   }
 }

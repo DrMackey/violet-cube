@@ -180,20 +180,6 @@ function App() {
     // setActivePage(newActivePages);
   }
 
-  function checkPagesStatus(e) {
-    e.pagesStatus = e.lastURL.map((e, i, m) => {
-      if (i === m.length - 2) {
-        return PAGE_STATUS_CLASSES[1];
-      } else if (i === m.length - 1) {
-        return PAGE_STATUS_CLASSES[2];
-      } else {
-        return PAGE_STATUS_CLASSES[2];
-      }
-    });
-
-    return e;
-  }
-
   function handleTabActive(prev) {
     const setHomePage = location.pathname.split("/"); // ['', 'catalog', '16498-shingeki-no-kyojin']
     setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
@@ -419,87 +405,6 @@ function App() {
             </>
           }
         />
-
-        {/* <Route
-          path="/today"
-          element={
-            <Today
-              setScrollTopMain={setScrollTopMain}
-              handleScrollMain={handleScrollMain}
-              setIsToggleBottomPage={setIsToggleBottomPage}
-            />
-          }
-        />
-        <Route
-          path="/catalog/*"
-          element={
-            <>
-              <Header
-                isToggleHeader={isToggleHeader}
-                isTitle="Каталог"
-                isTogglePage={isTogglePage}
-                setIsTogglePage={setIsTogglePage}
-                checkHandleHeader={checkHandleHeader}
-              />
-              <Catalog
-                isToggleHeader={isToggleHeader}
-                onIsCards={isCards}
-                isLoadCards={isLoadCards}
-                isTogglePage={isTogglePage}
-                setIsTogglePage={setIsTogglePage}
-                setIsToggleHeader={setIsToggleHeader}
-                handleScrollContent={handleScrollContent}
-                handleScrollMain={handleScrollMain}
-                setScrollTopMain={setScrollTopMain}
-                setIsToggleBottomPage={setIsToggleBottomPage}
-                isLoadVideo={isLoadVideo}
-                getTitleData={getTitleData}
-                getKodikVideo={getKodikVideo}
-                getTitleVideo={getTitleVideo}
-                isCard={isCard}
-                isVideo={isVideo}
-                checkScrollСontent={checkScrollСontent}
-                handleTogglePage={handleTogglePage}
-              />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/medialibrary"
-          element={
-            <>
-              <Header
-                isToggleHeader={isToggleHeader}
-                isTitle="Медиатека"
-                isTogglePage={isTogglePage}
-              />
-              <Medialibrary
-                isToggleHeader={isToggleHeader}
-                setScrollTopMain={setScrollTopMain}
-                handleScrollMain={handleScrollMain}
-                setIsToggleBottomPage={setIsToggleBottomPage}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <>
-              <Header
-                isToggleHeader={isToggleHeader}
-                isTitle="Поиск"
-                isSearchPage="header_search-page"
-              />
-              <Search
-                isToggleHeader={isToggleHeader}
-                setScrollTopMain={setScrollTopMain}
-                handleScrollMain={handleScrollMain}
-                setIsToggleBottomPage={setIsToggleBottomPage}
-              />
-            </>
-          }
-        /> */}
       </Routes>
       <Navbar onActivePage={activePage} />
       <BottomPage
