@@ -3,6 +3,7 @@
 .page__preview {
   padding: 0 20px;
   padding-top: 14px;
+  margin-top: 40px;
   display: flex;
   gap: 17px;
 }

@@ -1,18 +1,26 @@
 import React from "react";
 import "./Titlepage.css";
 
-export default function Titlepage({ isTitle, isToggleHeader, isToday, setIsToggleBottomPage }) {
+export default function Titlepage({
+  isTitle,
+  isToggleHeader,
+  isToday,
+  setIsToggleBottomPage,
+}) {
+  // ${isToggleHeader ? "titlepage__container_scroll" : ""}
   return (
     <div
-      className={`titlepage__container ${
-        isToggleHeader ? "titlepage__container_scroll" : ""
-      }`}
+      className={`titlepage__container 
+        `}
     >
       <div className="titlepage__subtitle-container">
         <h1 className="titlepage__subtitle">{isTitle}</h1>
         <p className="titlepage__today">{isToday}</p>
-      </div> 
-      <button className="titlepage__profile" onClick={() => setIsToggleBottomPage(true)}>
+      </div>
+      <button
+        className="titlepage__profile"
+        onClick={() => setIsToggleBottomPage(true)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="31"

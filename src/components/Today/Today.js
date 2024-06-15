@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
+import TemplatePage from "../TemplatePage/TemplatePage.js";
 import Titlepage from "../Titlepage/Titlepage.js";
 import "./Today.css";
 
 export default function Today({
   onActivePage,
-  setScrollTopMain,
-  handleScrollMain,
+  // setScrollTopMain,
+  // handleScrollMain,
   setIsToggleBottomPage,
 }) {
   useEffect(() => {
-    setScrollTopMain(0);
+    // setScrollTopMain(0);
   }, []);
   return (
     <>
@@ -17,8 +18,9 @@ export default function Today({
         className={`main-page ${
           onActivePage[0].tabActive && "main-page_selected"
         }`}
-        onScroll={handleScrollMain}
+        // onScroll={handleScrollMain}
       >
+        {/* <TemplatePage statusPage={onActivePage[0].pagesStatus[0]}> */}
         <Titlepage
           isTitle="Сегодня"
           isToday="28 Января"
@@ -36,6 +38,7 @@ export default function Today({
           className="today__card"
           style={{ backgroundColor: "#272727" }}
         ></div>
+        {/* </TemplatePage> */}
       </section>
     </>
   );

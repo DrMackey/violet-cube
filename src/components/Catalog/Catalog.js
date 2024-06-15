@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
+import TemplatePage from "../TemplatePage/TemplatePage.js";
 import Page from "../Page/Page.js";
 // import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import { useLocation, Link, Route, Routes } from "react-router-dom";
@@ -19,7 +20,7 @@ export default function Catalog({
   setIsToggleHeader,
   handleScrollMain,
   handleScrollContent,
-  setScrollTopMain,
+  // setScrollTopMain,
   setIsToggleBottomPage,
 
   isLoadVideo,
@@ -28,11 +29,14 @@ export default function Catalog({
   getKodikVideo,
   isCard,
   isVideo,
-  checkScrollСontent,
+  // checkScrollСontent,
   handleTogglePage,
+  isRefPage,
+  setIsRefPage,
+  isLocation,
 }) {
   useEffect(() => {
-    setScrollTopMain(0);
+    // setScrollTopMain(0);
     // console.log("Монтирование Каталога");
     // handleHeader("");
     // setIsToggleHeader((isToggleHeader["catalog"] = 0));
@@ -72,30 +76,53 @@ export default function Catalog({
   }
 
   return (
-    <>
-      <section
-        onScroll={handleScrollMain}
-        className={`main-page ${
-          onActivePage[1].tabActive && "main-page_selected"
-        }`}
+    <section
+      // onScroll={handleScrollMain}
+      className={`main-page ${
+        onActivePage[1].tabActive && "main-page_selected"
+      }`}
+    >
+      <TemplatePage
+        statusPage={onActivePage[1].pagesStatus[0]}
+        indexPage={0}
+        indexTab={1}
+        isRefPage={isRefPage}
+        setIsRefPage={setIsRefPage}
+        // handleScrollMain={handleScrollMain}
+        isLocation={isLocation}
       >
-        <section className={`catalog-page ${onActivePage[1].pagesStatus[0]}`}>
-          <Titlepage
-            isTitle="Каталог"
-            isToggleHeader={isToggleHeader}
-            setIsToggleBottomPage={setIsToggleBottomPage}
-          />
-          <Categories />
-          <PreviewCards />
-          <CardsGroup
-            onIsCards={onIsCards}
-            isLoadCards={isLoadCards}
-            handleClick={handleClick}
-          />
-        </section>
-        {onActivePage[1].lastURL.map((el, index) => {
-          if (index >= 1) {
-            return (
+        <Titlepage
+          isTitle="Каталог"
+          isToggleHeader={isToggleHeader}
+          setIsToggleBottomPage={setIsToggleBottomPage}
+        />
+        <Categories />
+        <PreviewCards />
+        <CardsGroup
+          onIsCards={onIsCards}
+          isLoadCards={isLoadCards}
+          handleClick={handleClick}
+        />
+        <CardsGroup
+          onIsCards={onIsCards}
+          isLoadCards={isLoadCards}
+          handleClick={handleClick}
+        />
+      </TemplatePage>
+
+      {onActivePage[1].lastURL.map((el, index) => {
+        if (index >= 1) {
+          return (
+            <TemplatePage
+              key={index}
+              indexPage={index}
+              indexTab={1}
+              statusPage={onActivePage[1].pagesStatus[index]}
+              isRefPage={isRefPage}
+              setIsRefPage={setIsRefPage}
+              // handleScrollMain={handleScrollMain}
+              isLocation={isLocation}
+            >
               <Page
                 key={index}
                 indexPage={index}
@@ -110,15 +137,15 @@ export default function Catalog({
                 getTitleVideo={getTitleVideo}
                 isCard={isCard}
                 isVideo={isVideo}
-                checkScrollСontent={checkScrollСontent}
+                // checkScrollСontent={checkScrollСontent}
                 onIsCards={onIsCards}
                 isLoadCards={isLoadCards}
                 handleTogglePage={handleTogglePage}
               />
-            );
-          }
-        })}
-      </section>
-    </>
+            </TemplatePage>
+          );
+        }
+      })}
+    </section>
   );
 }

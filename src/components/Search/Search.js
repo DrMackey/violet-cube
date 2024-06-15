@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import TemplatePage from "../TemplatePage/TemplatePage.js";
 import Titlepage from "../Titlepage/Titlepage.js";
 import Searchform from "../Searchform/Searchform.js";
 import "./Search.css";
@@ -6,12 +7,12 @@ import "./Search.css";
 export default function Search({
   onActivePage,
   isToggleHeader,
-  setScrollTopMain,
-  handleScrollMain,
+  // setScrollTopMain,
+  // handleScrollMain,
   setIsToggleBottomPage,
 }) {
   useEffect(() => {
-    setScrollTopMain(0);
+    // setScrollTopMain(0);
   }, []);
   return (
     <>
@@ -19,8 +20,9 @@ export default function Search({
         className={`main-page ${
           onActivePage[3].tabActive && "main-page_selected"
         }`}
-        onScroll={handleScrollMain}
+        // onScroll={handleScrollMain}
       >
+        {/* <TemplatePage statusPage={onActivePage[3].pagesStatus[0]}> */}
         <Titlepage
           isTitle="Поиск"
           isToggleHeader={isToggleHeader}
@@ -225,6 +227,7 @@ export default function Search({
         velit. Phasellus gravida semper nisi. Nullam vel sem. Pellentesque
         libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Sed
         hendrerit. Morbi ac felis.
+        {/* </TemplatePage> */}
       </section>
     </>
   );
