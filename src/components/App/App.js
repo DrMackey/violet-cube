@@ -100,14 +100,14 @@ function App() {
 
   function removeDataPage(elm) {
     const copyArr = elm.slice();
+
     activePage.map((elm, index) => {
       if (elm.tabActive) {
         indexTab = index;
       }
     });
-
     copyArr[indexTab].headerStatus.splice(setHomePage.length, 1);
-    console.log("deleteCopyArr", copyArr);
+
     return copyArr;
   }
 
@@ -182,6 +182,10 @@ function App() {
     setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
     let indexPage;
 
+    if (setHomePage[0] === "") {
+      setHomePage[0] = "today";
+    }
+
     activePage.map((e, i) => {
       if (setHomePage[0] === e.baseURL[0]) {
         indexPage = i;
@@ -205,6 +209,10 @@ function App() {
     const setHomePage = location.pathname.split("/"); // ['', 'catalog', '16498-shingeki-no-kyojin']
     setHomePage.shift(); // ['catalog', '16498-shingeki-no-kyojin']
     let indexPage;
+
+    if (setHomePage[0] === "") {
+      setHomePage[0] = "today";
+    }
 
     activePage.map((e, i) => {
       if (setHomePage[0] === e.baseURL[0]) {

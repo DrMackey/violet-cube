@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAnimate } from "framer-motion";
 import "./TemplatePage.css";
 
-export default function Page({
+export default function TemplatePage({
   children,
   indexPage,
   indexTab,

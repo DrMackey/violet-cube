@@ -103,23 +103,25 @@ export default function Catalog({
         // handleScrollMain={handleScrollMain}
         isLocation={isLocation}
       >
-        <Titlepage
-          isTitle="Каталог"
-          isToggleHeader={isToggleHeader}
-          setIsToggleBottomPage={setIsToggleBottomPage}
-        />
-        <Categories />
-        <PreviewCards />
-        <CardsGroup
-          onIsCards={onIsCards}
-          isLoadCards={isLoadCards}
-          handleClick={handleClick}
-        />
-        <CardsGroup
-          onIsCards={onIsCards}
-          isLoadCards={isLoadCards}
-          handleClick={handleClick}
-        />
+        <>
+          <Titlepage
+            isTitle="Каталог"
+            isToggleHeader={isToggleHeader}
+            setIsToggleBottomPage={setIsToggleBottomPage}
+          />
+          <Categories />
+          <PreviewCards />
+          <CardsGroup
+            onIsCards={onIsCards}
+            isLoadCards={isLoadCards}
+            handleClick={handleClick}
+          />
+          <CardsGroup
+            onIsCards={onIsCards}
+            isLoadCards={isLoadCards}
+            handleClick={handleClick}
+          />
+        </>
       </TemplatePage>
 
       {onActivePage[1].lastURL.map((el, index) => {

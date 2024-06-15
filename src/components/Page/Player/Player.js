@@ -5,7 +5,6 @@ import "./Player.css";
 export default function Player({ isUrlVideos, isLoadVideo }) {
   const [selectedFruit, setSelectedFruit] = useState("KODIK");
   const [selectedSeries, setSelectedSeries] = useState(1);
-  const localCurrentSlide = { index: Number };
   // const lastSeason = isVideo[0].last_season;
   // const seriesObj = isVideo[0].seasons[lastSeason].episodes;
   const maxEpisodes = 3;
@@ -63,7 +62,6 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
             <p className="player__series-title">
               Серия
               <span className="player__series-title-span">
-                {localCurrentSlide.index}
                 {selectedSeries}
               </span>
               /<span>{isLoadVideo ? isUrlVideos[0].length : "0"}</span>
