@@ -60,6 +60,8 @@
   border: none;
   color: #0a84ff;
   overflow: hidden;
+  cursor: pointer;
+  border:none;
 }
 
 .header__button_none {
@@ -79,4 +81,5 @@
 
 .disabled {
   opacity: 0;
+  cursor: default;
 }

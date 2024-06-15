@@ -2,36 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 
-export default function Header({
-  isToggleHeader,
-  isTitle,
-  isSearchPage,
-  isTogglePage,
-  setIsTogglePage,
-  checkHandleHeader,
-  // previousPage,
-  isRefPage,
-  setIsRefPage,
-  isLocation,
-  setHomePage,
-  indexTab,
-}) {
+export default function Header({ isTitle, isRefPage, setHomePage, indexTab }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMainPage, setIsMainPage] = useState(true);
-  let previousPage;
 
   useEffect(() => {
-    if (setHomePage.length === 1) {
+    if (setHomePage.length <= 1) {
       setIsMainPage(true);
-    } else if (setHomePage.length === 2) {
-      previousPage = setHomePage[0];
-      console.log("setHomePage", previousPage);
-      setIsMainPage(false);
     } else {
       setIsMainPage(false);
     }
-  }, [location, isToggleHeader]);
+  }, [location]);
 
   // function getParentLocation() {
   //   const newArr = location.pathname.split("/");
@@ -41,12 +23,12 @@ export default function Header({
   function handleClick() {
     navigate(-1);
   }
-  // .at(-1)
+
   return (
     <header
       className={`header ${
         isRefPage[indexTab].headerStatus[setHomePage.length - 1] ?? ""
-      } ${isSearchPage ?? ""}`}
+      }`}
     >
       <div className="header__title-container">
         <button
@@ -67,10 +49,10 @@ export default function Header({
             />
           </svg>
           <p className="header__button-subtitle">
-            {previousPage ? previousPage : "Назад"}
+            {setHomePage.length <= 2 ? isTitle : "Назад"}
           </p>
         </button>
-        <h1 className="header__title">{previousPage ? null : isTitle}</h1>
+        <h1 className="header__title">{isMainPage ? isTitle : null}</h1>
         {/* <button className="header__button disabled"></button> */}
       </div>
       {/* {isSearchVisible ? <Searchform isToggleHeader={isToggleHeader} /> : ""} */}

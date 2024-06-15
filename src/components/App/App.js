@@ -300,7 +300,7 @@ function App() {
           <img className="loader__img" src="./favicon.ico" alt="logo" />
         </div>
       )}
-      <Header
+      {/* <Header
         isToggleHeader={isToggleHeader}
         isTitle="Page"
         isTogglePage={isTogglePage}
@@ -310,7 +310,7 @@ function App() {
         isLocation={isLocation}
         setHomePage={setHomePage}
         indexTab={indexTab}
-      />
+      /> */}
       <Routes>
         <Route path="/" element={<Navigate to={"/today"} replace />} />
         <Route
@@ -340,6 +340,7 @@ function App() {
                 isRefPage={isRefPage}
                 setIsRefPage={setIsRefPage}
                 isLocation={isLocation}
+                setHomePage={setHomePage}
               />
               <Medialibrary
                 onActivePage={activePage}

@@ -4,11 +4,14 @@ import TemplatePage from "../TemplatePage/TemplatePage.js";
 import Page from "../Page/Page.js";
 // import VirtualNavigation from "../VirtualNavigation/VirtualNavigation.js";
 import { useLocation, Link, Route, Routes } from "react-router-dom";
+import Header from "../Header/Header.js";
 import Titlepage from "../Titlepage/Titlepage.js";
 import PreviewCards from "./PreviewCards/PreviewCards.js";
 import Categories from "./Categories/Categories.js";
 import CardsGroup from "../CardsGroup/CardsGroup.js";
 import "./Catalog.css";
+
+const TITLE_PAGE = "Каталог";
 
 export default function Catalog({
   onActivePage,
@@ -34,7 +37,10 @@ export default function Catalog({
   isRefPage,
   setIsRefPage,
   isLocation,
+  setHomePage,
 }) {
+  const [isTitleHeader, setIsTitleHeader] = useState("Каталог");
+
   useEffect(() => {
     // setScrollTopMain(0);
     // console.log("Монтирование Каталога");
@@ -82,6 +88,12 @@ export default function Catalog({
         onActivePage[1].tabActive && "main-page_selected"
       }`}
     >
+      <Header
+        isTitle={TITLE_PAGE}
+        isRefPage={isRefPage}
+        setHomePage={setHomePage}
+        indexTab={1}
+      />
       <TemplatePage
         statusPage={onActivePage[1].pagesStatus[0]}
         indexPage={0}
