@@ -115,11 +115,13 @@ export default function Catalog({
             onIsCards={onIsCards}
             isLoadCards={isLoadCards}
             handleClick={handleClick}
+            isLoadDelimiter={true}
           />
           <CardsGroup
             onIsCards={onIsCards}
             isLoadCards={isLoadCards}
             handleClick={handleClick}
+            isLoadDelimiter={false}
           />
         </>
       </TemplatePage>

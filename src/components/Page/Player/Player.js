@@ -21,6 +21,23 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
 
   return (
     <section className="player">
+      {!isLoadVideo && (
+        <Carousel
+          totalSlides={1}
+          visibleSlides={1}
+          trayPadding={"15px"}
+          slideMargin={5}
+          onSlide={(e) => mathSeries(e)}
+        >
+          <Slider>
+            <Slide key={1}>
+              <div className="player__li">
+                <div className="player__li-content"></div>
+              </div>
+            </Slide>
+          </Slider>
+        </Carousel>
+      )}
       {isLoadVideo && (
         <Carousel
           totalSlides={isUrlVideos[0].length}
