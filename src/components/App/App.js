@@ -17,7 +17,11 @@ function App() {
   const location = useLocation();
   let indexTab = 1;
 
-  const [isCards, setIsCards] = useState({});
+  const [isCards, setIsCards] = useState({ status: false, content: [] });
+  const [isOngoingCards, setIsOngoingCards] = useState({
+    status: false,
+    content: [],
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingDone, setIsLoadingDone] = useState("");
   const [isCard, setIsCard] = useState({});
@@ -51,7 +55,6 @@ function App() {
     },
   ]);
   const [isToggleBottomPage, setIsToggleBottomPage] = useState(false);
-  const [isLoadCards, setIsLoadCards] = useState(false);
   const [isLoadVideo, setIsLoadVideo] = useState(false);
   const [isLocation, setIsLocation] = useState([]);
 
@@ -115,6 +118,7 @@ function App() {
 
   useEffect(() => {
     getCards();
+    getOngoingPopularity();
     setIsLoadingDone("done");
     setTimeout(() => {
       setIsLoading(false);
@@ -244,12 +248,23 @@ function App() {
   const sleep = (ms) => new Promise((res) => setTimeout(() => res(), ms));
 
   function getCards() {
-    setIsLoadCards(false);
+    setIsCards((elm) => ({ ...elm, status: false }));
     api
       .getInitialCards()
       .then((res) => {
-        setIsCards(res);
-        setIsLoadCards(true);
+        setIsCards((elm) => ({ ...elm, status: true, content: res }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function getOngoingPopularity() {
+    setIsOngoingCards((elm) => ({ ...elm, status: true }));
+    api
+      .getOngoingPopularity()
+      .then((res) => {
+        setIsOngoingCards((elm) => ({ ...elm, status: true, content: res }));
       })
       .catch((err) => {
         console.log(err);
@@ -333,7 +348,7 @@ function App() {
                 onActivePage={activePage}
                 isToggleHeader={isToggleHeader}
                 onIsCards={isCards}
-                isLoadCards={isLoadCards}
+                onIsOngoingCards={isOngoingCards}
                 isTogglePage={isTogglePage}
                 setIsTogglePage={setIsTogglePage}
                 setIsToggleHeader={setIsToggleHeader}
@@ -358,6 +373,10 @@ function App() {
               <Search
                 onActivePage={activePage}
                 isToggleHeader={isToggleHeader}
+                isRefPage={isRefPage}
+                setIsRefPage={setIsRefPage}
+                isLocation={isLocation}
+                setHomePage={setHomePage}
                 setIsToggleBottomPage={setIsToggleBottomPage}
               />
             </>

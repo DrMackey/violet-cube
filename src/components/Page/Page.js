@@ -65,6 +65,7 @@ export default function Page({
     if (isLoadVideo) {
       // console.log(isVideo, "isVideo");
       setIsUrlVideos(() => getSeries(isVideo));
+      console.log(isVideo, "isVideo");
       setIsLoadingSeries(true);
     }
   }, [isLoadVideo]);
@@ -102,7 +103,13 @@ export default function Page({
       const lastSeason = e.last_season;
       if (lastSeason > 0) {
         const seriesObj = e.seasons[lastSeason].episodes;
-        return Object.values(seriesObj);
+        const translation = e.translation.title;
+        const episodes = e.episodes_count;
+        return {
+          series: Object.values(seriesObj),
+          translation: translation,
+          episodes: episodes,
+        };
       }
     });
   }

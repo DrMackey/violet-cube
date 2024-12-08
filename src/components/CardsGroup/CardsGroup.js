@@ -5,29 +5,32 @@ import "./CardsGroup.css";
 
 export default function CardsGroup({
   onIsCards,
-  isLoadCards,
   handleClick,
   isLoadDelimiter,
+  onIsTitle,
 }) {
   const location = useLocation();
+
   return (
     <>
-      {isLoadCards && (
+      {onIsCards.status && (
         <>
           <section className="cards-group">
             <div className="cards-group__title-container">
-              <h2 className="cards-group__title">Смотрят сегодня</h2>
+              <h2 className="cards-group__title">
+                {onIsTitle ? onIsTitle : "Смотрят сегодня"}
+              </h2>
               <button className="cards-group__button">Все</button>
             </div>
 
             <Carousel
-              totalSlides={onIsCards.length}
+              totalSlides={onIsCards.content.length}
               visibleSlides={1}
               trayPadding={"15px"}
               slideMargin={5}
             >
               <Slider>
-                {onIsCards.map((card) => {
+                {onIsCards.content.map((card) => {
                   const link = card.url.slice(8);
                   return (
                     <Slide key={card.id}>

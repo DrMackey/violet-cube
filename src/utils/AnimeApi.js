@@ -25,6 +25,21 @@ class AnimeApi {
       });
   }
 
+  getOngoingPopularity() {
+    return fetch(
+      `${this._url}/animes?limit=25&status=ongoing&order=popularity&season=2024`,
+      {
+        // credentials: "include",
+      }
+    )
+      .then((res) => {
+        return this._getResponseData(res);
+      })
+      .then((res) => {
+        return res;
+      });
+  }
+
   getProfileId() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
@@ -42,6 +57,18 @@ class AnimeApi {
     return fetch(`${this._url}/animes${titleUrl}`, {
       headers: this._headers,
       // credentials: "include",
+    })
+      .then((res) => {
+        return this._getResponseData(res);
+      })
+      .then((res) => {
+        return res;
+      });
+  }
+
+  getTopicHot() {
+    return fetch(`${this._url}/topics/hot`, {
+      headers: this._headers,
     })
       .then((res) => {
         return this._getResponseData(res);

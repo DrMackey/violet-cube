@@ -38,6 +38,7 @@ export default function Catalog({
   setIsRefPage,
   isLocation,
   setHomePage,
+  onIsOngoingCards,
 }) {
   const [isTitleHeader, setIsTitleHeader] = useState("Каталог");
 
@@ -112,16 +113,16 @@ export default function Catalog({
           <Categories />
           <PreviewCards />
           <CardsGroup
-            onIsCards={onIsCards}
-            isLoadCards={isLoadCards}
+            onIsCards={onIsOngoingCards}
             handleClick={handleClick}
-            isLoadDelimiter={true}
+            isLoadDelimiter={false}
+            onIsTitle={"Онгоинги этого сезона"}
           />
           <CardsGroup
             onIsCards={onIsCards}
-            isLoadCards={isLoadCards}
             handleClick={handleClick}
-            isLoadDelimiter={false}
+            isLoadDelimiter={true}
+            onIsTitle={"Самое популярное"}
           />
         </>
       </TemplatePage>

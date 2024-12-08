@@ -11,7 +11,7 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
 
   useEffect(() => {
     if (isLoadVideo) {
-      console.log(isUrlVideos[0].length, "isLoadVideo");
+      console.log(isUrlVideos[0].length, "isLoadVideo", isUrlVideos);
     }
   }, [isLoadVideo]);
 
@@ -40,31 +40,35 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
       )}
       {isLoadVideo && (
         <Carousel
-          totalSlides={isUrlVideos[0].length}
+          totalSlides={isUrlVideos.episodes}
           visibleSlides={1}
           trayPadding={"15px"}
           slideMargin={5}
           onSlide={(e) => mathSeries(e)}
         >
           <Slider>
-            {isUrlVideos[0].map((e, i) => {
+            {isUrlVideos[0].series.map((e, i) => {
               const link = e;
               return (
                 <Slide key={i}>
                   <div className="player__li">
                     <div className="player__li-content">
-                      {/* {maxEpisodes > i ? (
-                        <iframe
-                          title={i}
-                          className="player__video player__video_iframe"
-                          src={link}
-                          frameborder="0"
-                          scrolling="no"
-                          allowfullscreen
-                        ></iframe>
+                      {selectedSeries - 1 === i ||
+                      selectedSeries - 2 === i ||
+                      selectedSeries === i ? (
+                        <>
+                          <iframe
+                            title={i}
+                            className="player__video player__video_iframe"
+                            src={link}
+                            frameBorder="0"
+                            allowFullScreen
+                            allow="autoplay *; fullscreen *"
+                          ></iframe>
+                        </>
                       ) : (
                         ""
-                      )} */}
+                      )}
                     </div>
                   </div>
                 </Slide>
@@ -81,7 +85,7 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
               <span className="player__series-title-span">
                 {selectedSeries}
               </span>
-              /<span>{isLoadVideo ? isUrlVideos[0].length : "0"}</span>
+              /<span>{isLoadVideo ? isUrlVideos[0].episodes : "0"}</span>
             </p>
             <p className="player__time-watch">
               <svg
@@ -99,42 +103,52 @@ export default function Player({ isUrlVideos, isLoadVideo }) {
             </p>
           </div>
           <div className="voice-acting">
-            <details className="voice-acting">
-              <summary className="voice-acting__active-button">
-                <div className="voice-acting__active-button-title-container">
-                  <p className="voice-acting__title">Animedia</p>
-                  <svg
-                    className="voice-acting__icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    height="8"
-                    fill="none"
-                  >
-                    <rect
-                      width="1.294"
-                      height="7.052"
-                      y="2.049"
-                      rx=".647"
-                      transform="rotate(-45 0 2.05)"
-                    />
-                    <rect
-                      width="1.294"
-                      height="7.052"
-                      x="9.068"
-                      y=".964"
-                      rx=".647"
-                      transform="rotate(43.928 9.068 .964)"
-                    />
-                  </svg>
-                </div>
-              </summary>
-              <details-menu>
-                <div className="voice-acting__list">
-                  <button className="voice-acting__item">Anilibria</button>
-                  <button className="voice-acting__item">AniDUB</button>
-                </div>
-              </details-menu>
-            </details>
+            {isLoadVideo && (
+              <details className="voice-acting">
+                <summary className="voice-acting__active-button">
+                  <div className="voice-acting__active-button-title-container">
+                    <p className="voice-acting__title">
+                      {isUrlVideos[0].translation}
+                    </p>
+                    <svg
+                      className="voice-acting__icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="8"
+                      fill="none"
+                    >
+                      <rect
+                        width="1.294"
+                        height="7.052"
+                        y="2.049"
+                        rx=".647"
+                        transform="rotate(-45 0 2.05)"
+                      />
+                      <rect
+                        width="1.294"
+                        height="7.052"
+                        x="9.068"
+                        y=".964"
+                        rx=".647"
+                        transform="rotate(43.928 9.068 .964)"
+                      />
+                    </svg>
+                  </div>
+                </summary>
+                <details-menu>
+                  <div className="voice-acting__list">
+                    {isLoadVideo &&
+                      isUrlVideos.map((e) => {
+                        return (
+                          <button className="voice-acting__item">
+                            {e.translation}
+                          </button>
+                        );
+                      })}
+                  </div>
+                </details-menu>
+              </details>
+            )}
           </div>
         </div>
         <div className="player-choice">

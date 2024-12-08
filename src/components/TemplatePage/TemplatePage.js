@@ -9,6 +9,7 @@ export default function TemplatePage({
   statusPage,
   isRefPage,
   setIsRefPage,
+  isSearch,
 }) {
   const [scope, animate] = useAnimate();
   let refPage = isRefPage.slice();
@@ -17,8 +18,8 @@ export default function TemplatePage({
     animate(
       scope.current,
       { transform: transformValue },
-      { duration: 0.3 },
-      { ease: "easeInOut" }
+      { duration: 0.35 },
+      { ease: [0.43, 0.92, 0, 0.83] }
     );
 
   useEffect(() => {
@@ -46,7 +47,15 @@ export default function TemplatePage({
     const scrollTop = e.currentTarget.scrollTop;
 
     if (indexPage === 0) {
-      toggleHeaderStatus(scrollTop, "", "header_scroll header_scroll2");
+      if (isSearch) {
+        toggleHeaderStatus(
+          scrollTop,
+          "",
+          "header_scroll header_scroll2 header_search-page"
+        );
+      } else {
+        toggleHeaderStatus(scrollTop, "", "header_scroll header_scroll2");
+      }
     } else {
       toggleHeaderStatus(
         scrollTop,

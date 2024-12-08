@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 
-export default function Header({ isTitle, isRefPage, setHomePage, indexTab }) {
+export default function Header({
+  children,
+  isTitle,
+  isRefPage,
+  setHomePage,
+  indexTab,
+  isSearch,
+}) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMainPage, setIsMainPage] = useState(true);
@@ -55,6 +62,7 @@ export default function Header({ isTitle, isRefPage, setHomePage, indexTab }) {
         <h1 className="header__title">{isMainPage ? isTitle : null}</h1>
         {/* <button className="header__button disabled"></button> */}
       </div>
+      <div className="header__search-container">{children}</div>
       {/* {isSearchVisible ? <Searchform isToggleHeader={isToggleHeader} /> : ""} */}
     </header>
   );
